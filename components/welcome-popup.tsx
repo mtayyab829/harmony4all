@@ -150,7 +150,7 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-0 lg:p-4"> 
       <Card className="w-full h-full lg:w-full lg:max-w-xl lg:h-auto bg-white rounded-none lg:rounded-2xl shadow-2xl relative overflow-y-auto">
-        <button
+        <button 
           onClick={onClose}
           className="absolute top-5 right-5 sm:top-1 sm:right-1 lg:top-4 lg:right-4 p-1 sm:p-2 hover:bg-gray-100 rounded-full z-10"
           aria-label="Close popup"
