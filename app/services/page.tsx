@@ -147,7 +147,7 @@ export default function ServicesPage() {
                   <div className="relative">
                     <div className="w-full h-60 md:h-80 overflow-hidden relative">
                       <Image
-                        src={service.image || "/placeholder.svg"}
+                        src={service.image || imageUrlsData.media.placeholder.cloudinaryUrl}
                         alt={service.title}
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-700"

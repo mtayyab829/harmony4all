@@ -578,7 +578,7 @@ export default function AboutPage() {
                 <div className="relative">
                   <div className="w-full h-64 md:h-96 overflow-hidden relative">
                     <Image
-                      src={member.image || "/placeholder.svg"}
+                      src={member.image || imageUrlsData.media.placeholder.cloudinaryUrl}
                       alt={member.name}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"

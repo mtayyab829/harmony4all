@@ -75,14 +75,14 @@ export default function PartnersPage() {
     const spotlightStories = [
         {
             name: "The Harmony Foundation",
-            logo: "/placeholder-logo.svg",
+            logo: imageUrlsData.media.placeholder.cloudinaryUrl,
             description: "Their generous $50,000 grant enabled us to provide instruments to 200 students across five schools, creating lasting opportunities for musical growth.",
             impact: "200+ instruments donated",
             website: "https://example.com"
         },
         {
             name: "Community Arts Initiative",
-            logo: "/placeholder-logo.svg",
+            logo: imageUrlsData.media.placeholder.cloudinaryUrl,
             description: "Through their partnership, we've been able to expand our curriculum to include digital music production, reaching students who prefer modern music technology.",
             impact: "Digital music program launched",
             website: "https://example.com"

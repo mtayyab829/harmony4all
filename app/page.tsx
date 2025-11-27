@@ -651,7 +651,7 @@ const HomeBlogSection = () => {
                             onClick={(e) => e.stopPropagation()}
                           >
                             <Image
-                              src={post.image || '/placeholder.jpg'}
+                              src={post.image || imageUrlsData.media.placeholder.cloudinaryUrl}
                               alt={post.title}
                               fill
                               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -661,7 +661,7 @@ const HomeBlogSection = () => {
                           </a>
                         ) : (
                           <Image
-                            src={post.image || '/placeholder.jpg'}
+                            src={post.image || imageUrlsData.media.placeholder.cloudinaryUrl}
                             alt={post.title}
                             fill
                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
