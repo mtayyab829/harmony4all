@@ -17,14 +17,6 @@ const PLACEHOLDER = imageUrlsData.media.placeholder.cloudinaryUrl
 // Import the media data
 import mediaData from "./harmony4all_media_images.json"
 
-// Helper function to find Cloudinary URL by title
-const getCloudinaryUrl = (title: string): string => {
-  const galleryImage = imageUrlsData.media.galleryImages.find(
-    (img: any) => img.name === title
-  )
-  return galleryImage?.cloudinaryUrl || PLACEHOLDER
-}
-
 const getCategoryFromTitle = (title: string): string => {
   const lowerTitle = title.toLowerCase()
 
@@ -58,7 +50,7 @@ const buildMediaItems = () =>
     type: "photo",
     title: item.title,
     description: item.text,
-    thumbnail: getCloudinaryUrl(item.title),
+    thumbnail: item.image_url || PLACEHOLDER,
     date: item.text,
     category: getCategoryFromTitle(item.title),
     featured: index < 4,
