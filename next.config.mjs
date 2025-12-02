@@ -25,6 +25,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.harmony4all.org',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   async headers() {
