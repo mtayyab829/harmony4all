@@ -51,7 +51,7 @@ const HeroCarousel = () => {
       subtitle:
         "",
       isVideo: true,
-      videoUrl: "https://res.cloudinary.com/dcrieatns/video/upload/v1764193558/video-home_ghyjfm.mp4",
+      videoUrl: "https://cdn.harmony4all.org/video-home_ghyjfm.mp4",
     },
     {
       title: "Building a World of Harmony Through Music",
