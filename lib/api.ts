@@ -113,6 +113,12 @@ export const donationAPI = {
     const response = await api.get(`/donation/status/${donationId}`);
     return response.data;
   },
+
+  // Get Founding 100 Circle progress
+  getFounding100Progress: async () => {
+    const response = await api.get('/donation/founding-100-progress');
+    return response.data;
+  },
 };
 
 // Instrument Donation API functions

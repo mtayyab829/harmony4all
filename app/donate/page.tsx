@@ -31,6 +31,8 @@ export default function DonatePage() {
 
   // Add ref for donation form section
   const donationFormRef = useRef<HTMLDivElement>(null)
+  // Add ref for donation levels section
+  const donationLevelsRef = useRef<HTMLDivElement>(null)
 
   const donationLevels = [
     {
@@ -102,6 +104,23 @@ export default function DonatePage() {
     if (urlParams.get('cancelled') === 'true') {
       setSubmitStatus('error');
       setErrorMessage('Payment was cancelled. Please try again.');
+    }
+    
+    // Check if coming from founding-100 page and need to scroll to levels
+    const fromParam = urlParams.get('from');
+    const scrollParam = urlParams.get('scroll');
+    if (fromParam === 'founding100' && scrollParam === 'levels') {
+      // Scroll to donation levels section after a short delay
+      setTimeout(() => {
+        if (donationLevelsRef.current) {
+          donationLevelsRef.current.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }, 500);
+      // Clean up URL params
+      window.history.replaceState({}, '', '/donate');
     }
     
     // Check for amount parameter from other pages
@@ -223,7 +242,7 @@ export default function DonatePage() {
       </section>
 
       {/* Donation Levels Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-white">
+      <section ref={donationLevelsRef} className="py-12 md:py-16 lg:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-8 md:mb-12">
