@@ -33,6 +33,8 @@ export default function DonatePage() {
   const donationFormRef = useRef<HTMLDivElement>(null)
   // Add ref for donation levels section
   const donationLevelsRef = useRef<HTMLDivElement>(null)
+  // Add ref for donor information section
+  const donorInfoRef = useRef<HTMLDivElement>(null)
 
   const donationLevels = [
     {
@@ -88,14 +90,19 @@ export default function DonatePage() {
   const handleDonationLevelClick = (amount: number) => {
     setSelectedAmount(amount)
     setCustomAmount("")
-    
-    // Smooth scroll to donation form
-    if (donationFormRef.current) {
-      donationFormRef.current.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      })
-    }
+
+    // Smooth scroll to donor information section
+    setTimeout(() => {
+      if (donorInfoRef.current) {
+        const elementPosition = donorInfoRef.current.getBoundingClientRect().top + window.pageYOffset
+        const offsetPosition = elementPosition - 100 // Add some offset from top
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        })
+      }
+    }, 100)
   }
 
   // Check for cancelled payment and amount parameter on page load
@@ -106,17 +113,19 @@ export default function DonatePage() {
       setErrorMessage('Payment was cancelled. Please try again.');
     }
     
-    // Check if coming from founding-100 page and need to scroll to levels
+    // Check if coming from founding-100 page - scroll to donor info
     const fromParam = urlParams.get('from');
-    const scrollParam = urlParams.get('scroll');
-    if (fromParam === 'founding100' && scrollParam === 'levels') {
-      // Scroll to donation levels section after a short delay
+    if (fromParam === 'founding100') {
+      // Scroll to donor information section after a short delay
       setTimeout(() => {
-        if (donationLevelsRef.current) {
-          donationLevelsRef.current.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          });
+        if (donorInfoRef.current) {
+          const elementPosition = donorInfoRef.current.getBoundingClientRect().top + window.pageYOffset
+          const offsetPosition = elementPosition - 100 // Add some offset from top
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          })
         }
       }, 500);
       // Clean up URL params
@@ -131,13 +140,16 @@ export default function DonatePage() {
         setSelectedAmount(amount);
         setCustomAmount("");
         
-        // Smooth scroll to donation form after a short delay
+        // Smooth scroll to donor information section after a short delay
         setTimeout(() => {
-          if (donationFormRef.current) {
-            donationFormRef.current.scrollIntoView({ 
-              behavior: 'smooth',
-              block: 'start'
-            });
+          if (donorInfoRef.current) {
+            const elementPosition = donorInfoRef.current.getBoundingClientRect().top + window.pageYOffset
+            const offsetPosition = elementPosition - 100 // Add some offset from top
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            })
           }
         }, 500);
       }
@@ -456,7 +468,7 @@ export default function DonatePage() {
                   </div>
 
                   {/* Donor Information Form */}
-                  <div className="space-y-4 md:space-y-6 mb-6 md:mb-8">
+                  <div ref={donorInfoRef} className="space-y-4 md:space-y-6 mb-6 md:mb-8">
                     <h4 className="text-base md:text-lg font-semibold text-gray-900">Donor Information</h4>
                     <div className="grid md:grid-cols-2 gap-3 md:gap-4">
                       <div>
@@ -531,7 +543,7 @@ export default function DonatePage() {
                       </div>
                       <div className="flex justify-between text-xs md:text-sm text-gray-600">
                         <span>Processing Fee:</span>
-                        <span>$0 (covered by Harmony 4 All)</span>
+                        <span>4% (covered by Harmony 4 All)</span>
                       </div>
                       <hr className="my-2" />
                       <div className="flex justify-between font-semibold text-base md:text-lg">
