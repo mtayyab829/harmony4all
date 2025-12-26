@@ -238,5 +238,20 @@ export const blogAPI = {
   }
 };
 
+// Text Updates API functions
+export const textUpdatesAPI = {
+  // Subscribe to text updates
+  subscribe: async (formData: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    smsConsent: boolean;
+  }) => {
+    const response = await api.post("/text-updates/subscribe", formData);
+    return response.data;
+  },
+};
+
 // Export the base api instance for custom requests
 export default api;
