@@ -5,7 +5,6 @@ import './globals.css'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
-import { Founding100Banner } from '@/components/founding-100-banner'
 import { headers } from 'next/headers'
 
 export const metadata: Metadata = {
@@ -128,7 +127,6 @@ html {
               <main id="main-content" className="pt-0" role="main">
                 {children}
               </main>
-              <Founding100Banner />
               <Footer />
             </>
           )}

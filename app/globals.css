@@ -8,7 +8,8 @@
   }
 }
 
-/* Custom animations for Founding 100 page */
+/* Custom animations for Founding 100 page - Campaign ended */
+/*
 @keyframes scroll-left {
   0% {
     transform: translateX(0);
@@ -52,6 +53,7 @@
 .animate-bounce-once {
   animation: bounce-once 2s ease-in-out;
 }
+*/
 
 @layer base {
   :root {

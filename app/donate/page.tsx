@@ -113,24 +113,6 @@ export default function DonatePage() {
       setErrorMessage('Payment was cancelled. Please try again.');
     }
     
-    // Check if coming from founding-100 page - scroll to donor info
-    const fromParam = urlParams.get('from');
-    if (fromParam === 'founding100') {
-      // Scroll to donor information section after a short delay
-      setTimeout(() => {
-        if (donorInfoRef.current) {
-          const elementPosition = donorInfoRef.current.getBoundingClientRect().top + window.pageYOffset
-          const offsetPosition = elementPosition - 100 // Add some offset from top
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          })
-        }
-      }, 500);
-      // Clean up URL params
-      window.history.replaceState({}, '', '/donate');
-    }
     
     // Check for amount parameter from other pages
     const amountParam = urlParams.get('amount');
