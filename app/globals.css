@@ -8,6 +8,20 @@
   }
 }
 
+/* Custom animations for donors marquee */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 10s linear infinite;
+}
+
 /* Custom animations for Founding 100 page - Campaign ended */
 /*
 @keyframes scroll-left {

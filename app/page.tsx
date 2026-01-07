@@ -575,6 +575,74 @@ const GetInvolvedSection = () => {
   )
 }
 
+// Donors Marquee Section
+const DonorsMarqueeSection = () => {
+  const donors = [
+    "Alex Singh",
+    "Anne Allauzen",
+    "Mark Garret Ours",
+    "Carla Rose",
+    "Stavros Theoharis",
+    "Allison Davis",
+    "Frances kweller",
+    "Evie Joselow",
+    "Karen Mazza",
+    "Christopher Foltz",
+    "Tahmina Sultan",
+    "Wayne DeLisser",
+    "Dave",
+    "NEW YORK INJURY LAW FIRM PLLC"
+  ]
+
+  return (
+    <section className="py-12 bg-gradient-to-r from-black via-gray-900 to-black text-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">Our Generous Supporters</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-white to-transparent mx-auto mb-4"></div>
+          <p className="text-lg opacity-90">Thank you for believing in our mission</p>
+        </div>
+
+        <div className="relative overflow-hidden">
+          {/* Gradient overlays for smooth fade effect - hidden on mobile */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black via-black/80 to-transparent z-10 hidden md:block"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black via-black/80 to-transparent z-10 hidden md:block"></div>
+
+          <div className="flex animate-marquee whitespace-nowrap py-4">
+            {/* First set of donors */}
+            <div className="flex items-center mr-8 md:mr-12">
+              {donors.map((donor, index) => (
+                <span key={`first-${index}`} className="flex items-center">
+                  <span className="text-lg sm:text-xl md:text-2xl font-light tracking-wide text-white/90 hover:text-white transition-all duration-300 px-2 md:px-4">
+                    {donor}
+                  </span>
+                  {index < donors.length - 1 && (
+                    <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mx-1 md:mx-2 flex-shrink-0"></div>
+                  )}
+                </span>
+              ))}
+            </div>
+            {/* Duplicate set for seamless scrolling */}
+            <div className="flex items-center">
+              {donors.map((donor, index) => (
+                <span key={`second-${index}`} className="flex items-center">
+                  <span className="text-lg sm:text-xl md:text-2xl font-light tracking-wide text-white/90 hover:text-white transition-all duration-300 px-2 md:px-4">
+                    {donor}
+                  </span>
+                  {index < donors.length - 1 && (
+                    <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mx-1 md:mx-2 flex-shrink-0"></div>
+                  )}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  )
+}
+
 // Home Blog Teaser
 const HomeBlogSection = () => {
   const [posts, setPosts] = useState<any[]>([])
@@ -769,6 +837,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen overflow-hidden">
       <HeroCarousel />
+      <DonorsMarqueeSection />
       <WhoWeAreSection />
       <MissionValuesSection />
       <ProgramsSection />
