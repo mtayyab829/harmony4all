@@ -1,6 +1,5 @@
 "use client"
 
-import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { imageUrlsData } from "@/lib/image-urls"
@@ -13,7 +12,7 @@ export default function SocialPage() {
         {/* Logo - Musical instrument with notes */}
         {/* Musical instrument (saxophone/clarinet style) */}
         <Image src={imageUrlsData.socialPage.logo.cloudinaryUrl} alt="Harmony 4 All Logo" width={144} height={144} className="rounded-full object-contain" />
-
+ 
       </div>
 
       {/* Separator Line */}
@@ -35,7 +34,15 @@ export default function SocialPage() {
             rel="noopener noreferrer"
             className="flex items-center justify-center w-full bg-black hover:bg-gray-900 text-white py-4 px-6 rounded-lg transition-colors duration-300"
           >
-            <Facebook className="w-6 h-6 mr-3" />
+            <div className="w-8 h-8 mr-3 p-1 bg-white rounded-full">
+              <Image
+                src="/sm/facebook_white.png"
+                alt="Facebook"
+                width={24}
+                height={24}
+                className="w-full h-full"
+              />
+            </div>
             <span className="text-lg font-medium">Facebook</span>
           </Link>
 
@@ -46,7 +53,15 @@ export default function SocialPage() {
             rel="noopener noreferrer"
             className="flex items-center justify-center w-full bg-black hover:bg-gray-900 text-white py-4 px-6 rounded-lg transition-colors duration-300"
           >
-            <Instagram className="w-6 h-6 mr-3" />
+            <div className="w-8 h-8 mr-3 p-1.5 bg-white rounded-full">
+              <Image
+                src="/sm/instagram_white.png"
+                alt="Instagram"
+                width={24}
+                height={24}
+                className="w-full h-full"
+              />
+            </div>
             <span className="text-lg font-medium">Instagram</span>
           </Link>
 
@@ -57,7 +72,15 @@ export default function SocialPage() {
             rel="noopener noreferrer"
             className="flex items-center justify-center w-full bg-black hover:bg-gray-900 text-white py-4 px-6 rounded-lg transition-colors duration-300"
           >
-            <Linkedin className="w-6 h-6 mr-3" />
+            <div className="w-8 h-8 mr-3 p-1.5 bg-white rounded-full">
+              <Image
+                src="/sm/linkedin_white.png"
+                alt="LinkedIn"
+                width={24}
+                height={24}
+                className="w-full h-full"
+              />
+            </div>
             <span className="text-lg font-medium">LinkedIn</span>
           </Link>
 
@@ -68,7 +91,15 @@ export default function SocialPage() {
             rel="noopener noreferrer"
             className="flex items-center justify-center w-full bg-black hover:bg-gray-900 text-white py-4 px-6 rounded-lg transition-colors duration-300"
           >
-            <Youtube className="w-6 h-6 mr-3" />
+            <div className="w-8 h-8 mr-3 p-1 bg-white rounded-full">
+              <Image
+                src="/sm/youtube_white.png"
+                alt="YouTube"
+                width={24}
+                height={24}
+                className="w-full h-full"
+              />
+            </div>
             <span className="text-lg font-medium">Youtube</span>
           </Link>
         </div>
