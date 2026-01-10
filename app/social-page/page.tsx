@@ -6,9 +6,9 @@ import { imageUrlsData } from "@/lib/image-urls"
 
 export default function SocialPage() {
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4 py-12 space-y-4">
       {/* Logo and Brand Section */}
-      <div className="text-center mb-4">
+      <div className="text-center">
         {/* Logo - Musical instrument with notes */}
         {/* Musical instrument (saxophone/clarinet style) */}
         <Image src={imageUrlsData.socialPage.logo.cloudinaryUrl} alt="Harmony 4 All Logo" width={144} height={144} className="rounded-full object-contain" />
@@ -16,12 +16,12 @@ export default function SocialPage() {
       </div>
 
       {/* Separator Line */}
-      <div className="w-full max-w-md h-px bg-black mb-4"></div>
+      <div className="w-full max-w-md h-px bg-black"></div>
 
       {/* Social Media Section */}
-      <div className="text-center">
+      <div className="text-center space-y-4">
         {/* Call to Action */}
-        <h2 className="text-3xl font-serif font-bold text-black mb-8">
+        <h2 className="text-3xl font-serif font-bold text-black">
           Follow @JoinHarmony4All
         </h2>
 
