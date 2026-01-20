@@ -591,8 +591,17 @@ const DonorsMarqueeSection = () => {
     "Tahmina Sultan",
     "Wayne DeLisser",
     "Dave",
-    "NEW YORK INJURY LAW FIRM PLLC"
+    "NEW YORK INJURY LAW FIRM PLLC",
+    "New York State Senator Joseph P. Addabbo, Jr.",
+    "New York State Office of the Governor",
+    "New York State Legislature",
+    "New York State Council on the Arts",
+    "New York City Department of Cultural Affairs",
+    "New York Foundation for the Arts",
+    "Citizens Committee for New York City",
+    "Villa Russo",
   ]
+  const extendedDonors = [...donors, ...donors, ...donors, ...donors, ...donors, ...donors,...donors, ...donors, ...donors, ...donors, ...donors, ...donors]
 
   return (
     <section className="py-12 bg-gradient-to-r from-black via-gray-900 to-black text-white">
@@ -608,28 +617,15 @@ const DonorsMarqueeSection = () => {
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black via-black/80 to-transparent z-10 hidden md:block"></div>
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black via-black/80 to-transparent z-10 hidden md:block"></div>
 
-          <div className="flex animate-marquee whitespace-nowrap py-4">
-            {/* First set of donors */}
-            <div className="flex items-center mr-8 md:mr-12">
-              {donors.map((donor, index) => (
-                <span key={`first-${index}`} className="flex items-center">
-                  <span className="text-lg sm:text-xl md:text-2xl font-light tracking-wide text-white/90 hover:text-white transition-all duration-300 px-2 md:px-4">
-                    {donor}
-                  </span>
-                  {index < donors.length - 1 && (
-                    <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mx-1 md:mx-2 flex-shrink-0"></div>
-                  )}
-                </span>
-              ))}
-            </div>
-            {/* Duplicate set for seamless scrolling */}
+          <div className="flex animate-marquee hover:pause-marquee whitespace-nowrap py-4">
+            {/* Extended donors for seamless continuous scrolling */}
             <div className="flex items-center">
-              {donors.map((donor, index) => (
-                <span key={`second-${index}`} className="flex items-center">
+              {extendedDonors.map((donor, index) => (
+                <span key={`donor-${index}`} className="flex items-center mr-8 md:mr-12">
                   <span className="text-lg sm:text-xl md:text-2xl font-light tracking-wide text-white/90 hover:text-white transition-all duration-300 px-2 md:px-4">
                     {donor}
                   </span>
-                  {index < donors.length - 1 && (
+                  {index < extendedDonors.length - 1 && (
                     <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white/60 rounded-full mx-1 md:mx-2 flex-shrink-0"></div>
                   )}
                 </span>
