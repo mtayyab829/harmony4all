@@ -51,6 +51,7 @@ export const Footer = () => {
     { text: "Get Involved", href: "/get-involved" },
     { text: "Contact", href: "/contact" },
     { text: "Privacy Policy", href: "/privacy" },
+    { text: "Terms & Conditions", href: "/terms" },
   ]
 
   const contactInfo = [

@@ -216,6 +216,19 @@ export default function TextUpdatesPage() {
                     </div>
                   )}
 
+                  {/* Terms Acceptance */}
+                  <div className="text-xs text-gray-600 text-center pt-2">
+                    By submitting this form, you agree to our{" "}
+                    <Link href="/terms" className="text-black hover:underline">
+                      Terms & Conditions
+                    </Link>{" "}
+                    and{" "}
+                    <Link href="/privacy" className="text-black hover:underline">
+                      Privacy Policy
+                    </Link>
+                    .
+                  </div>
+
                   {/* Submit Button */}
                   <Button
                     type="submit"
