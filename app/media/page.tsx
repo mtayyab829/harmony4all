@@ -2,167 +2,159 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useMemo } from "react"
-
+import { ExternalLink, Calendar, Newspaper } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
-import MediaHero from "./components/media-hero"
-import MediaMarquee from "./components/media-marquee"
-import { imageUrlsData } from "@/lib/image-urls"
-
-const PLACEHOLDER = imageUrlsData.media.placeholder.cloudinaryUrl
-
-// Import the media data
-import mediaData from "./harmony4all_media_images.json"
-
-const getCategoryFromTitle = (title: string): string => {
-  const lowerTitle = title.toLowerCase()
-
-  if (lowerTitle.includes("concert") || lowerTitle.includes("performance") || lowerTitle.includes("recital")) {
-    return "programs"
+// Sample press and media features - replace with actual data
+const mediaFeatures = [
+  {
+    title: "Harmony 4 All Featured in New York State Senate Recognition",
+    description: "State Senator Joseph P. Addabbo, Jr. honored Harmony 4 All for outstanding contributions to music education in underserved communities across New York City.",
+    date: "March 2024",
+    source: "New York State Senate",
+    link: "#",
+    category: "Government Recognition"
+  },
+  {
+    title: "United Nations Youth Delegate Program Highlights Bianca Quddus",
+    description: "Co-Founder Bianca Quddus featured for her work as a Global Youth Ambassador and commitment to music education access for all children.",
+    date: "February 2024",
+    source: "United Nations",
+    link: "#",
+    category: "International Recognition"
+  },
+  {
+    title: "Juilliard School Partnership Announcement",
+    description: "Harmony 4 All announces expanded partnership with The Juilliard School to provide preparatory music education to talented underserved youth.",
+    date: "January 2024",
+    source: "Juilliard School",
+    link: "#",
+    category: "Education Partnership"
+  },
+  {
+    title: "Community Impact: Free Instrument Distribution Program",
+    description: "Local news coverage of Harmony 4 All's program providing over 500 free musical instruments to students in Title 1 schools across Queens.",
+    date: "December 2023",
+    source: "Local News Network",
+    link: "#",
+    category: "Community Impact"
+  },
+  {
+    title: "Youth Leadership in Music Education",
+    description: "Profile of co-founders Bianca and Joshua Quddus, highlighting youth-led approaches to addressing educational inequities through music.",
+    date: "November 2023",
+    source: "Education Today Magazine",
+    link: "#",
+    category: "Leadership Profile"
+  },
+  {
+    title: "Carnegie Hall Link Up Program Success",
+    description: "Harmony 4 All students perform alongside professional musicians at Carnegie Hall, showcasing the program's impact on musical development.",
+    date: "October 2023",
+    source: "Carnegie Hall",
+    link: "#",
+    category: "Performance Achievement"
   }
-  if (
-    lowerTitle.includes("donation") ||
-    lowerTitle.includes("drive") ||
-    lowerTitle.includes("senator") ||
-    lowerTitle.includes("united nations")
-  ) {
-    return "events"
-  }
-  if (lowerTitle.includes("volunteer") || lowerTitle.includes("community")) {
-    return "volunteers"
-  }
-  if (lowerTitle.includes("juilliard") || lowerTitle.includes("faculty") || lowerTitle.includes("teacher")) {
-    return "programs"
-  }
-  if (lowerTitle.includes("award") || lowerTitle.includes("commencement")) {
-    return "events"
-  }
-
-  return "events"
-}
-
-const buildMediaItems = () =>
-  mediaData.map((item, index) => ({
-    id: index,
-    type: "photo",
-    title: item.title,
-    description: item.text,
-    thumbnail: item.image_url || PLACEHOLDER,
-    date: item.text,
-    category: getCategoryFromTitle(item.title),
-    featured: index < 4,
-  }))
+]
 
 export default function MediaPage() {
-  const mediaItems = useMemo(() => buildMediaItems(), [])
-
-  const featuredItems = mediaItems.filter((item) => item.featured)
-  
-
   return (
     <div className="min-h-screen bg-white">
-      <section
-        className="relative mt-3 py-16 md:py-24 lg:py-32 bg-cover bg-top bg-no-repeat md:hidden h-[50vh]"
-        style={{
-          backgroundImage: `url('${imageUrlsData.media.mobileHeroBackground.cloudinaryUrl}')`,
-          objectFit: "cover",
-        }}
-      >
-      </section>
 
-      <div className="hidden md:block">
-        <MediaHero items={mediaItems} />
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 py-4">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center space-x-2 text-sm">
+            <Link href="/" className="text-black hover:text-gray-800">
+              Home
+            </Link>
+            <span className="text-gray-400">/</span>
+            <span className="text-gray-600">Media & Press</span>
+          </div>
+        </div>
       </div>
 
-      {/* Featured Video Section */}
-      <section className="py-8 md:py-12 lg:py-16 bg-gray-50">
+      {/* Hero Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6 lg:mb-8">Featured Video</h2>
-            <p className="text-sm md:text-lg text-gray-600 mb-8 md:mb-10 lg:mb-12">Watch our latest video showcasing the impact of our music education programs</p>
-            <Card className="shadow-2xl border-0 rounded-2xl overflow-hidden">
-              <div className="relative aspect-[16/9] bg-gray-200">
-                <iframe
-                  src="https://www.youtube.com/embed/CQXnJpY_zR8"
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  className="w-full h-full object-cover"
-                ></iframe>
-                <div className="absolute bottom-2 md:bottom-4 right-2 md:right-4">
-                  <Badge className="bg-black/70 text-white text-xs md:text-sm">2:58</Badge>
-                </div>
-              </div>
-            </Card>
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center space-x-2 bg-black text-white px-4 md:px-6 py-2 md:py-3 rounded-full mb-6">
+              <Newspaper className="h-4 w-4 md:h-5 md:w-5" />
+              <span className="font-semibold text-sm md:text-base">MEDIA & PRESS</span>
+            </div>
+            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+              Press & Media Coverage
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover how Harmony 4 All is making an impact in music education through
+              press features, community recognition, and media coverage.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Featured Media Section */}
-      <section className="py-6 md:py-8 bg-white">
-        <div className="w-full px-2">
-          <div className="text-center mb-6 md:mb-8">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">Event Highlights</h2>
-            <p className="text-sm md:text-lg text-gray-600">Highlights from our most impactful programs and success stories</p>
-            </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-1 md:gap-2">
-            {featuredItems.map((item, index) => (
-              <Card
-                key={index}
-                className="shadow-lg border-0 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 group"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={item.thumbnail}
-                      alt={item.title}
-                      fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    quality={80}
-                    priority={index === 0}
-                  />
-                  {/* Always Visible Text Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent">
-                    <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3 text-white">
-                      <h4 className="text-xs font-semibold mb-1 line-clamp-2 leading-tight">{item.title}</h4>
-                      <div className="flex items-center justify-between">
-                        <p className="text-xs opacity-90">{item.date}</p>
+      {/* Media Features */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid gap-8">
+              {mediaFeatures.map((feature, index) => (
+                <Card key={index} className="bg-white shadow-lg border-0 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-start justify-between mb-3">
+                      <Badge className="bg-black text-white mb-2">{feature.category}</Badge>
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Calendar className="h-4 w-4 mr-1" />
+                        {feature.date}
                       </div>
                     </div>
-                  </div>
-                </div>
-              </Card>
+                    <CardTitle className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
+                      {feature.title}
+                    </CardTitle>
+                    <p className="text-gray-600 text-base leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-gray-700">
+                        Source: {feature.source}
+                      </span>
+                      <Link
+                        href={feature.link}
+                        className="inline-flex items-center text-black hover:text-gray-600 font-medium transition-colors"
+                      >
+                        Read Full Article
+                        <ExternalLink className="h-4 w-4 ml-1" />
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <MediaMarquee items={mediaItems} />
 
-      <div className="py-8 md:py-10 bg-black text-white text-center">
-        <Link href="/media/all" aria-label="View all media items">
-          <Button
-            variant="outline"
-            className="mx-auto bg-black rounded-full border-white text-white hover:bg-white hover:text-black px-8 py-3 text-base md:text-lg"
-          >
-            View All Media
-          </Button>
-        </Link>
-      </div>
-        
       {/* Call to Action */}
-      <section className="py-12 md:py-16 lg:py-20 bg-black text-white">
+      <section className="py-16 bg-black text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">Share Your Story</h2>
-          <p className="text-sm md:text-lg lg:text-xl mb-6 md:mb-8 opacity-90">Have a success story or memorable moment to share? We'd love to feature your experience in our media gallery.</p>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+          <h2 className="text-3xl font-bold mb-4">
+            Media Inquiries
+          </h2>
+          <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
+            Interested in featuring Harmony 4 All's work? We'd love to share our story
+            of youth-led impact in music education.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact">
-              <Button size="lg" className="bg-white w-full text-gray-900 hover:bg-gray-100 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg rounded-full">Share Your Story</Button>
-            </Link>
-            <Link href="/blog">
-              <Button size="lg" variant="outline" className="border-2 w-full border-white text-white hover:bg-white hover:text-gray-900 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg rounded-full bg-transparent">Read Our Blog</Button>
+              <Button className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full">
+                Contact Us
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </Button>
             </Link>
           </div>
         </div>

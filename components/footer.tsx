@@ -203,7 +203,7 @@ export const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-center md:text-left">
               <p className="text-white/60 text-sm">
-                © 2025 Harmony 4 All. All rights reserved.
+                © 2026 Harmony 4 All. All rights reserved.
               </p>
             </div>
             <div className="flex items-center space-x-2 text-white/60 text-sm">

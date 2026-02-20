@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Heart, Users, Clock, MapPin, Phone, CheckCircle, Calendar, ArrowRight, Gift, Music, Wrench, BookOpen, Award, Mic, Globe, HelpCircle } from "lucide-react"
+import { Users, Clock, Phone, CheckCircle, Calendar, Gift, Award, Globe, HelpCircle } from "lucide-react"
 import { imageUrlsData } from "@/lib/image-urls"
 
 export default function ServicesPage() {
@@ -22,7 +22,6 @@ export default function ServicesPage() {
       ageGroups: ["Children", "Teens", "Adults"],
       duration: "Ongoing/Seasonal",
       image: imageUrlsData.services.serviceImages[0]?.cloudinaryUrl || "",
-      icon: Music,
     },
     {
       title: "Free Instrument Repairs",
@@ -36,7 +35,6 @@ export default function ServicesPage() {
       ageGroups: ["All Ages"],
       duration: "Ongoing/Seasonal",
       image: imageUrlsData.services.serviceImages[1]?.cloudinaryUrl || "",
-      icon: Wrench,
     },
     {
       title: "Free Musical Curriculum",
@@ -50,7 +48,19 @@ export default function ServicesPage() {
       ageGroups: ["Children", "Teens", "Adults", "Seniors"],
       duration: "Ongoing/Seasonal",
       image: imageUrlsData.services.serviceImages[2]?.cloudinaryUrl || "",
-      icon: BookOpen,
+    },
+    {
+      title: "Community Outreach",
+      description: "Bringing music to underserved neighborhoods through concerts, workshops, and wellness programs.",
+      features: [
+        "Live music for underserved neighborhoods",
+        "Music for wellness in senior homes",
+        "Hands-on learning workshops",
+        "School partnerships",
+      ],
+      ageGroups: ["All Ages"],
+      duration: "Ongoing/Seasonal",
+      image: imageUrlsData.services.serviceImages[3]?.cloudinaryUrl || "",
     },
     {
       title: "Instrument Donation",
@@ -63,8 +73,7 @@ export default function ServicesPage() {
       ],
       ageGroups: ["All Ages"],
         duration: "Ongoing/Seasonal",
-      image: imageUrlsData.services.serviceImages[3]?.cloudinaryUrl || "",
-      icon: Gift,
+      image: imageUrlsData.services.serviceImages[4]?.cloudinaryUrl || "",
     },
   ]
 
@@ -154,9 +163,6 @@ export default function ServicesPage() {
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         quality={85}
                       />
-                    </div>
-                    <div className="absolute top-4 md:top-6 right-4 md:right-6 w-12 h-12 md:w-16 md:h-16 bg-black rounded-full flex items-center justify-center shadow-lg">
-                      <service.icon className="h-6 w-6 md:h-8 md:w-8 text-white" />
                     </div>
                   </div>
                   
@@ -255,9 +261,6 @@ export default function ServicesPage() {
               </div>
               <CardContent className="p-4 md:p-6">
                 <div className="flex items-center mb-3 md:mb-4">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-3 md:mr-4">
-                    <Music className="h-5 w-5 md:h-6 md:w-6 text-purple-600" />
-                  </div>
                   <h3 className="text-lg md:text-xl font-bold text-gray-900">Community Concerts</h3>
                 </div>
                 <p className="text-gray-600 mb-3 md:mb-4 text-sm md:text-base">
@@ -290,9 +293,6 @@ export default function ServicesPage() {
               </div>
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                    <Users className="h-6 w-6 text-blue-600" />
-                  </div>
                   <h3 className="text-xl font-bold text-gray-900">Performance Pathways</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
@@ -324,9 +324,6 @@ export default function ServicesPage() {
               </div>
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
-                    <BookOpen className="h-6 w-6 text-green-600" />
-                  </div>
                   <h3 className="text-xl font-bold text-gray-900">Educational Workshops</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
@@ -359,9 +356,6 @@ export default function ServicesPage() {
               </div>
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
-                    <Mic className="h-6 w-6 text-orange-600" />
-                  </div>
                   <h3 className="text-xl font-bold text-gray-900">Advocacy & Speaking</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
@@ -408,9 +402,6 @@ export default function ServicesPage() {
                     />
                   </div>
                   <CardContent className="p-4 md:p-6">
-                    <div className="w-12 h-12 md:w-16 md:h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                      <span className="text-xl md:text-2xl font-bold text-white">{step.step}</span>
-                    </div>
                     <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2 md:mb-3">{step.title}</h3>
                     <p className="text-gray-600 text-xs md:text-sm">{step.description}</p>
                   </CardContent>

@@ -4,7 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Heart, Target, Eye, Users, Music, Award, Star, Calendar, MapPin, Phone, Mail, ArrowRight } from "lucide-react"
+import { Heart, Target, Eye, Users, Music, Award, Star, Calendar, MapPin, Phone, Mail, ArrowRight, Wrench, Mic, Gift } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { imageUrlsData } from "@/lib/image-urls"
 
@@ -177,9 +177,7 @@ export default function AboutPage() {
           <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 lg:mb-8">Our Mission</h2>
             <p className="text-sm md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-4xl mx-auto px-4">
-              We are dedicated to breaking down barriers in music education for underserved communities.
-              Through innovative programs, comprehensive resources, and inclusive platforms, we provide access,
-              development, and empowerment through the universal language of music.
+              At <span className="font-bold">Harmony 4 All</span>, our mission is to ensure that music is not a privilege, but a pathway open to every child. As a youth-led nonprofit, we provide underserved K-12 students across New York City with free instruments, educational resources, and community programs. Through music, we spark creativity, strengthen confidence, and weave connections that uplift families and communities. Our vision is a world where every child can discover their voice and shape a brighter future in harmony with others.
             </p>
           </div>
         </div>
@@ -259,185 +257,37 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-12 md:py-24 bg-gradient-to-br from-gray-50 to-gray-100">
+      {/* Core Values */}
+      <section className="py-12 md:py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-8 md:mb-16">
-              <div className="inline-flex items-center space-x-2 bg-black text-white px-4 md:px-6 py-2 md:py-3 rounded-full mb-4 md:mb-6">
-                <Heart className="h-4 w-4 md:h-5 md:w-5" />
-                <span className="font-semibold text-sm md:text-base">OUR VALUES</span>
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">Our Core Values</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="text-center">
+                <Users className="h-12 w-12 text-black mx-auto mb-3" />
+                <h3 className="font-bold text-gray-900 mb-2">Excellence in Access</h3>
+                <p className="text-sm text-gray-600">Ensuring music education is accessible to all</p>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-6">The Foundation of Our Mission</h2>
-              <p className="text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-                Our values are the heartbeat of <span className="font-bold">Harmony 4 All</span>. They shape how we bring music to students, guide our programs, and define the legacy we hope to leave in the lives of young musicians and their communities.
-              </p>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center mb-8 md:mb-16">
-              {/* Values Content */}
-              <div className="space-y-6 md:space-y-8">
-                <div className="bg-white rounded-2xl w-full md:w-[90%] p-4 shadow-xl border border-gray-100">
-                  <div className="flex items-center mb-4 md:mb-6">
-                    <div className="w-12 h-12 md:w-14 md:h-14 bg-black rounded-xl flex items-center justify-center mr-3 md:mr-4">
-                      <Users className="h-6 w-6 md:h-7 md:w-7 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900">Excellence in Access</h3>
-                      <p className="text-gray-500 text-sm md:text-base">Ensuring music education is accessible to all</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 text-xs md:text-sm">
-                    Every child deserves the chance to learn, grow, and shine through music. We open doors of opportunity so that talent is never limited by circumstance.
-                  </p>
-                </div>
-
-                <div className="bg-white rounded-2xl w-full md:w-[90%] p-4 shadow-xl border border-gray-100">
-                  <div className="flex items-center mb-4 md:mb-6">
-                    <div className="w-12 h-12 md:w-14 md:h-14 bg-black rounded-xl flex items-center justify-center mr-3 md:mr-4">
-                      <Target className="h-6 w-6 md:h-7 md:w-7 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900">Harmony in Community</h3>
-                      <p className="text-gray-500 text-sm md:text-base">Removing barriers to participation</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 text-xs md:text-sm">
-                    Music is a bridge that connects people. We strengthen families, schools, and neighborhoods by creating spaces where music brings hearts together.
-                  </p>
-                </div>
-
-                <div className="bg-white rounded-2xl w-full md:w-[90%] p-4 shadow-xl border border-gray-100">
-                  <div className="flex items-center mb-4 md:mb-6">
-                    <div className="w-12 h-12 md:w-14 md:h-14 bg-black rounded-xl flex items-center justify-center mr-3 md:mr-4">
-                      <Award className="h-6 w-6 md:h-7 md:w-7 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900">Creativity with Purpose</h3>
-                      <p className="text-gray-500 text-sm md:text-base">Building confidence through music</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 text-xs md:text-sm">
-                    We nurture imagination and artistry while helping students build confidence, resilience, and leadership that carry far beyond the stage.
-                  </p>
-                </div>
-
-                <div className="bg-white rounded-2xl w-full md:w-[90%] p-4 shadow-xl border border-gray-100">
-                  <div className="flex items-center mb-4 md:mb-6">
-                    <div className="w-12 h-12 md:w-14 md:h-14 bg-black rounded-xl flex items-center justify-center mr-3 md:mr-4">
-                      <Music className="h-6 w-6 md:h-7 md:w-7 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900">Generations in Resonance</h3>
-                      <p className="text-gray-500 text-sm md:text-base">Fostering artistic expression</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 text-xs md:text-sm">
-                    We honor the voices of the past, uplift the students of today, and inspire tomorrow's leaders through the timeless power of music.
-                  </p>
-                </div>
+              <div className="text-center">
+                <Target className="h-12 w-12 text-black mx-auto mb-3" />
+                <h3 className="font-bold text-gray-900 mb-2">Harmony in Community</h3>
+                <p className="text-sm text-gray-600">Removing barriers to participation</p>
               </div>
-
-              {/* Image Section */}
-              <div className="relative">
-                <div className="w-full md:w-[90%] h-64 md:h-96 rounded-full overflow-hidden shadow-2xl mx-auto relative">
-                  <Image
-                    src={imageUrlsData.about.valuesImage.cloudinaryUrl}
-                    alt="Orchestra"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 90vw"
-                    quality={85}
-                    className="object-cover"
-                    loading="lazy"
-                  />
-                </div>
+              <div className="text-center">
+                <Award className="h-12 w-12 text-black mx-auto mb-3" />
+                <h3 className="font-bold text-gray-900 mb-2">Creativity with Purpose</h3>
+                <p className="text-sm text-gray-600">Building confidence through music</p>
               </div>
-            </div>
-
-            {/* Values Summary */}
-            <div className="bg-black rounded-3xl p-6 md:p-12 text-white text-center shadow-2xl">
-              <div className="max-w-6xl mx-auto">
-                <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">The Power of Music to Inspire, Connect, and Transform</h3>
-                <p className="text-sm md:text-base lg:text-xl leading-relaxed opacity-90 mb-6 md:mb-8">
-                  We believe in the transformative power of music to open doors, nurture creativity, and bring communities together. Our values are not just words-they are the guiding principles that shape every decision we make and every program we create at <span className="font-bold">Harmony 4 All</span>.
-                </p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                  {[
-                    { icon: Users, label: "Excellence in Access" },
-                    { icon: Target, label: "Harmony in Community" },
-                    { icon: Award, label: "Creativity with Purpose" },
-                    { icon: Music, label: "Generations in Resonance" }
-                  ].map((value, index) => (
-                    <div key={index} className="text-center">
-                      <div className="w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-2 md:mb-3">
-                        <value.icon className="h-6 w-6 md:h-8 md:w-8 text-white" />
-                      </div>
-                      <p className="font-semibold text-xs md:text-sm">{value.label}</p>
-                    </div>
-                  ))}
-                </div>
+              <div className="text-center">
+                <Music className="h-12 w-12 text-black mx-auto mb-3" />
+                <h3 className="font-bold text-gray-900 mb-2">Generations in Resonance</h3>
+                <p className="text-sm text-gray-600">Fostering artistic expression</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* What We Do */}
-      <section className="py-12 md:py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-8 md:mb-16">
-              What We Do
-            </h2>
-            <div className="space-y-6 md:space-y-8">
-              <div className="bg-white rounded-2xl p-4 md:p-8 shadow-lg">
-                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-3 md:mb-4 flex items-center">
-                  <Music className="h-5 w-5 md:h-6 md:w-6 text-black mr-2 md:mr-3" />
-                  Free Community Concerts
-                  </h3>
-                <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                  Live music for underserved neighborhoods, fostering unity and cultural appreciation.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-2xl p-4 md:p-8 shadow-lg">
-                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-3 md:mb-4 flex items-center">
-                  <Users className="h-5 w-5 md:h-6 md:w-6 text-black mr-2 md:mr-3" />
-                  Free Music Workshops 
-                  </h3>
-                <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                  Hands-on learning and mentorship to help students unlock their musical potential.</p>
-              </div>
-              <div className="bg-white rounded-2xl p-4 md:p-8 shadow-lg">
-                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-3 md:mb-4 flex items-center">
-                  <Award className="h-5 w-5 md:h-6 md:w-6 text-black mr-2 md:mr-3" />
-                 Free Music for Wellness
-                 </h3>
-                <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                Music performance in community centers, nursing homes, and senior homes to promote emotional well-being.
-                </p>
-              </div>
-              <div className="bg-white rounded-2xl p-4 md:p-8 shadow-lg">
-                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-3 md:mb-4 flex items-center">
-                  <Award className="h-5 w-5 md:h-6 md:w-6 text-black mr-2 md:mr-3" />
-                  School Partnerships
-                </h3>
-                <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                  Bringing free music programs to underfunded NYC public schools for consistent education.</p>
-              </div>
-   
-              <div className="bg-white rounded-2xl p-4 md:p-8 shadow-lg">
-                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-3 md:mb-4 flex items-center">
-                  <Award className="h-5 w-5 md:h-6 md:w-6 text-black mr-2 md:mr-3" />
-                  Collaborative Performances</h3>
-                <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                  Partnering with local artists and ensembles to give students confidence-building stage experience.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Our Story */}
       <section className="py-12 md:py-20 bg-gray-200">
@@ -494,11 +344,6 @@ export default function AboutPage() {
                   key={index}
                   className="flex items-start space-x-4 md:space-x-6"
                 >
-                  <div className="flex-shrink-0">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-black rounded-full flex items-center justify-center">
-                      <Calendar className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                    </div>
-                  </div>
                   <div className="bg-white rounded-xl p-4 md:p-6 shadow-lg flex-1">
                     <div className="flex items-start space-x-3 md:space-x-4">
                       <div className="w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden flex-shrink-0 relative">

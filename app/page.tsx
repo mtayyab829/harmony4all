@@ -19,8 +19,6 @@ import {
   Wrench,
   Mic,
   ArrowRight,
-  Volume2,
-  VolumeX,
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
@@ -35,50 +33,30 @@ import { imageUrlsData } from "@/lib/image-urls"
 const HeroCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
-  const [isVideoMuted, setIsVideoMuted] = useState(true)
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted
-      setIsVideoMuted(videoRef.current.muted)
-    }
-  }
 
   const slides = [
-    {
-      title: "",
-      subtitle:
-        "",
-      isVideo: true,
-      videoUrl: "https://cdn.harmony4all.org/video-home_ghyjfm.mp4",
-    },
     {
       title: "Building a World of Harmony Through Music",
       subtitle:
         "Inspiring the next generation to discover their voices, unite communities, and transform lives through the power of music.",
       image: imageUrlsData.home.heroCarousel[1]?.cloudinaryUrl || "",
-
     },
     {
       title: "Did you Know?",
       subtitle:
         "Schools with music programs have an estimated 90.2 percent graduation rate compared to 72.9 percent for schools without music education.",
       image: imageUrlsData.home.heroCarousel[2]?.cloudinaryUrl || "",
-
     },
     {
       title: "Building Communities Through Music",
       subtitle: "Together, we are opening doors for the next generation to discover their voices, expand their potential, and strengthen the bonds of community.",
       image: imageUrlsData.home.heroCarousel[3]?.cloudinaryUrl || "",
-
     },
     {
       title: "Educational Excellence Through Music",
       subtitle:
         "Cultivating creativity, confidence, and possibility by giving every child access to the transformative power of music.",
       image: imageUrlsData.home.heroCarousel[4]?.cloudinaryUrl || "",
-
     },
   ]
 
@@ -101,16 +79,6 @@ const HeroCarousel = () => {
     }
   }, [isPaused])
 
-  // Pause video when leaving the first slide
-  useEffect(() => {
-    if (videoRef.current) {
-      if (currentSlide === 0) {
-        videoRef.current.play().catch(err => console.log('Auto-play prevented:', err))
-      } else {
-        videoRef.current.pause()
-      }
-    }
-  }, [currentSlide])
 
   return (
     <section
@@ -128,72 +96,39 @@ const HeroCarousel = () => {
             }`}
           aria-hidden={index !== currentSlide}
         >
-          {/* Video Background */}
-          {slide.isVideo ? (
+          {/* Background Image */}
+          {slide.image && (
             <>
-              {/* Mobile: Full height video container */}
-              <div className="sm:hidden w-full h-full relative">
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
+              {/* Mobile: Fixed height image container */}
+              <div className="sm:hidden w-full h-[180px] relative mt-10">
+               <Image
+                  src={slide.image}
+                  alt={slide.title}
+                  fill
+                  sizes="100vw"
+                  quality={85}
+                  priority={index === 0}
                   className="w-full h-full object-cover"
-                >
-                  <source src={slide.videoUrl} type="video/mp4" />
-                </video>
+                />
               </div>
 
-              {/* Desktop: Full background video */}
-              <div className="hidden sm:block absolute inset-0">
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover object-bottom"
-                >
-                  <source src={slide.videoUrl} type="video/mp4" />
-                </video>
+              {/* Desktop: Full background image */}
+              <div className="hidden sm:block absolute inset-0 bg-cover bg-center">
+                <Image
+                  src={slide.image}
+                  alt={slide.title}
+                  fill
+                  sizes="100vw"
+                  quality={85}
+                  priority={index === 0}
+                  className="w-full h-full object-cover"
+                />
               </div>
-
             </>
-          ) : (
-            slide.image && (
-              <>
-                {/* Mobile: Fixed height image container */}
-                <div className="sm:hidden w-full h-[180px] relative mt-10">
-                 <Image
-                    src={slide.image}
-                    alt={slide.title}
-                    fill
-                    sizes="100vw"
-                    quality={85}
-                    priority={index === 0}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Desktop: Full background image */}
-                <div className="hidden sm:block absolute inset-0 bg-cover bg-center">
-                  <Image
-                    src={slide.image}
-                    alt={slide.title}
-                    fill
-                    sizes="100vw"
-                    quality={85}
-                    priority={index === 0}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </>
-            )
           )}
 
-          {/* Mobile: Content below image/video */}
-          {!slide.isVideo && (
+          {/* Mobile: Content below image */}
+          {slide.image && (
             <div className="sm:hidden relative z-10 container mx-auto px-4 text-center py-8">
               <div className="max-w-4xl mx-auto text-gray-900">
                 <h1
@@ -226,8 +161,9 @@ const HeroCarousel = () => {
             </div>
           )}
 
-          {/* Desktop: Content overlaid on image/video */}
-          <div className="hidden sm:flex relative z-10 container mx-auto px-4 text-center h-full items-center">
+          {/* Desktop: Content overlaid on image */}
+          {slide.image && (
+            <div className="hidden sm:flex relative z-10 container mx-auto px-4 text-center h-full items-center">
             <div className="max-w-4xl mx-auto text-white">
               <h1
                 className={`text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight px-2 ${index === currentSlide ? "opacity-100" : "opacity-0"
@@ -257,33 +193,15 @@ const HeroCarousel = () => {
               </div>
             </div>
           </div>
+          )}
         </div>
       ))}
-
-      {/* Volume Toggle Button - Only show on video slide */}
-      {slides[currentSlide]?.isVideo && (
-        <div className="absolute top-50 left-50 z-50">
-          <Button
-            onClick={toggleMute}
-            variant="outline"
-            size="icon"
-            className="bg-black/70 text-white border-white/30 backdrop-blur-sm rounded-full w-12 h-12 sm:w-14 sm:h-14 shadow-lg cursor-pointer"
-            aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
-          >
-            {isVideoMuted ? (
-              <VolumeX className="h-5 w-5 sm:h-6 sm:w-6" />
-            ) : (
-              <Volume2 className="h-5 w-5 sm:h-6 sm:w-6" />
-            )}
-          </Button>
-        </div>
-      )}
 
       {/* Navigation Arrows */}
       <Button
         variant="outline"
         size="icon"
-        className={`absolute left-1 sm:left-4 top-1/2 transform -translate-y-1/2 bg-transparent border-0 focus:outline-none focus:ring-0 ${slides[currentSlide]?.isVideo ? 'text-white' : 'text-black'}`}
+        className="absolute left-1 sm:left-4 top-1/2 transform -translate-y-1/2 bg-transparent border-0 focus:outline-none focus:ring-0 text-black"
         onClick={prevSlide}
         aria-label="Previous slide"
       >
@@ -293,7 +211,7 @@ const HeroCarousel = () => {
       <Button
         variant="outline"
         size="icon"
-        className={`absolute right-1 sm:right-4 top-1/2 transform -translate-y-1/2 bg-transparent border-0 focus:outline-none focus:ring-0 ${slides[currentSlide]?.isVideo ? 'text-white' : 'text-black'}`}
+        className="absolute right-1 sm:right-4 top-1/2 transform -translate-y-1/2 bg-transparent border-0 focus:outline-none focus:ring-0 text-black"
         onClick={nextSlide}
         aria-label="Next slide"
       >
@@ -324,17 +242,50 @@ const HeroCarousel = () => {
   )
 }
 
-// Who We Are Section Component
-const WhoWeAreSection = () => {
+// Impact Statistics Section Component
+const ImpactStatisticsSection = () => {
+  const stats = [
+    {
+      number: "1,200+",
+      label: "Students Served",
+      description: "Underserved youth receiving music education since 2021"
+    },
+    {
+      number: "500+",
+      label: "Instruments Distributed",
+      description: "Free instruments provided to students in need"
+    },
+    {
+      number: "50+",
+      label: "Schools Partnered",
+      description: "Title 1 schools and community centers served"
+    },
+    {
+      number: "92%",
+      label: "Program Efficiency",
+      description: "Of budget directly invested in programs"
+    }
+  ]
+
   return (
-    <section id="who-we-are-section" className="py-4 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+    <section className="py-16 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="container mx-auto px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-4 sm:mb-12 md:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-2 sm:mb-6 md:mb-8">Who We Are</h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed px-2">
-              <span className="font-bold">Harmony 4 All</span> is a youth-led nonprofit founded on the belief that every child deserves the opportunity to explore their fullest potential. We provide underserved K-12 students across New York City with free access to instruments, music education resources, and community concerts—nurturing creativity, confidence, and connection. Through the power of music, we strengthen schools, uplift families, and inspire generations.
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Impact</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Measurable outcomes that demonstrate our commitment to transforming lives through music education.
             </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-4xl md:text-5xl font-bold text-black mb-2">{stat.number}</div>
+                <div className="text-lg font-semibold text-gray-900 mb-2">{stat.label}</div>
+                <p className="text-sm text-gray-600 leading-relaxed">{stat.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -437,11 +388,18 @@ const ProgramsSection = () => {
       image: imageUrlsData.home.programsImages[2]?.cloudinaryUrl || "",
     },
     {
+      icon: Users,
+      title: "Community Outreach",
+      description: "Bringing music to underserved neighborhoods through concerts, workshops, and wellness programs.",
+      features: ["Live music for underserved neighborhoods", "Music for wellness in senior homes", "Hands-on learning workshops", "School partnerships"],
+      image: imageUrlsData.home.programsImages[3]?.cloudinaryUrl || "",
+    },
+    {
       icon: Gift,
       title: "Instrument Donation",
       description: "Donate musical instruments to help make music education accessible to all students.",
       features: ["Accept all instruments", "Tax deductible", "Pickup service", "Quality inspection"],
-      image: imageUrlsData.home.programsImages[3]?.cloudinaryUrl || "",
+      image: imageUrlsData.home.programsImages[4]?.cloudinaryUrl || "",
     },
   ]
 
@@ -452,30 +410,42 @@ const ProgramsSection = () => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 sm:mb-6">Our Services</h2>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-6xl mx-auto px-2">
             Discover how <span className="font-bold">Harmony 4 All</span> opens doors of opportunity through music. Our programs provide the tools, resources, and support that help underserved students explore their creativity, strengthen their confidence, and grow with their communities.
-
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6">
+            <Badge className="px-4 py-2">
+              Partnering with Title 1 Schools & Community Centers
+            </Badge>
+            <Link href="/annual-report">
+              <Button variant="outline" className="border-gray-300 hover:bg-gray-50">
+                Download Annual Report
+              </Button>
+            </Link>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
           {programs.map((program, index) => (
             <Card
               key={index}
               className="bg-white shadow-lg hover:shadow-xl border-0 rounded-2xl overflow-hidden"
             >
               <div className="aspect-video overflow-hidden relative">
-                <Image
-                  src={program.image}
-                  alt={program.title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  quality={80}
-                  className="object-cover group-hover:scale-110 transition-transform duration-300"
-                />
+                {program.image ? (
+                  <Image
+                    src={program.image}
+                    alt={program.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 25vw, 20vw"
+                    quality={80}
+                    className="object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                    <program.icon className="h-16 w-16 text-gray-500" />
+                  </div>
+                )}
               </div>
               <CardHeader className="text-center pb-4">
-                <div className="mx-auto w-12 h-12 sm:w-16 sm:h-16 bg-black rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4">
-                  <program.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
-                </div>
                 <CardTitle className="text-lg sm:text-xl font-bold text-gray-900">{program.title}</CardTitle>
               </CardHeader>
               <CardContent>
@@ -819,30 +789,17 @@ const HomeBlogSection = () => {
 
 // Main Page Component
 export default function HomePage() {
-  const [showPopup, setShowPopup] = useState(false)
-
-  useEffect(() => {
-    // Show popup after 2 seconds
-    const timer = setTimeout(() => {
-      setShowPopup(true)
-    }, 2000)
-
-    return () => clearTimeout(timer)
-  }, [])
-
   return (
     <div className="min-h-screen overflow-hidden">
       <HeroCarousel />
       <DonorsMarqueeSection />
-      <WhoWeAreSection />
+      <ImpactStatisticsSection />
       <MissionValuesSection />
       <ProgramsSection />
       <GetInvolvedSection />
       <TestimonialsSection />
-      <HomeBlogSection />
       <ContactSection />
       <NewsletterSection />
-      <WelcomePopup isOpen={showPopup} onClose={() => setShowPopup(false)} />
     </div>
   )
 }
