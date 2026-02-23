@@ -1,9 +1,11 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { imageUrlsData } from "@/lib/image-urls"
 import {
   DollarSign,
   TrendingUp,
@@ -22,13 +24,6 @@ export default function FinancialTransparencyPage() {
 
   const financialHighlights = [
     {
-      title: "Community Partnerships",
-      amount: "10+",
-      period: "since 2025",
-      description: "Schools and community centers served",
-      icon: Users
-    },
-    {
       title: "Community Members Reached",
       amount: "1000+",
       period: "since 2021",
@@ -41,6 +36,13 @@ export default function FinancialTransparencyPage() {
       period: "since 2021",
       description: "Free instrument repair services provided",
       icon: Music
+    },
+    {
+      title: "Community Partnerships",
+      amount: "10+",
+      period: "since 2025",
+      description: "Schools and community centers served",
+      icon: Users
     },
     {
         title: "Community Events",
@@ -83,20 +85,36 @@ export default function FinancialTransparencyPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-black text-white px-4 md:px-6 py-2 md:py-3 rounded-full mb-6">
-              <Eye className="h-4 w-4 md:h-5 md:w-5" />
-              <span className="font-semibold text-sm md:text-base">FINANCIAL TRANSPARENCY</span>
+      <section className="relative py-16 md:py-24 lg:py-32 bg-gray-900">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={imageUrlsData.financialTransparency.heroBackground.cloudinaryUrl}
+            alt=""
+            fill
+            sizes="100vw"
+            quality={75}
+            className="object-cover"
+            priority
+          />
+        </div>
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50 z-0"></div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col items-center justify-center h-full">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="inline-flex items-center space-x-2 bg-black text-white px-4 md:px-6 py-2 md:py-3 rounded-full mb-6">
+                <Eye className="h-4 w-4 md:h-5 md:w-5" />
+                <span className="font-semibold text-sm md:text-base">FINANCIAL TRANSPARENCY</span>
+              </div>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-6 drop-shadow-lg text-center">
+                Accountability Through Transparency
+              </h1>
+              <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto drop-shadow-lg">
+                We believe in complete financial transparency. Every dollar donated to Harmony 4 All
+                is accounted for and directly supports our mission of making music education accessible to all.
+              </p>
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
-              Accountability Through Transparency
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              We believe in complete financial transparency. Every dollar donated to Harmony 4 All
-              is accounted for and directly supports our mission of making music education accessible to all.
-            </p>
           </div>
         </div>
       </section>

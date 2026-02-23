@@ -703,6 +703,13 @@
       "cloudinaryUrl": "https://res.cloudinary.com/deocrj0jn/image/upload/v1765970166/harmony4all/assets/volunteer-hero-background.jpg"
     }
   },
+  "financialTransparency": {
+    "heroBackground": {
+      "name": "Financial Transparency Hero Background",
+      "url": "/assets/educational-excellence-through-music.avif",
+      "cloudinaryUrl": "https://res.cloudinary.com/deocrj0jn/image/upload/v1765970089/harmony4all/assets/educational-excellence-through-music.avif"
+    }
+  },
   "home": {
     "heroCarousel": [
       {
