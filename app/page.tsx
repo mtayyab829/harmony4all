@@ -411,19 +411,9 @@ const ProgramsSection = () => {
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-6xl mx-auto px-2">
             Discover how <span className="font-bold">Harmony 4 All</span> opens doors of opportunity through music. Our programs provide the tools, resources, and support that help underserved students explore their creativity, strengthen their confidence, and grow with their communities.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6">
-            <Badge className="px-4 py-2">
-              Partnering with Title 1 Schools & Community Centers
-            </Badge>
-            <Link href="/annual-report">
-              <Button variant="outline" className="border-gray-300 hover:bg-gray-50">
-                Download Annual Report
-              </Button>
-            </Link>
-          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
           {programs.map((program, index) => (
             <Card
               key={index}
