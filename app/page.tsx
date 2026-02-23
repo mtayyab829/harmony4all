@@ -246,24 +246,24 @@ const HeroCarousel = () => {
 const ImpactStatisticsSection = () => {
   const stats = [
     {
-      number: "1,200+",
-      label: "Students Served",
+      number: "1000+",
+      label: "Community Members Reached",
       description: "Underserved youth receiving music education since 2021"
     },
     {
-      number: "500+",
-      label: "Instruments Distributed",
-      description: "Free instruments provided to students in need"
+      number: "80+",
+      label: "Instruments Repaired",
+      description: "Free instrument repair services provided"
     },
     {
-      number: "50+",
-      label: "Schools Partnered",
+      number: "10+",
+      label: "Community Partnerships",
       description: "Title 1 schools and community centers served"
     },
     {
-      number: "92%",
-      label: "Program Efficiency",
-      description: "Of budget directly invested in programs"
+      number: "12+",
+      label: "Community Events",
+      description: "Music performances and educational workshops"
     }
   ]
 

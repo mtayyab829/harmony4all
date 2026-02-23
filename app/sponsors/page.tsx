@@ -173,24 +173,24 @@ export default function SponsorsPage() {
 
     const impactMetrics = [
         {
-            number: "300+",
-            label: "Students Served",
+            number: "1000+",
+            label: "Community Members Reached",
             description: "Children receiving music education through our programs"
         },
         {
+            number: "80+",
+            label: "Instruments Repaired",
+            description: "Free instrument repair services provided"
+        },
+        {
             number: "10+",
-            label: "Schools Partnered",
-            description: "Educational institutions across NYC"
+            label: "Community Partnerships",
+            description: "Schools and community centers served"
         },
         {
-            number: "100+",
-            label: "Instruments Provided",
-            description: "Musical instruments donated and maintained"
-        },
-        {
-            number: "25+",
-            label: "Events Hosted",
-            description: "Community concerts and educational events"
+            number: "12+",
+            label: "Community Events",
+            description: "Music performances and educational workshops"
         }
     ]
 
@@ -411,7 +411,7 @@ export default function SponsorsPage() {
                                         <div>
                                             <h3 className="text-sm md:text-xl font-semibold text-gray-900 mb-1 md:mb-2">Proven Impact</h3>
                                             <p className="text-xs md:text-base text-gray-600">
-                                                Our programs have directly impacted over 500 students across 25+ schools, with measurable improvements in academic performance and social development.
+                                                Our programs have directly impacted over 1000 community members across 10+ partnerships, with measurable improvements in academic performance and social development.
                                             </p>
                                         </div>
                                     </div>

@@ -13,39 +13,41 @@ import {
   Calendar,
   ArrowRight,
   Eye,
-  Award
+  Award,
+  Music,
+  Users
 } from "lucide-react"
 
 export default function FinancialTransparencyPage() {
 
   const financialHighlights = [
     {
-      title: "Total Revenue",
-      amount: "$150,000+",
-      period: "FY 2023",
-      description: "Generated through donations, grants, and program fees",
-      icon: DollarSign
+      title: "Community Partnerships",
+      amount: "10+",
+      period: "since 2025",
+      description: "Schools and community centers served",
+      icon: Users
     },
     {
-      title: "Program Expenses",
-      amount: "92%",
-      period: "of total budget",
-      description: "Directly invested in music education programs",
-      icon: TrendingUp
-    },
-    {
-      title: "Administrative Costs",
-      amount: "8%",
-      period: "below industry average",
-      description: "Efficient operations maximize program impact",
-      icon: PieChart
-    },
-    {
-      title: "Students Served",
-      amount: "1,200+",
+      title: "Community Members Reached",
+      amount: "1000+",
       period: "since 2021",
       description: "Underserved youth receiving music education",
       icon: Award
+    },
+    {
+      title: "Instruments Repaired",
+      amount: "80+",
+      period: "since 2021",
+      description: "Free instrument repair services provided",
+      icon: Music
+    },
+    {
+        title: "Community Events",
+      amount: "12+",
+      period: "since 2021",
+      description: "Music performances and educational workshops",
+      icon: Calendar
     }
   ]
 
@@ -241,7 +243,7 @@ export default function FinancialTransparencyPage() {
               </Button>
             </Link>
             <Link href="/contact">
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-3 rounded-full">
+              <Button className="border-white text-white hover:bg-white hover:text-black px-8 py-3 rounded-full">
                 Contact Us
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>

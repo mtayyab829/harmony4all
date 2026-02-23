@@ -19,42 +19,16 @@ export default function AnnualReportPage() {
 
   const reportHighlights = [
     {
-      year: "2023",
-      title: "Breaking Barriers Through Music",
-      description: "Our most comprehensive annual report yet, detailing the impact of our expanded programs and community partnerships.",
-      downloads: 245,
-      pages: 32,
-      highlights: [
-        "1,200+ students served across NYC",
-        "500+ instruments distributed",
-        "50+ school partnerships established",
-        "92% program efficiency achieved"
-      ]
-    },
-    {
-      year: "2022",
+      year: "2025",
       title: "Harmony in Action",
-      description: "A year of growth and community impact, showcasing our expanded reach and program effectiveness.",
-      downloads: 189,
-      pages: 28,
-      highlights: [
-        "950+ students reached",
-        "320+ instruments provided",
-        "35+ partner schools",
-        "87% program efficiency"
-      ]
-    },
-    {
-      year: "2021",
-      title: "Founding Year Impact",
-      description: "Our inaugural annual report, documenting the establishment of Harmony 4 All and our initial community impact.",
-      downloads: 156,
+      description: "Our latest annual report showcasing the impact of our community programs and partnerships.",
+      downloads: 0,
       pages: 24,
       highlights: [
-        "600+ students served",
-        "150+ instruments distributed",
-        "20+ school partnerships",
-        "Foundation established"
+        "1000+ community members reached across NYC",
+        "80+ instruments repaired",
+        "10+ community partnerships established",
+        "12+ community events hosted"
       ]
     }
   ]
@@ -62,27 +36,27 @@ export default function AnnualReportPage() {
   const impactMetrics = [
     {
       icon: Users,
-      value: "1,200+",
-      label: "Students Served",
-      description: "Underserved youth reached since 2021"
+      value: "1000+",
+      label: "Community Members Reached",
+      description: "Underserved youth receiving music education"
     },
     {
       icon: Music,
-      value: "500+",
-      label: "Instruments Distributed",
-      description: "Free instruments provided to students"
+      value: "80+",
+      label: "Instruments Repaired",
+      description: "Free instrument repair services provided"
     },
     {
       icon: TrendingUp,
-      value: "92%",
-      label: "Program Efficiency",
-      description: "Funds directly supporting programs"
+      value: "10+",
+      label: "Community Partnerships",
+      description: "Schools and community centers served"
     },
     {
       icon: Calendar,
-      value: "3+",
-      label: "Years of Impact",
-      description: "Building sustainable change"
+      value: "12+",
+      label: "Community Events",
+      description: "Music performances and educational workshops"
     }
   ]
 
@@ -131,11 +105,11 @@ export default function AnnualReportPage() {
                   Latest Report
                 </Badge>
                 <CardTitle className="text-2xl md:text-3xl font-bold mb-2">
-                  2023 Annual Report: Breaking Barriers Through Music
+                  2025 Annual Report: Harmony in Action
                 </CardTitle>
                 <CardDescription className="text-white/80 text-base">
-                  Our most comprehensive report yet, showcasing three years of transformative impact
-                  in underserved communities across New York City.
+                  Our latest annual report showcasing the impact of our community programs
+                  and partnerships across New York City.
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-center">
@@ -153,10 +127,10 @@ export default function AnnualReportPage() {
                 </div>
                 <Button className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold">
                   <Download className="h-4 w-4 mr-2" />
-                  Download 2023 Report (PDF)
+                  Download 2025 Report (PDF)
                 </Button>
                 <p className="text-xs text-white/60 mt-3">
-                  PDF • 32 pages • 2.4 MB • Last updated: December 2023
+                  PDF • 24 pages • 1.8 MB • Last updated: December 2025
                 </p>
               </CardContent>
             </Card>
