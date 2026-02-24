@@ -248,7 +248,7 @@ const ImpactStatisticsSection = () => {
     {
       number: "1000+",
       label: "Community Members Reached",
-      description: "Underserved youth receiving music education since 2021"
+      description: "Underserved youth receiving music education"
     },
     {
       number: "80+",

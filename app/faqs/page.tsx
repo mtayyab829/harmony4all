@@ -32,7 +32,7 @@ export default function FAQsPage() {
       id: 2,
       category: "story",
       question: "When was Harmony 4 All founded?",
-      answer: "Harmony 4 All was officially approved as a nonprofit organization by the IRS in September 2023. Since then, we've been working tirelessly to bring the joy of music to communities that need it most."
+      answer: "Harmony 4 All, Inc. was incorporated in the State of New York in July 2023 and received IRS 501(c)(3) nonprofit status. Since our founding, we've been working tirelessly to bring the joy of music to communities that need it most."
     },
     {
       id: 3,

@@ -392,7 +392,7 @@ export default function AccessibilityPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-xs md:text-sm lg:text-base text-gray-600">
-              <strong>Last Updated:</strong> December 2024
+              <strong>Last Updated:</strong> December 2025
             </p>
             <p className="text-xs md:text-sm lg:text-base text-gray-600 mt-2">
               This accessibility statement is reviewed and updated regularly to reflect our current accessibility

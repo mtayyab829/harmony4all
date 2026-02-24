@@ -601,7 +601,7 @@ export default function AboutPage() {
                     <div className="space-y-3 text-gray-700 text-sm md:text-base">
                       <div className="flex justify-between items-center">
                         <span className="font-medium">Address:</span>
-                        <span>New York City, United States</span>
+                        <span>104-44 116th Street<br />Richmond Hill, NY 11419</span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="font-medium">Email:</span>
@@ -649,15 +649,15 @@ export default function AboutPage() {
                     <div className="space-y-3 text-gray-700 text-sm md:text-base">
                       <div className="flex justify-between items-start">
                         <span className="font-medium">Board of Directors:</span>
-                        <span className="text-right">Dedicated volunteers</span>
+                        <span className="text-right">Diane Bacchus (President)<br />Nahaz Quddus (Secretary)<br />Joshua Quddus (Treasurer)<br />Bianca Quddus (Co-Founder)</span>
                       </div>
                       <div className="flex justify-between items-start">
                         <span className="font-medium">Executive Leadership:</span>
-                        <span className="text-right">Co-Founders:<br /><strong>Bianca</strong> & <strong>Joshua Quddus</strong></span>
+                        <span className="text-right">Diane Bacchus (President)<br />All officers serve as volunteers</span>
                       </div>
                       <div className="flex justify-between items-start">
-                        <span className="font-medium">Advisory Council:</span>
-                        <span className="text-right">Music education experts</span>
+                        <span className="font-medium">IRS Form 990 Officers:</span>
+                        <span className="text-right">All officers report $0 compensation</span>
                       </div>
                     </div>
                   </div>

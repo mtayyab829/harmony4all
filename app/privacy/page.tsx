@@ -378,10 +378,10 @@ export default function PrivacyPolicyPage() {
                   updated policy on our website and updating the "Last Updated" date.
                 </p>
                 <p className="text-gray-600 text-sm md:text-base">
-                  <strong>Last Updated:</strong> December 2024
+                  <strong>Last Updated:</strong> December 2025
                 </p>
                 <p className="text-gray-600 mt-2 text-sm md:text-base">
-                  <strong>Effective Date:</strong> December 1, 2024
+                  <strong>Effective Date:</strong> December 1, 2025
                 </p>
               </CardContent>
             </Card>

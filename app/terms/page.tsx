@@ -388,8 +388,8 @@ export default function TermsConditionsPage() {
                     terms on this page and updating the "Last Updated" date below.
                   </p>
                   <div className="text-gray-700 text-sm md:text-base">
-                    <p><strong>Last Updated:</strong> December 2024</p>
-                    <p className="mt-2"><strong>Effective Date:</strong> December 1, 2024</p>
+                    <p><strong>Last Updated:</strong> December 2025</p>
+                    <p className="mt-2"><strong>Effective Date:</strong> December 1, 2025</p>
                   </div>
                 </CardContent>
               </Card>

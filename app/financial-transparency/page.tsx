@@ -26,14 +26,14 @@ export default function FinancialTransparencyPage() {
     {
       title: "Community Members Reached",
       amount: "1000+",
-      period: "since 2021",
+      period: "since 2025",
       description: "Underserved youth receiving music education",
       icon: Award
     },
     {
       title: "Instruments Repaired",
       amount: "80+",
-      period: "since 2021",
+      period: "since 2025",
       description: "Free instrument repair services provided",
       icon: Music
     },
@@ -47,25 +47,26 @@ export default function FinancialTransparencyPage() {
     {
         title: "Community Events",
       amount: "12+",
-      period: "since 2021",
+      period: "since 2025",
       description: "Music performances and educational workshops",
       icon: Calendar
     }
   ]
 
   const revenueSources = [
-    { category: "Individual Donations", percentage: 45, amount: "$67,500" },
-    { category: "Foundation Grants", percentage: 30, amount: "$45,000" },
-    { category: "Corporate Sponsorships", percentage: 15, amount: "$22,500" },
-    { category: "Program Fees", percentage: 7, amount: "$10,500" },
-    { category: "Other Revenue", percentage: 3, amount: "$4,500" }
+    { category: "Individual Donations", percentage: 85, amount: "$10,063" },
+    { category: "Foundation Grants", percentage: 10, amount: "$1,181" },
+    { category: "Corporate Sponsorships", percentage: 3, amount: "$355" },
+    { category: "Program Fees", percentage: 1, amount: "$118" },
+    { category: "Other Revenue", percentage: 1, amount: "$95" }
   ]
 
   const expenseBreakdown = [
-    { category: "Program Services", percentage: 75, amount: "$112,500", description: "Instruments, curriculum, and direct program delivery" },
-    { category: "Instrument Maintenance", percentage: 17, amount: "$25,500", description: "Repairs, maintenance, and equipment replacement" },
-    { category: "Administration", percentage: 6, amount: "$9,000", description: "Management, accounting, and compliance" },
-    { category: "Fundraising", percentage: 2, amount: "$3,000", description: "Development and donor relations" }
+    { category: "Program Expenses", percentage: 45, amount: "$5,287", description: "Direct program delivery and educational activities" },
+    { category: "Contract Labor", percentage: 30, amount: "$3,525", description: "Professional services and program support" },
+    { category: "Advertising & Marketing", percentage: 15, amount: "$1,762", description: "Community outreach and promotional activities" },
+    { category: "Software & Subscriptions", percentage: 8, amount: "$941", description: "Digital tools and operational subscriptions" },
+    { category: "Other Expenses", percentage: 2, amount: "$235", description: "Miscellaneous operational costs" }
   ]
 
   return (
@@ -226,7 +227,7 @@ export default function FinancialTransparencyPage() {
             <Card className="bg-gray-50 border-2 border-dashed border-gray-300">
               <CardContent className="p-8 text-center">
                 <FileText className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">IRS Form 990 - FY 2023</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">IRS Form 990 - FY 2024</h3>
                 <p className="text-gray-600 mb-6">
                   Complete financial disclosure as filed with the IRS
                 </p>

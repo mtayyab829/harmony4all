@@ -41,7 +41,7 @@ export default function JoshuaPage() {
     leadership: [
       "Global Youth Ambassador at the Foundation of Support for the UN",
       "Tutor through Relume Organization",
-      "Vargas-Vetter/Ukena Fellowship Recipient (2022)"
+      "Vargas-Vetter/Ukena Fellowship Recipient (2023)"
     ],
     music: [
       "Former Member, High School Jazz Academy at Jazz at Lincoln Center",
@@ -65,7 +65,7 @@ export default function JoshuaPage() {
   ]
 
   const longBio = [
-    "As an inquisitive child, Joshua has always felt strongly about the importance of education for the youth and is a firm advocate for the accessibility of education, particularly music education, within underrepresented groups and minorities. Joshua tutors through the Relume Organization, partnered with schools in Harlem to support educationally disadvantaged children. In 2022, Joshua was awarded the Vargas-Vetter/Ukena Fellowship, receiving a significant stipend and professional mentorship to further his musical endeavors.",
+    "As an inquisitive child, Joshua has always felt strongly about the importance of education for the youth and is a firm advocate for the accessibility of education, particularly music education, within underrepresented groups and minorities. Joshua tutors through the Relume Organization, partnered with schools in Harlem to support educationally disadvantaged children. In 2023, Joshua was awarded the Vargas-Vetter/Ukena Fellowship, receiving a significant stipend and professional mentorship to further his musical endeavors.",
     "Joshua has performed at prestigious venues such as Carnegie Hall, Lincoln Center, the United Nations, Harvard Medical School, Peter Jay Sharp Theatre, Birdland Jazz Club, Dizzy's Club, The Times Center, Shapeshifter Lab, and more. He is a member of Jazz at Lincoln Center's Youth Orchestra and Mary Lou Williams Combo and is the youngest member of the New York Youth Symphony's Jazz Band. Additionally, Joshua runs his own Jazz Quintet, the Quddus Quintet, and is part of the Senior Jazz Ensemble at his high school.",
     "As a math enthusiast, Joshua participates in numerous math competitions, including the AMC 8/10/12, CML, MATHCOUNTS, Purple Comet, and the Trinity Math Competition."
   ]
