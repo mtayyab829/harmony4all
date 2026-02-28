@@ -39,6 +39,13 @@ const HeroCarousel = () => {
       title: "Building a World of Harmony Through Music",
       subtitle:
         "Inspiring the next generation to discover their voices, unite communities, and transform lives through the power of music.",
+      video: imageUrlsData.home.heroCarousel[0]?.url || "",
+      type: "video",
+    },
+    {
+      title: "Building a World of Harmony Through Music",
+      subtitle:
+        "Inspiring the next generation to discover their voices, unite communities, and transform lives through the power of music.",
       image: imageUrlsData.home.heroCarousel[1]?.cloudinaryUrl || "",
     },
     {
@@ -96,8 +103,36 @@ const HeroCarousel = () => {
             }`}
           aria-hidden={index !== currentSlide}
         >
-          {/* Background Image */}
-          {slide.image && (
+          {/* Background Media */}
+          {slide.video && slide.type === "video" ? (
+            <>
+              {/* Mobile: Fixed height video container */}
+              <div className="sm:hidden w-full h-[180px] relative mt-10">
+                <video
+                  src={slide.video}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover"
+                  poster={slide.image}
+                />
+              </div>
+
+              {/* Desktop: Full background video */}
+              <div className="hidden sm:block absolute inset-0">
+                <video
+                  src={slide.video}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover"
+                  poster={slide.image}
+                />
+              </div>
+            </>
+          ) : slide.image ? (
             <>
               {/* Mobile: Fixed height image container */}
               <div className="sm:hidden w-full h-[180px] relative mt-10">
@@ -125,10 +160,10 @@ const HeroCarousel = () => {
                 />
               </div>
             </>
-          )}
+          ) : null}
 
-          {/* Mobile: Content below image */}
-          {slide.image && (
+          {/* Mobile: Content below media */}
+          {(slide.image || slide.video) && (
             <div className="sm:hidden relative z-10 container mx-auto px-4 text-center py-8">
               <div className="max-w-4xl mx-auto text-gray-900">
                 <h1
@@ -161,8 +196,8 @@ const HeroCarousel = () => {
             </div>
           )}
 
-          {/* Desktop: Content overlaid on image */}
-          {slide.image && (
+          {/* Desktop: Content overlaid on media */}
+          {(slide.image || slide.video) && (
             <div className="hidden sm:flex relative z-10 container mx-auto px-4 text-center h-full items-center">
             <div className="max-w-4xl mx-auto text-white">
               <h1
