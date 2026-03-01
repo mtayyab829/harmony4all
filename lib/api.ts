@@ -247,5 +247,48 @@ export const textUpdatesAPI = {
   },
 };
 
+// Admin API functions
+export const adminAPI = {
+  // Download Audited Financial Statement
+  downloadAuditedFinancialStatement: async () => {
+    const response = await api.get("/admin/audited-financial-statement", {
+      responseType: 'blob', // Important for file downloads
+    });
+
+    // Create a blob URL and trigger download
+    const blob = new Blob([response.data], { type: 'application/pdf' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'Harmony_4All_Audited_Financial_Statement_2024.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+
+    return { success: true };
+  },
+
+  // Download IRS Form 990
+  downloadIRSForm990: async () => {
+    const response = await api.get("/admin/irs-form-990", {
+      responseType: 'blob', // Important for file downloads
+    });
+
+    // Create a blob URL and trigger download
+    const blob = new Blob([response.data], { type: 'application/pdf' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'Harmony_4All_IRS_Form_990_FY_2024.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+
+    return { success: true };
+  },
+};
+
 // Export the base api instance for custom requests
 export default api;

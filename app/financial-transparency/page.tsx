@@ -2,10 +2,12 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { imageUrlsData } from "@/lib/image-urls"
+import { adminAPI } from "@/lib/api"
 import {
   DollarSign,
   TrendingUp,
@@ -21,6 +23,18 @@ import {
 } from "lucide-react"
 
 export default function FinancialTransparencyPage() {
+  const [isDownloadingForm990, setIsDownloadingForm990] = useState(false)
+
+  const handleDownloadForm990 = async () => {
+    try {
+      setIsDownloadingForm990(true)
+      await adminAPI.downloadIRSForm990()
+    } catch (error) {
+      console.error('Error downloading IRS Form 990:', error)
+    } finally {
+      setIsDownloadingForm990(false)
+    }
+  }
 
   const financialHighlights = [
     {
@@ -231,9 +245,13 @@ export default function FinancialTransparencyPage() {
                 <p className="text-gray-600 mb-6">
                   Complete financial disclosure as filed with the IRS
                 </p>
-                <Button className="bg-black text-white hover:bg-gray-800 px-8 py-3 rounded-full">
+                <Button
+                  onClick={handleDownloadForm990}
+                  disabled={isDownloadingForm990}
+                  className="bg-black text-white hover:bg-gray-800 px-8 py-3 rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
+                >
                   <Download className="h-4 w-4 mr-2" />
-                  Download Form 990
+                  {isDownloadingForm990 ? 'Downloading...' : 'Download Form 990'}
                 </Button>
                 <p className="text-xs text-gray-500 mt-4">
                   Available upon request. Contact info@harmony4all.org for access.

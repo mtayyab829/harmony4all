@@ -159,7 +159,7 @@ export default function ServicesPage() {
                         src={service.image || imageUrlsData.media.placeholder.cloudinaryUrl}
                         alt={service.title}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                        className="object-cover group-hover:scale-110 transition-transform duration-700 object-top"
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         quality={85}
                       />
@@ -349,7 +349,7 @@ export default function ServicesPage() {
                   src={imageUrlsData.services.additionalServices[3]?.cloudinaryUrl || ""}
                   alt="Advocacy Speaking"
                   fill
-                  className="bg-bottom object-cover hover:scale-105 transition-transform duration-300"
+                  className="bg-bottom object-contain hover:scale-105 transition-transform duration-300"
                   sizes="(max-width: 768px) 100vw, 50vw"
                   quality={85}
                 />

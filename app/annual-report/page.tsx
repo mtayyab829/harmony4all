@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -14,8 +15,22 @@ import {
   ArrowRight,
   Eye
 } from "lucide-react"
+import { adminAPI } from "@/lib/api"
 
 export default function AnnualReportPage() {
+  const [isDownloadingReport, setIsDownloadingReport] = useState(false)
+
+  const handleDownloadAnnualReport = async () => {
+    try {
+      setIsDownloadingReport(true)
+      await adminAPI.downloadAuditedFinancialStatement()
+    } catch (error) {
+      console.error('Error downloading Annual Report:', error)
+      alert('Failed to download Annual Report. Please try again.')
+    } finally {
+      setIsDownloadingReport(false)
+    }
+  }
 
   const reportHighlights = [
     {
@@ -125,9 +140,13 @@ export default function AnnualReportPage() {
                     </div>
                   ))}
                 </div>
-                <Button className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold">
+                <Button
+                  onClick={handleDownloadAnnualReport}
+                  disabled={isDownloadingReport}
+                  className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                >
                   <Download className="h-4 w-4 mr-2" />
-                  Download 2025 Report (PDF)
+                  {isDownloadingReport ? 'Downloading...' : 'Download 2025 Report (PDF)'}
                 </Button>
                 <p className="text-xs text-white/60 mt-3">
                   PDF • 24 pages • 1.8 MB • Last updated: December 2025
@@ -185,9 +204,13 @@ export default function AnnualReportPage() {
                       <span className="text-sm text-gray-500">
                         {report.pages} pages • PDF
                       </span>
-                      <Button variant="outline" className="border-gray-300 hover:bg-gray-50">
+                      <Button
+                        onClick={() => handleDownloadAnnualReport()}
+                        disabled={isDownloadingReport}
+                        className="border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
                         <Download className="h-4 w-4 mr-2" />
-                        Download
+                        {isDownloadingReport ? 'Downloading...' : 'Download'}
                       </Button>
                     </div>
                   </CardContent>

@@ -428,7 +428,7 @@ export default function AboutPage() {
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
                       quality={85}
-                      className="object-cover"
+                      className="object-contain"
                       loading={index === 0 ? "eager" : "lazy"}
                     />
                   </div>
