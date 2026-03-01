@@ -31,6 +31,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'qns.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   async headers() {
