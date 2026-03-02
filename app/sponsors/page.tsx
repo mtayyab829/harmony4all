@@ -113,9 +113,9 @@ export default function SponsorsPage() {
             logo: getSponsorLogo("Villa Russo"),
             website: "https://www.villarussocatering.com",
             tier: "Silver",
-            category: "Catering Service",
-            impact: "Make Memories In Our Castle", 
-            description: "From unforgettable Weddings to royal Sweet Sixteens and Quinceañeras, perfectly choreographed corporate events to unique private occasions, Villa Russo is your dream castle in Queens."
+            category: "Venue Partner",
+            impact: "Youth Performance Venue",
+            description: "Villa Russo provides venue space that supports Harmony 4 All's youth performances and community-centered musical events."
         },
 
     ]
