@@ -34,7 +34,7 @@ export default function AnnualReportPage() {
 
   const reportHighlights = [
     {
-      year: "2025",
+      year: "2024",
       title: "Harmony in Action",
       description: "Our latest annual report showcasing the impact of our community programs and partnerships.",
       downloads: 0,
@@ -146,10 +146,10 @@ export default function AnnualReportPage() {
                   className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Download className="h-4 w-4 mr-2" />
-                  {isDownloadingReport ? 'Downloading...' : 'Download 2025 Report (PDF)'}
+                  {isDownloadingReport ? 'Downloading...' : 'Download 2024 Report (PDF)'}
                 </Button>
                 <p className="text-xs text-white/60 mt-3">
-                  PDF • 24 pages • 1.8 MB • Last updated: December 2025
+                  PDF - Last updated: December 2024
                 </p>
               </CardContent>
             </Card>

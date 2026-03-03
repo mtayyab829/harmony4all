@@ -40,28 +40,28 @@ export default function FinancialTransparencyPage() {
     {
       title: "Community Members Reached",
       amount: "1000+",
-      period: "since 2025",
+      period: "since 2024",
       description: "Underserved youth receiving music education",
       icon: Award
     },
     {
       title: "Instruments Repaired",
       amount: "80+",
-      period: "since 2025",
+      period: "since 2024",
       description: "Free instrument repair services provided",
       icon: Music
     },
     {
       title: "Community Partnerships",
       amount: "10+",
-      period: "since 2025",
+      period: "since 2024",
       description: "Schools and community centers served",
       icon: Users
     },
     {
         title: "Community Events",
       amount: "12+",
-      period: "since 2025",
+      period: "since 2024",
       description: "Music performances and educational workshops",
       icon: Calendar
     }
