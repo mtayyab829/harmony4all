@@ -34,7 +34,7 @@ export default function AnnualReportPage() {
 
   const reportHighlights = [
     {
-      year: "2024",
+      year: "Latest",
       title: "Harmony in Action",
       description: "Our latest annual report showcasing the impact of our community programs and partnerships.",
       downloads: 0,
@@ -120,7 +120,7 @@ export default function AnnualReportPage() {
                   Latest Report
                 </Badge>
                 <CardTitle className="text-2xl md:text-3xl font-bold mb-2">
-                  2025 Annual Report: Harmony in Action
+                  Annual Report: Harmony in Action
                 </CardTitle>
                 <CardDescription className="text-white/80 text-base">
                   Our latest annual report showcasing the impact of our community programs
@@ -146,10 +146,10 @@ export default function AnnualReportPage() {
                   className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Download className="h-4 w-4 mr-2" />
-                  {isDownloadingReport ? 'Downloading...' : 'Download 2024 Report (PDF)'}
+                  {isDownloadingReport ? 'Downloading...' : 'Download Annual Report (PDF)'}
                 </Button>
                 <p className="text-xs text-white/60 mt-3">
-                  PDF - Last updated: December 2024
+                  PDF - Latest Report
                 </p>
               </CardContent>
             </Card>

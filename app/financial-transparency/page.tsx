@@ -40,28 +40,28 @@ export default function FinancialTransparencyPage() {
     {
       title: "Community Members Reached",
       amount: "1000+",
-      period: "since 2024",
+      period: "",
       description: "Underserved youth receiving music education",
       icon: Award
     },
     {
       title: "Instruments Repaired",
       amount: "80+",
-      period: "since 2024",
+      period: "",
       description: "Free instrument repair services provided",
       icon: Music
     },
     {
       title: "Community Partnerships",
       amount: "10+",
-      period: "since 2024",
+      period: "",
       description: "Schools and community centers served",
       icon: Users
     },
     {
         title: "Community Events",
       amount: "12+",
-      period: "since 2024",
+      period: "",
       description: "Music performances and educational workshops",
       icon: Calendar
     }
@@ -241,7 +241,7 @@ export default function FinancialTransparencyPage() {
             <Card className="bg-gray-50 border-2 border-dashed border-gray-300">
               <CardContent className="p-8 text-center">
                 <FileText className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">IRS Form 990 - FY 2024</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">IRS Form 990</h3>
                 <p className="text-gray-600 mb-6">
                   Complete financial disclosure as filed with the IRS
                 </p>
