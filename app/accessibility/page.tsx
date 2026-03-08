@@ -303,7 +303,12 @@ export default function AccessibilityPage() {
                   <div className="space-y-2 md:space-y-3">
                     <div className="flex items-center">
                       <Phone className="h-4 w-4 md:h-5 md:w-5 text-black mr-2 md:mr-3" />
-                      <span className="text-xs md:text-sm lg:text-base text-gray-700"><a href="tel:+13475547712"> (737) HARMONY (427-6669)</a></span>
+                      <span className="text-xs md:text-sm lg:text-base text-gray-700">
+                        <a href="tel:+18883168742">(888) 31MUSIC</a>
+                        {" "}
+                        or{" "}
+                        <a href="tel:+13475547712">(737) HARMONY (427-6669)</a>
+                      </span>
                     </div>
                     <div className="flex items-center">
                       <Mail className="h-4 w-4 md:h-5 md:w-5 text-black mr-2 md:mr-3" />

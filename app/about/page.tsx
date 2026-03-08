@@ -613,7 +613,11 @@ export default function AboutPage() {
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="font-medium">Phone:</span>
-                        <span><a href="tel:+13475547712"> (737) HARMONY (427-6669)</a></span>
+                        <span>
+                          <a href="tel:+18883168742">(888) 31MUSIC</a>
+                          <br />
+                          <a href="tel:+13475547712">(737) HARMONY (427-6669)</a>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -649,7 +653,7 @@ export default function AboutPage() {
                     <div className="space-y-3 text-gray-700 text-sm md:text-base">
                       <div className="flex justify-between items-start">
                         <span className="font-medium">Board of Directors:</span>
-                        <span className="text-right">Diane Bacchus (President)<br />Nahaz Quddus (Secretary)<br />Joshua Quddus (Treasurer)<br />Bianca Quddus (Co-Founder)</span>
+                        <span className="text-right">Diane Bacchus (President)<br />Nahaz Quddus (Secretary)<br />Joshua Quddus (Vice President)<br />Bianca Quddus (Treasurer)</span>
                       </div>
                       <div className="flex justify-between items-start">
                         <span className="font-medium">Executive Leadership:</span>

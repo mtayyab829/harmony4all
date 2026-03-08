@@ -149,7 +149,7 @@ export default function ContactPage() {
             <Button 
               size="lg" 
               className="bg-white text-black hover:bg-white/60 px-6 md:px-8 py-3 md:py-4 text-sm md:text-lg rounded-full"
-              onClick={() => window.open('tel:+17374276669', '_self')}
+              onClick={() => window.open('tel:+18883168742', '_self')}
             >
               <Phone className="mr-2 h-4 w-4 md:h-5 md:w-5" />
               Call Us Now
