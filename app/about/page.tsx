@@ -13,14 +13,14 @@ export default function AboutPage() {
   const teamMembers = [
     {
       name: "Bianca Quddus",
-      role: "Co-Founder",
+      role: "Co-Founder & Treasurer",
       bio: "Bianca Quddus is a Global Youth Ambassador to the Foundation of Support for the United Nations, a student at the New York City Specialized High School, The Bronx High School of Science, and a clarinet student in the Juilliard School's Preparatory Division.",
       image: imageUrlsData.about.teamMembers[0]?.cloudinaryUrl || "",
       achievements: ["Global Youth Ambassador", "Bronx High School of Science", "Juilliard Preparatory Division"]
     },
     {
       name: "Joshua Quddus",
-      role: "Co-Founder",
+      role: "Co-Founder & Vice President",
       bio: "Joshua Quddus is a Global Youth Ambassador to the Foundation of Support for the United Nations, a sophomore at the prestigious Hunter College High School, and a saxophone student at the Juilliard School's Preparatory Division. In addition, he is also an educator, programmer, and a mathematics enthusiast.",
       image: imageUrlsData.about.teamMembers[1]?.cloudinaryUrl || "",
       achievements: ["Global Youth Ambassador", "Hunter College High School", "Juilliard Preparatory Division"]

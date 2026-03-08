@@ -118,7 +118,7 @@ export default function JoshuaPage() {
             <div className="text-center lg:text-left text-white">
               <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold mb-4 md:mb-6 drop-shadow-lg"><strong>Joshua Quddus</strong></h1>
               <Badge className="bg-white text-black text-sm md:text-base lg:text-lg px-4 md:px-6 py-1 md:py-2 mb-4 md:mb-6">
-                Co-Founder
+                Co-Founder & Vice President
               </Badge>
               <p className="text-base md:text-lg lg:text-2xl mb-6 md:mb-8 opacity-90 max-w-3xl drop-shadow-lg">
                 Juilliard Preparatory Division Graduate
