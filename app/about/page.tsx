@@ -614,7 +614,7 @@ export default function AboutPage() {
                       <div className="flex justify-between items-center">
                         <span className="font-medium">Phone:</span>
                         <span>
-                          <a href="tel:+18883168742">(888) 31MUSIC</a>
+                          <a href="tel:+18883168742">(888) 31-MUSIC</a>
                           <br />
                           <a href="tel:+13475547712">(737) HARMONY (427-6669)</a>
                         </span>

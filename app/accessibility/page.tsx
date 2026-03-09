@@ -304,7 +304,7 @@ export default function AccessibilityPage() {
                     <div className="flex items-center">
                       <Phone className="h-4 w-4 md:h-5 md:w-5 text-black mr-2 md:mr-3" />
                       <span className="text-xs md:text-sm lg:text-base text-gray-700">
-                        <a href="tel:+18883168742">(888) 31MUSIC</a>
+                        <a href="tel:+18883168742">(888) 31-MUSIC</a>
                         {" "}
                         or{" "}
                         <a href="tel:+13475547712">(737) HARMONY (427-6669)</a>
