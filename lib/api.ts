@@ -260,7 +260,7 @@ export const adminAPI = {
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'Harmony_4All_Audited_Financial_Statement_2024.pdf';
+    link.download = 'Harmony_4All_Audited_Financial_Statement.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -280,7 +280,7 @@ export const adminAPI = {
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'Harmony_4All_IRS_Form_990_FY_2024.pdf';
+    link.download = 'Harmony_4All_IRS_Form_990_FY.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
