@@ -68,19 +68,20 @@ export default function FinancialTransparencyPage() {
   ]
 
   const revenueSources = [
-    { category: "Individual Donations", percentage: 85, amount: "$10,063" },
-    { category: "Foundation Grants", percentage: 10, amount: "$1,181" },
-    { category: "Corporate Sponsorships", percentage: 3, amount: "$355" },
-    { category: "Program Fees", percentage: 1, amount: "$118" },
-    { category: "Other Revenue", percentage: 1, amount: "$95" }
+    { category: "Individual Donations", percentage: 19, amount: "$5,027" },
+    { category: "Government Grants", percentage: 37, amount: "$10,000" },
+    { category: "Corporate & Foundation Grants", percentage: 26, amount: "$7,000" },
+    { category: "Sponsorship Income", percentage: 18, amount: "$5,000" }
   ]
 
   const expenseBreakdown = [
-    { category: "Program Expenses", percentage: 45, amount: "$5,287", description: "Direct program delivery and educational activities" },
-    { category: "Contract Labor", percentage: 30, amount: "$3,525", description: "Professional services and program support" },
-    { category: "Advertising & Marketing", percentage: 15, amount: "$1,762", description: "Community outreach and promotional activities" },
-    { category: "Software & Subscriptions", percentage: 8, amount: "$941", description: "Digital tools and operational subscriptions" },
-    { category: "Other Expenses", percentage: 2, amount: "$235", description: "Miscellaneous operational costs" }
+    { category: "Program Services", percentage: 64, amount: "$16,777", description: "Direct musical programs, instruments, volunteer stipends, venue rental, community awareness initiatives, program-related labor, and travel." },
+    { category: "Management & General", percentage: 34, amount: "$8,902", description: "Administrative operations required to manage and sustain the organization." },
+    { category: "Office & Administrative Operations", percentage: 22, amount: "$5,786", description: "Telephone and communication, software tools, website hosting, office supplies, postage, and bank charges." },
+    { category: "Legal & Professional Services", percentage: 8, amount: "$2,099", description: "Bookkeeping services, CPA tax preparation, consulting services, and registration fees." },
+    { category: "Administrative Contract Labor", percentage: 5, amount: "$1,385", description: "Freelancer and individual support services allocated to administration." },
+    { category: "Advertising & Marketing (Admin Portion)", percentage: 8, amount: "$2,151", description: "Marketing and promotional costs supporting administrative and organizational visibility." },
+    { category: "Fundraising", percentage: 2, amount: "$609", description: "Donor research, data research, and grant writing expenses to support fundraising activities." }
   ]
 
   return (
@@ -176,7 +177,7 @@ export default function FinancialTransparencyPage() {
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 flex items-center">
                   <TrendingUp className="h-7 w-7 mr-3 text-black" />
-                  Revenue Sources
+                  Revenue Sources (2025)
                 </h2>
                 <div className="space-y-4">
                   {revenueSources.map((source, index) => (
@@ -201,7 +202,7 @@ export default function FinancialTransparencyPage() {
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 flex items-center">
                   <PieChart className="h-7 w-7 mr-3 text-black" />
-                  Expense Breakdown
+                  Expense Breakdown (2025)
                 </h2>
                 <div className="space-y-4">
                   {expenseBreakdown.map((expense, index) => (
