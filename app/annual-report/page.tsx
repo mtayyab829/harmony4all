@@ -19,16 +19,51 @@ import { adminAPI } from "@/lib/api"
 
 export default function AnnualReportPage() {
   const [isDownloadingReport, setIsDownloadingReport] = useState(false)
+  const [isDownloadingAuditedStatement, setIsDownloadingAuditedStatement] = useState(false)
+  const [isDownloadingForm990, setIsDownloadingForm990] = useState(false)
 
   const handleDownloadAnnualReport = async () => {
+    console.log('Starting Annual Report download...')
     try {
       setIsDownloadingReport(true)
-      await adminAPI.downloadAuditedFinancialStatement()
+      console.log('Calling adminAPI.downloadAnnualReport()...')
+      await adminAPI.downloadAnnualReport()
+      console.log('Annual Report download completed successfully')
     } catch (error) {
       console.error('Error downloading Annual Report:', error)
-      alert('Failed to download Annual Report. Please try again.')
     } finally {
       setIsDownloadingReport(false)
+      console.log('Annual Report download state reset')
+    }
+  }
+
+  const handleDownloadAuditedStatement = async () => {
+    console.log('Starting Audited Financial Statement download...')
+    try {
+      setIsDownloadingAuditedStatement(true)
+      console.log('Calling adminAPI.downloadAuditedFinancialStatement()...')
+      await adminAPI.downloadAuditedFinancialStatement()
+      console.log('Audited Financial Statement download completed successfully')
+    } catch (error) {
+      console.error('Error downloading Audited Financial Statement:', error)
+    } finally {
+      setIsDownloadingAuditedStatement(false)
+      console.log('Audited Financial Statement download state reset')
+    }
+  }
+
+  const handleDownloadForm990 = async () => {
+    console.log('Starting IRS Form 990 download...')
+    try {
+      setIsDownloadingForm990(true)
+      console.log('Calling adminAPI.downloadIRSForm990()...')
+      await adminAPI.downloadIRSForm990()
+      console.log('IRS Form 990 download completed successfully')
+    } catch (error) {
+      console.error('Error downloading IRS Form 990:', error)
+    } finally {
+      setIsDownloadingForm990(false)
+      console.log('IRS Form 990 download state reset')
     }
   }
 
@@ -113,46 +148,116 @@ export default function AnnualReportPage() {
       {/* Current Year Highlight */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <Card className="bg-gradient-to-r from-black to-gray-800 text-white border-0 shadow-2xl">
-              <CardHeader className="text-center pb-6">
-                <Badge className="bg-white/20 text-white mb-4 w-fit mx-auto">
-                  Latest Report
-                </Badge>
-                <CardTitle className="text-2xl md:text-3xl font-bold mb-2">
-                  Annual Report: Harmony in Action
-                </CardTitle>
-                <CardDescription className="text-white/80 text-base">
-                  Our latest annual report showcasing the impact of our community programs
-                  and partnerships across New York City.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                  {impactMetrics.map((metric, index) => (
-                    <div key={index} className="text-center">
-                      <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
-                        <metric.icon className="h-6 w-6 text-white" />
+          <div className="max-w-6xl mx-auto">
+            <div className="space-y-8">
+              {/* Annual Report Card */}
+              <Card className="bg-black text-white border-0 shadow-2xl">
+                <CardHeader className="text-center pb-6">
+                  <Badge className="bg-white/20 text-white mb-4 w-fit mx-auto">
+                    Latest Report
+                  </Badge>
+                  <CardTitle className="text-2xl md:text-3xl font-bold mb-2">
+                    Annual Report: Harmony in Action
+                  </CardTitle>
+                  <CardDescription className="text-white/80 text-base">
+                    Our latest annual report showcasing the impact of our community programs
+                    and partnerships across New York City.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                    {impactMetrics.map((metric, index) => (
+                      <div key={index} className="text-center">
+                        <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                          <metric.icon className="h-6 w-6 text-white" />
+                        </div>
+                        <div className="text-2xl font-bold mb-1">{metric.value}</div>
+                        <div className="text-sm font-medium mb-1">{metric.label}</div>
+                        <div className="text-xs text-white/70">{metric.description}</div>
                       </div>
-                      <div className="text-2xl font-bold mb-1">{metric.value}</div>
-                      <div className="text-sm font-medium mb-1">{metric.label}</div>
-                      <div className="text-xs text-white/70">{metric.description}</div>
+                    ))}
+                  </div>
+                  <Button
+                    onClick={handleDownloadAnnualReport}
+                    disabled={isDownloadingReport}
+                    className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    {isDownloadingReport ? 'Downloading...' : 'Download Annual Report (PDF)'}
+                  </Button>
+                  <p className="text-xs text-white/60 mt-3">
+                    PDF - Latest Report
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Financial Documents Row */}
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Audited Financial Statement Card */}
+                <Card className="bg-black text-white border-0 shadow-2xl">
+                  <CardHeader className="text-center pb-6">
+                    <Badge className="bg-white/20 text-white mb-4 w-fit mx-auto">
+                      Financial Transparency
+                    </Badge>
+                    <CardTitle className="text-2xl md:text-3xl font-bold mb-2">
+                      Audited Financial Statement
+                    </CardTitle>
+                    <CardDescription className="text-white/80 text-base">
+                      Complete audited financial statements for the period ending December 31, 2025,
+                      prepared in accordance with generally accepted accounting principles.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-center">
+                    <div className="w-16 h-16 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-6">
+                      <FileText className="h-8 w-8 text-white" />
                     </div>
-                  ))}
-                </div>
-                <Button
-                  onClick={handleDownloadAnnualReport}
-                  disabled={isDownloadingReport}
-                  className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Download className="h-4 w-4 mr-2" />
-                  {isDownloadingReport ? 'Downloading...' : 'Download Annual Report (PDF)'}
-                </Button>
-                <p className="text-xs text-white/60 mt-3">
-                  PDF - Latest Report
-                </p>
-              </CardContent>
-            </Card>
+                    <Button
+                      onClick={handleDownloadAuditedStatement}
+                      disabled={isDownloadingAuditedStatement}
+                      className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Download className="h-4 w-4 mr-2" />
+                      {isDownloadingAuditedStatement ? 'Downloading...' : 'Download Financial Statement'}
+                    </Button>
+                    <p className="text-xs text-white/60 mt-3">
+                      PDF - Audited Statement
+                    </p>
+                  </CardContent>
+                </Card>
+
+                {/* IRS Form 990 Card */}
+                <Card className="bg-black text-white border-0 shadow-2xl">
+                  <CardHeader className="text-center pb-6">
+                    <Badge className="bg-white/20 text-white mb-4 w-fit mx-auto">
+                      Tax Filing
+                    </Badge>
+                    <CardTitle className="text-2xl md:text-3xl font-bold mb-2">
+                      IRS Form 990
+                    </CardTitle>
+                    <CardDescription className="text-white/80 text-base">
+                      Official IRS Form 990 filing for tax year 2025, demonstrating our tax-exempt
+                      status and commitment to transparency.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-center">
+                    <div className="w-16 h-16 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-6">
+                      <FileText className="h-8 w-8 text-white" />
+                    </div>
+                    <Button
+                      onClick={handleDownloadForm990}
+                      disabled={isDownloadingForm990}
+                      className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Download className="h-4 w-4 mr-2" />
+                      {isDownloadingForm990 ? 'Downloading...' : 'Download Form 990'}
+                    </Button>
+                    <p className="text-xs text-white/60 mt-3">
+                      PDF - IRS Filing
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           </div>
         </div>
       </section>

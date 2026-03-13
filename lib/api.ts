@@ -249,6 +249,26 @@ export const textUpdatesAPI = {
 
 // Admin API functions
 export const adminAPI = {
+  // Download Annual Report
+  downloadAnnualReport: async () => {
+    const response = await api.get("/admin/annual-report", {
+      responseType: 'blob', // Important for file downloads
+    });
+
+    // Create a blob URL and trigger download
+    const blob = new Blob([response.data], { type: 'application/pdf' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'Harmony4All_Annual_Report.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+
+    return { success: true };
+  },
+
   // Download Audited Financial Statement
   downloadAuditedFinancialStatement: async () => {
     const response = await api.get("/admin/audited-financial-statement", {
@@ -280,7 +300,7 @@ export const adminAPI = {
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'Harmony_4All_IRS_Form_990_FY.pdf';
+    link.download = 'Harmony_4All_Form_990.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
