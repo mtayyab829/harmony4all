@@ -183,7 +183,12 @@ export default function AnnualReportPage() {
                     className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Download className="h-4 w-4 mr-2" />
-                    {isDownloadingReport ? 'Downloading...' : 'Download Annual Report (PDF)'}
+                    <span className="hidden sm:inline">
+                      {isDownloadingReport ? 'Downloading...' : 'Download Annual Report (PDF)'}
+                    </span>
+                    <span className="sm:hidden">
+                      {isDownloadingReport ? 'Downloading...' : 'Download Report'}
+                    </span>
                   </Button>
                   <p className="text-xs text-white/60 mt-3">
                     PDF - Latest Report
