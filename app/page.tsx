@@ -814,6 +814,8 @@ const HomeBlogSection = () => {
 
 // Main Page Component
 export default function HomePage() {
+  const [isWelcomePopupOpen, setIsWelcomePopupOpen] = useState(true)
+
   return (
     <div className="min-h-screen overflow-hidden">
       <HeroCarousel />
@@ -825,6 +827,8 @@ export default function HomePage() {
       <TestimonialsSection />
       <ContactSection />
       <NewsletterSection />
+
+      <WelcomePopup isOpen={isWelcomePopupOpen} onClose={() => setIsWelcomePopupOpen(false)} />
     </div>
   )
 }
