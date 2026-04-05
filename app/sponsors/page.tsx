@@ -2,22 +2,21 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import {
     Music,
     Gift,
     Phone,
     Mail,
-    ExternalLink,
     Crown,
     DollarSign,
     Calendar,
     Megaphone,
 } from "lucide-react"
 import { imageUrlsData } from "@/lib/image-urls"
+import { getAllSponsors, getSponsorLogoUrl } from "@/lib/sponsors"
+import { SponsorCard } from "@/components/sponsors/sponsor-card"
 
 export default function SponsorsPage() {
     const [isVisible, setIsVisible] = useState(false)
@@ -26,99 +25,7 @@ export default function SponsorsPage() {
         setIsVisible(true)
     }, [])
 
-    // Helper function to get sponsor logo from JSON
-    const getSponsorLogo = (name: string): string => {
-        const sponsor = imageUrlsData.sponsors.sponsorLogos.find(
-            (s: any) => s.name.toLowerCase().includes(name.toLowerCase()) || 
-                       name.toLowerCase().includes(s.name.toLowerCase())
-        )
-        return sponsor?.cloudinaryUrl || ""
-    }
-
-    const currentSponsors = [
-        {
-            name: "THE NEWYORK INJURY LAW FIRM",
-            logo: getSponsorLogo("THE NEWYORK INJURY LAW FIRM"),
-            website: "https://thenewyorkinjurylawfirm.com/",
-            tier: "Gold",
-            category: "Legal Partner",
-            impact: "Pro Bono Services & Sponsorship",
-            description: "Supporting our mission through legal expertise and financial sponsorship."
-        },
-        {
-            name: "New York State Senator Joseph P. Addabbo, Jr.",
-            logo: getSponsorLogo("New York State Senator Joseph P. Addabbo"),
-            website: "https://www.nysenate.gov/senators/joseph-p-addabbo-jr",
-            tier: "Gold",
-            category: "Government Partner",
-            impact: "Legislative Support & Advocacy",
-            description: "Supporting music education initiatives and community programs through legislative advocacy."
-        },
-        {
-            name: "New York State Office of the Governor",
-            logo: getSponsorLogo("New York State Office of the Governor"),
-            website: "https://www.governor.ny.gov",
-            tier: "Platinum",
-            category: "Government Partner",
-            impact: "State-Level Support",
-            description: "Providing state-level support for arts education and community development initiatives."
-        },
-        {
-            name: "New York State Legislature",
-            logo: getSponsorLogo("New York State Legislature"),
-            website: "https://www.nysenate.gov/issues/new-york-state-legislature",
-            tier: "Platinum",
-            category: "Government Partner",
-            impact: "Legislative Framework",
-            description: "Establishing legislative framework and support for arts education programs."
-        },
-        {
-            name: "New York State Council on the Arts",
-            logo: getSponsorLogo("New York State Council on the Arts"),
-            website: "https://arts.ny.gov/our-mission",
-            tier: "Gold",
-            category: "Arts Council",
-            impact: "Arts Funding & Support",
-            description: "Providing essential funding and support for arts education and cultural programs."
-        },
-        {
-            name: "New York City Department of Cultural Affairs",
-            logo: getSponsorLogo("New York City Department of Cultural Affairs"),
-            website: "https://www.nyc.gov/site/dcla/index.page",
-            tier: "Gold",
-            category: "City Government",
-            impact: "Cultural Programming Support",
-            description: "Supporting cultural programming and arts education initiatives across NYC."
-        },
-        {
-            name: "New York Foundation for the Arts",
-            logo: getSponsorLogo("New York Foundation for the Arts"),
-            website: "https://www.nyfa.org",
-            tier: "Silver",
-            category: "Arts Foundation",
-            impact: "Artist Support & Resources",
-            description: "Providing resources and support for artists and arts education programs."
-        },
-        {
-            name: "Citizens Committee for New York City",
-            logo: getSponsorLogo("Citizens Committee for New York City"),
-            website: "https://www.citizensnyc.org/",
-            tier: "Silver",
-            category: "Non-Profit Organization",
-            impact: "Community Support & Resources",
-            description: "CitizensNYC is a partner for New Yorkers who have bold ideas to improve their neighborhoods."
-        },
-        {
-            name: "Villa Russo",
-            logo: getSponsorLogo("Villa Russo"),
-            website: "https://www.villarussocatering.com",
-            tier: "Silver",
-            category: "Venue Partner",
-            impact: "Youth Performance Venue",
-            description: "Villa Russo provides venue space that supports Harmony 4 All's youth performances and community-centered musical events."
-        },
-
-    ]
+    const currentSponsors = getAllSponsors()
 
     const sponsorshipOpportunities = [
         {
@@ -296,51 +203,12 @@ export default function SponsorsPage() {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-                            {currentSponsors.map((sponsor, index) => (
-                                <Card
-                                    key={index}
-                                    className="bg-white shadow-xl border-0 rounded-xl md:rounded-3xl overflow-hidden group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-                                >
-                                    <div className="p-4 md:p-8">
-                                        <div className="flex items-center justify-end mb-3 md:mb-4">
-                                            <Badge className="bg-black text-white px-2 md:px-3 py-1 text-xs font-semibold">
-                                                {sponsor.category}
-                                            </Badge>
-                                        </div>
-
-                                        <div className="w-full h-16 md:h-24 flex items-center justify-center mb-3 md:mb-4 bg-gray-50 rounded-lg md:rounded-xl relative">
-                                            <Image
-                                                src={sponsor.logo}
-                                                alt={`${sponsor.name} logo`}
-                                                fill
-                                                className="object-contain p-1 md:p-2"
-                                            />
-                                        </div>
-
-                                        <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1 md:mb-2">
-                                            {sponsor.name}
-                                        </h3>
-
-                                        <p className="text-xs md:text-base text-gray-600 mb-3 md:mb-4 leading-relaxed">
-                                            {sponsor.description}
-                                        </p>
-
-                                        <div className="mb-3 md:mb-4">
-                                            <h4 className="font-semibold text-gray-900 mb-1 text-xs">Impact:</h4>
-                                            <p className="text-xs md:text-sm text-black font-medium">{sponsor.impact}</p>
-                                        </div>
-
-                                        <Link href={sponsor.website} target="_blank" rel="noopener noreferrer">
-                                            <Button 
-                                                variant="outline" 
-                                                className="w-full border-gray-200 text-black hover:bg-gray-50 transition-all duration-300 text-xs md:text-sm py-2 md:py-3"
-                                            >
-                                                Visit Website
-                                                <ExternalLink className="ml-1 md:ml-2 h-3 w-3 md:h-4 md:w-4" />
-                                            </Button>
-                                        </Link>
-                                    </div>
-                                </Card>
+                            {currentSponsors.map((sponsor) => (
+                                <SponsorCard
+                                    key={sponsor.slug}
+                                    sponsor={sponsor}
+                                    logoSrc={getSponsorLogoUrl(sponsor)}
+                                />
                             ))}
                         </div>
                     </div>
