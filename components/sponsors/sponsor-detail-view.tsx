@@ -98,16 +98,6 @@ export function SponsorDetailView({ sponsor, logoSrc }: SponsorDetailViewProps) 
           </section>
         ))}
 
-        {sponsor.website ? (
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <Button asChild variant="outline" className="rounded-full">
-              <a href={sponsor.website} target="_blank" rel="noopener noreferrer">
-                Visit website
-                <ExternalLink className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
-          </div>
-        ) : null}
       </article>
     </div>
   )

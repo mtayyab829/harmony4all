@@ -361,6 +361,84 @@ export const SPONSORS: Sponsor[] = [
     ]
   },
   {
+    slug: "ahhaa",
+    name: "Ahhaa",
+    logoLookupName: "Ahhaa",
+    logoUrl: "https://www.ahhaa.com/_assets/v11/401d2ea6986c1aa247a8ec5e3e20eed9337125d3.png",
+    website: "https://www.ahhaa.com/",
+    tier: "Silver",
+    category: "Wellness & Technology Partner",
+    impact: "Mental Wellness & Personal Development",
+    description:
+      "Ahhaa is a mental wellness and personal growth platform that helps individuals build emotional awareness, develop positive habits, and improve overall well-being through science-backed tools and guided experiences.",
+    detailBlocks: [
+      {
+        title: "About Ahhaa",
+        paragraphs:
+          ["Ahhaa is a digital wellness platform focused on helping individuals understand their emotions, build healthier habits, and achieve personal growth through structured, science-based practices."],
+      },
+      {
+        title: "Core Approach",
+        paragraphs:
+          ["The platform combines behavioral science, psychology, and habit-building techniques to create meaningful 'Aha' moments—helping users gain clarity, shift mindset, and drive lasting change. :contentReference[oaicite:0]{index=0}"],
+      },
+      {
+        title: "Platform & Features",
+        paragraphs:
+          ["Ahhaa offers guided emotional check-ins, habit tracking, and micro-practices such as breathwork, reflection, and visualization to support mental well-being and self-awareness. :contentReference[oaicite:1]{index=1}"],
+      },
+      {
+        title: "Programs & Use Cases",
+        paragraphs:
+          ["The platform is used by individuals, organizations, schools, and corporates to improve emotional intelligence, resilience, and performance through structured wellness programs. :contentReference[oaicite:2]{index=2}"],
+      },
+      {
+        title: "Impact",
+        paragraphs:
+          ["By focusing on emotional awareness and behavioral change, Ahhaa helps users reduce stress, improve focus, and build sustainable personal growth habits across different areas of life. :contentReference[oaicite:3]{index=3}"],
+      }
+    ]
+  },
+  {
+    slug: "little-guyana-pharmacy-cafe",
+    name: "Little Guyana Pharmacy & Cafe",
+    logoLookupName: "Little Guyana Pharmacy & Cafe",
+    logoUrl: "https://static.wixstatic.com/media/d717d4_953d7f5ff40247cdaefa2602cb818730~mv2.png",
+    website: "https://littleguyanapharmacy.com/",
+    tier: "Silver",
+    category: "Healthcare & Community Partner",
+    impact: "Community Health & Cultural Engagement",
+    description:
+      "Little Guyana Pharmacy & Cafe is a community-focused healthcare provider and cultural space in Queens, New York, offering affordable medications, personalized care, and a unique café experience that brings people together.",
+    detailBlocks: [
+      {
+        title: "About the Business",
+        paragraphs:
+          ["Little Guyana Pharmacy & Cafe is a locally owned pharmacy based in South Richmond Hill, Queens, dedicated to providing accessible healthcare services with a strong focus on personalized patient care. :contentReference[oaicite:0]{index=0}"],
+      },
+      {
+        title: "Unique Concept",
+        paragraphs:
+          ["The business combines a full-service pharmacy with a café environment, creating a welcoming space where patients can receive care while enjoying a relaxed, community-oriented atmosphere. :contentReference[oaicite:1]{index=1}"],
+      },
+      {
+        title: "Services",
+        paragraphs:
+          ["Services include prescription filling, medication counseling, free delivery, insurance support, immunizations, and access to affordable medications, ensuring comprehensive care for patients. :contentReference[oaicite:2]{index=2}"],
+      },
+      {
+        title: "Community Impact",
+        paragraphs:
+          ["Rooted in the Indo-Caribbean community of Queens, the business focuses on culturally relevant care, offering familiar products and a supportive environment that builds trust and connection among residents. :contentReference[oaicite:3]{index=3}"],
+      },
+      {
+        title: "Mission & Vision",
+        paragraphs:
+          ["The pharmacy aims to transform the traditional healthcare experience by making it more personal, accessible, and community-driven—ensuring every patient feels valued and supported."],
+      }
+    ]
+  },
+  {
     slug: "resorts-world-new-york-city",
     name: "Resorts World New York City",
     logoLookupName: "Resorts World New York City",
