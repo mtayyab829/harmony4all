@@ -47,12 +47,12 @@ export function SponsorDetailView({ sponsor, logoSrc }: SponsorDetailViewProps) 
         </div>
 
         {hasLogo ? (
-          <div className="w-full max-w-md h-28 md:h-36 relative mx-auto mb-8 bg-gray-50 rounded-2xl">
+          <div className="w-full max-w-2xl h-56 md:h-60 relative mx-auto mb-8 bg-gray-50 rounded-2xl">
             <Image
               src={logoSrc}
               alt={`${sponsor.name} logo`}
               fill
-              className="object-contain p-4"
+              className="object-contain p-3 md:p-8"
               priority
             />
           </div>
@@ -81,7 +81,7 @@ export function SponsorDetailView({ sponsor, logoSrc }: SponsorDetailViewProps) 
               {block.title}
             </h2>
             {block.image ? (
-              <div className="relative w-full max-w-xs h-24 md:h-28 mb-6 mx-auto md:mx-0">
+              <div className="relative w-full max-w-md h-36 md:h-36 mb-6 mx-auto md:mx-0">
                 <Image
                   src={block.image.src}
                   alt={block.image.alt}

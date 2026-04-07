@@ -25,13 +25,13 @@ export function SponsorCard({ sponsor, logoSrc }: SponsorCardProps) {
           </Badge>
         </div>
 
-        <div className="w-full h-16 md:h-24 flex items-center justify-center mb-3 md:mb-4 bg-gray-50 rounded-lg md:rounded-xl relative">
+        <div className="w-full h-32 md:h-36 flex items-center justify-center mb-3 md:mb-4 bg-gray-50 rounded-lg md:rounded-xl relative">
           {hasLogo ? (
             <Image
               src={logoSrc}
               alt={`${sponsor.name} logo`}
               fill
-              className="object-contain p-1 md:p-2"
+              className="object-contain p-1 md:p-3"
             />
           ) : (
             <span className="text-xs text-gray-400 px-2 text-center">{sponsor.name}</span>

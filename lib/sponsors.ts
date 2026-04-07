@@ -494,7 +494,18 @@ export function getSponsorLogoUrl(sponsor: Sponsor): string {
 }
 
 export function getAllSponsors(): Sponsor[] {
-  return SPONSORS
+  const priorityOrder = [
+    "resorts-world-new-york-city",
+    "the-newyork-injury-law-firm",
+  ]
+
+  const priorityMap = new Map(priorityOrder.map((slug, index) => [slug, index]))
+
+  return [...SPONSORS].sort((a, b) => {
+    const aRank = priorityMap.has(a.slug) ? (priorityMap.get(a.slug) as number) : Number.MAX_SAFE_INTEGER
+    const bRank = priorityMap.has(b.slug) ? (priorityMap.get(b.slug) as number) : Number.MAX_SAFE_INTEGER
+    return aRank - bRank
+  })
 }
 
 export function getSponsorBySlug(slug: string): Sponsor | undefined {
