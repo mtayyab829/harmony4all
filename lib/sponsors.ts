@@ -443,6 +443,7 @@ export const SPONSORS: Sponsor[] = [
     name: "Blinkist",
     logoLookupName: "Blinkist",
     website: "https://www.blinkist.com/",
+    logoUrl: "https://res.cloudinary.com/dhsatxsrt/image/upload/v1776833808/harmony4all/media/ugt39dl51dt6gybfpnpz.png",
     tier: "Gold",
     category: "Education & Learning Platform",
     impact: "Microlearning & Knowledge Accessibility",
