@@ -400,6 +400,88 @@ export const SPONSORS: Sponsor[] = [
     ]
   },
   {
+    slug: "printgraphi",
+    name: "PrintGraphi",
+    logoLookupName: "PrintGraphi",
+    logoUrl: "https://res.cloudinary.com/dhsatxsrt/image/upload/v1776833807/harmony4all/media/s5m8syddtud224pxal2l.png",
+    website: "",
+    tier: "Silver",
+    category: "Printing & Marketing Partner",
+    impact: "Branding & Promotional Support",
+    description:
+      "PrintGraphi is a printing and marketing services provider specializing in custom design, branding, and promotional materials that help businesses and organizations effectively market their identity and services.",
+    detailBlocks: [
+      {
+        title: "About PrintGraphi",
+        paragraphs:
+          ["PrintGraphi is a creative printing and branding service that supports businesses with high-quality printed materials and visual marketing solutions, helping bring ideas to life through design and print."],
+      },
+      {
+        title: "Services",
+        paragraphs:
+          ["The company offers a range of services including flyers, business cards, banners, signage, promotional materials, and custom print solutions tailored to business needs."],
+      },
+      {
+        title: "Marketing Focus",
+        paragraphs:
+          ["With a focus on helping businesses grow, PrintGraphi provides branding and promotional support that enhances visibility and customer engagement."],
+      },
+      {
+        title: "Community Presence",
+        paragraphs:
+          ["Operating within the local community, PrintGraphi works closely with small businesses and organizations to provide accessible and reliable printing services."],
+      },
+      {
+        title: "Value & Approach",
+        paragraphs:
+          ["The brand emphasizes quality, affordability, and fast turnaround, making it a practical partner for businesses looking to strengthen their marketing presence."],
+      }
+    ]
+  },
+  {
+    slug: "blinkist",
+    name: "Blinkist",
+    logoLookupName: "Blinkist",
+    website: "https://www.blinkist.com/",
+    tier: "Gold",
+    category: "Education & Learning Platform",
+    impact: "Microlearning & Knowledge Accessibility",
+    description:
+      "Blinkist is a digital learning platform that transforms bestselling nonfiction books into concise 15-minute summaries, helping millions of users access key ideas quickly and efficiently for personal and professional growth.",
+    detailBlocks: [
+      {
+        title: "About Blinkist",
+        paragraphs:
+          ["Founded in 2012 in Berlin, Blinkist is a global learning platform that connects millions of users to powerful ideas from nonfiction books through short, easy-to-digest formats. :contentReference[oaicite:1]{index=1}"],
+      },
+      {
+        title: "Core Concept",
+        paragraphs:
+          ["Blinkist condenses complex nonfiction content into ‘Blinks’—15-minute summaries available in both text and audio—making it easier for users to learn on the go. :contentReference[oaicite:2]{index=2}"],
+      },
+      {
+        title: "Content Library",
+        paragraphs:
+          ["The platform offers thousands of titles across categories like business, psychology, productivity, and personal development, continuously expanding its library of curated insights. :contentReference[oaicite:3]{index=3}"],
+      },
+      {
+        title: "Global Reach",
+        paragraphs:
+          ["Blinkist serves tens of millions of users worldwide, helping individuals turn spare time into meaningful learning moments through mobile-first experiences. :contentReference[oaicite:4]{index=4}"],
+      },
+      {
+        title: "Business & Innovation",
+        paragraphs:
+          ["In addition to individual users, Blinkist supports organizations with learning solutions and was acquired in 2023 by the edtech company Go1 to expand its impact in digital education. :contentReference[oaicite:5]{index=5}"],
+      },
+      {
+        title: "Impact",
+        paragraphs:
+          ["By making knowledge more accessible and time-efficient, Blinkist empowers users to build better habits, improve skills, and stay informed in a fast-paced world."],
+      }
+    ]
+  },
+  {
     slug: "little-guyana-pharmacy-cafe",
     name: "Little Guyana Pharmacy & Cafe",
     logoLookupName: "Little Guyana Pharmacy & Cafe",
