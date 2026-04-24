@@ -100,6 +100,11 @@ export default function RSVPPage() {
         promotionalUpdates: true,
         agreeToTerms: true,
       })
+
+      setTimeout(() => {
+        window.location.href = "/"
+      }, 2000)
+
     } catch (submitError: any) {
       setError(submitError.response?.data?.message || "Something went wrong. Please try again.")
     } finally {
