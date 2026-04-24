@@ -91,7 +91,7 @@ export default function RSVPPage() {
     try {
       setIsLoading(true)
       const result = await rsvpAPI.submitForm(formData)
-      setSuccess(result.message || "Thank you for your RSVP!")
+      setSuccess(result.message || "Thank you for your submission!")
       setFormData({
         firstName: "",
         lastName: "",
@@ -121,25 +121,14 @@ export default function RSVPPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b border-gray-200 py-4">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center space-x-2 text-sm">
-            <Link href="/" className="text-gray-900 hover:text-gray-700">
-              Home
-            </Link>
-            <span className="text-gray-400">/</span>
-            <span className="text-gray-600">RSVP</span>
-          </div>
-        </div>
-      </div>
 
       <section className="py-12">
         <div className="container mx-auto px-4">
           <Card className="w-full max-w-xl mx-auto bg-white rounded-2xl shadow-2xl">
             <CardContent className="p-6">
               <div className="text-center mb-6">
-                <h1 className="text-2xl font-semibold text-gray-900 mb-2">RSVP Form</h1>
-                <p className="text-gray-600">Submit your details and we will follow up with you soon.</p>
+                <h1 className="text-2xl font-semibold text-gray-900 mb-2">Submission Form</h1>
+                <p className="text-gray-600">Submit your details and we will follow up with you shortly.</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -284,7 +273,7 @@ export default function RSVPPage() {
                       Submitting...
                     </>
                   ) : (
-                    "Submit RSVP"
+                    "Submit"
                   )}
                 </Button>
               </form>
