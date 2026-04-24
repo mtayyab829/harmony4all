@@ -60,6 +60,22 @@ export const welcomePopupAPI = {
   },
 }
 
+// RSVP API functions
+export const rsvpAPI = {
+  // Submit RSVP form
+  submitForm: async (formData: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    cellNumber: string;
+    promotionalUpdates: boolean;
+    agreeToTerms: boolean;
+  }) => {
+    const response = await api.post("/rsvp/submit", formData);
+    return response.data;
+  },
+}
+
 // Volunteer API functions
 export const volunteerAPI = {
   // Submit volunteer application
