@@ -27,6 +27,37 @@ export default function AboutPage() {
     }
   ]
 
+  const boardAdvisors = [
+    {
+      name: "Karen Mazza, Esq.",
+      title: "Board of Advisors",
+      image: "https://res.cloudinary.com/dhsatxsrt/image/upload/v1777209659/harmony4all/media/vdd3guczbcgbyjij7gfm.jpg",
+      bio: "Karen Mazza, Esq. is a Queens-based civic and nonprofit leader whose career bridges public service, legal expertise, and community impact. She serves as Board President of Center for the Women of New York, where she advances initiatives that expand opportunity, equity, and access for women and families across New York City.",
+      details: "Karen previously served as Deputy Executive Director and General Counsel of New York City Employees' Retirement System (NYCERS), one of the largest public pension systems in the United States. In that role, she led legal and administrative strategy, including the drafting and successful enactment of four statewide laws that strengthened and modernized public pension administration."
+    },
+    {
+      name: "Jo-Ann Sternberg",
+      title: "Board of Advisors",
+      image: "https://res.cloudinary.com/dhsatxsrt/image/upload/v1777209657/harmony4all/media/uja7brwyyf4ytcue0nij.jpg",
+      bio: "Jo-Ann Sternberg (she/her) is a distinguished clarinetist, educator, and arts leader whose work spans performance, mentorship, and the advancement of the next generation of musicians. She serves on the faculties of Princeton University, Rutgers Mason Gross School of the Arts, and Juilliard Music Advancement Program.",
+      details: "An accomplished performer, Jo-Ann is a member of the Borealis Wind Quintet and has appeared with leading ensembles including the Orpheus Chamber Orchestra, American Composers Orchestra, and the Chamber Music Society of Lincoln Center. She is also a dedicated mentor through programs such as the Juilliard Mentoring Program and the New York Youth Symphony."
+    },
+    {
+      name: "Anthony C. Sears, Esq.",
+      title: "Board of Advisors",
+      image: "https://res.cloudinary.com/dhsatxsrt/image/upload/v1777209655/harmony4all/media/wajzskw7zmxvpxwal2te.jpg",
+      bio: "Anthony C. Sears, Esq. is a distinguished trial attorney, community advocate, and supporter of youth arts access whose career reflects both legal excellence and a deep personal connection to the transformative power of music.",
+      details: "Anthony is recognized for handling complex litigation across New York and New Jersey, including catastrophic injury, wrongful death, construction accidents, and major transportation cases. A Super Lawyers Rising Star (2019-2025), he has built a strong reputation for strategic advocacy and successful outcomes."
+    },
+    {
+      name: "April Litt Rachmuth",
+      title: "Board of Advisors",
+      image: "https://res.cloudinary.com/dhsatxsrt/image/upload/v1777209653/harmony4all/media/xtergr5ffox7eki0pdoy.jpg",
+      bio: "April Litt Rachmuth is a New York City-based music educator and retired public school teacher whose career bridges finance, education, and community-centered arts instruction.",
+      details: "April began her career in senior finance roles at institutions including American Express, Chase Bank, Bankers Trust, and Shearson Lehman Hutton. She later transitioned into education, earning advanced credentials in elementary and special education and dedicating her work to expanding opportunity for young learners."
+    }
+  ]
+
   const storyMilestones = [
     {
       year: "Elementary School",
@@ -523,6 +554,58 @@ export default function AboutPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Board of Advisors */}
+      <section className="py-12 md:py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-10 md:mb-14">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Board of Advisors</h2>
+              <p className="text-sm md:text-lg text-gray-600 max-w-4xl mx-auto">
+                Our advisors bring deep expertise across public service, law, education, and the arts to help guide Harmony 4 All's mission and long-term impact.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-5 md:gap-8">
+              {boardAdvisors.map((advisor, index) => (
+                <Card key={index} className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 h-full overflow-hidden">
+                  <CardHeader className="pb-3 pt-5">
+                    <div className="flex items-center gap-4">
+                      <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden border border-gray-200 bg-gray-100 flex-shrink-0">
+                        {advisor.image ? (
+                          <Image
+                            src={advisor.image}
+                            alt={advisor.name}
+                            fill
+                            sizes="96px"
+                            quality={85}
+                            className="object-cover"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="h-full w-full flex items-center justify-center">
+                            <Users className="h-8 w-8 text-gray-400" />
+                          </div>
+                        )}
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl md:text-2xl text-gray-900">{advisor.name}</CardTitle>
+                        <CardDescription className="text-gray-600 font-medium mt-1">
+                          {advisor.title}
+                        </CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-3 pb-6 pt-0">
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed">{advisor.bio}</p>
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed">{advisor.details}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
