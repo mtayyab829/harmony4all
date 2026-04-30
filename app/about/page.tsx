@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Heart, Target, Eye, Users, Music, Award, Star, Calendar, MapPin, Phone, Mail, ArrowRight, Wrench, Mic, Gift } from "lucide-react"
@@ -9,6 +10,29 @@ import { Badge } from "@/components/ui/badge"
 import { imageUrlsData } from "@/lib/image-urls"
 
 export default function AboutPage() {
+  useEffect(() => {
+    const scrollToHashTarget = () => {
+      const hash = window.location.hash
+      if (!hash) return
+
+      const id = hash.replace("#", "")
+      const target = document.getElementById(id)
+
+      if (target) {
+        // Delay ensures the section exists after route transitions/hydration.
+        requestAnimationFrame(() => {
+          target.scrollIntoView({ behavior: "smooth", block: "start" })
+        })
+      }
+    }
+
+    scrollToHashTarget()
+    window.addEventListener("hashchange", scrollToHashTarget)
+
+    return () => {
+      window.removeEventListener("hashchange", scrollToHashTarget)
+    }
+  }, [])
 
   const teamMembers = [
     {
