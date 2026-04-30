@@ -559,7 +559,7 @@ export default function AboutPage() {
       </section>
 
       {/* Board of Advisors */}
-      <section className="py-12 md:py-20 bg-gray-50">
+      <section id="board-of-advisors" className="py-12 md:py-20 bg-gray-50 scroll-mt-24">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10 md:mb-14">
