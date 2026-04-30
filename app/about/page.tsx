@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Heart, Target, Eye, Users, Music, Award, Star, Calendar, MapPin, Phone, Mail, ArrowRight, Wrench, Mic, Gift } from "lucide-react"
@@ -10,6 +10,8 @@ import { Badge } from "@/components/ui/badge"
 import { imageUrlsData } from "@/lib/image-urls"
 
 export default function AboutPage() {
+  const [selectedAdvisorIndex, setSelectedAdvisorIndex] = useState<number | null>(null)
+
   useEffect(() => {
     const scrollToHashTarget = () => {
       const hash = window.location.hash
@@ -56,30 +58,68 @@ export default function AboutPage() {
       name: "Karen Mazza, Esq.",
       title: "Board of Advisors",
       image: "https://res.cloudinary.com/dhsatxsrt/image/upload/v1777209659/harmony4all/media/vdd3guczbcgbyjij7gfm.jpg",
-      bio: "Karen Mazza, Esq. is a Queens-based civic and nonprofit leader whose career bridges public service, legal expertise, and community impact. She serves as Board President of Center for the Women of New York, where she advances initiatives that expand opportunity, equity, and access for women and families across New York City.",
-      details: "Karen previously served as Deputy Executive Director and General Counsel of New York City Employees' Retirement System (NYCERS), one of the largest public pension systems in the United States. In that role, she led legal and administrative strategy, including the drafting and successful enactment of four statewide laws that strengthened and modernized public pension administration."
+      bio: `Karen Mazza, Esq. is a Queens-based civic and nonprofit leader whose career bridges public service, legal expertise, and community impact. She serves as Board President of Center for the Women of New York, where she advances initiatives that expand opportunity, equity, and access for women and families across New York City.
+
+Karen previously served as Deputy Executive Director and General Counsel of New York City Employees' Retirement System (NYCERS), one of the largest public pension systems in the United States. In this role, she led high-level legal and administrative strategy, including the drafting and successful enactment of four statewide laws that strengthened and modernized the administration of public pension systems-demonstrating a rare ability to translate policy into lasting structural impact.
+Her leadership extends deeply into Queens' civic infrastructure. Karen is an active member of Queens Community Board 11 and contributes to borough-wide nonprofit strategy through the Queens Borough President's Not-for-Profit Network Advisory Committee. She also serves on the NYC Prepared and Recovery Institute Queens Resilience Network Steering Committee, supporting community resilience, and is a member of Impact 100 NYC, a collective dedicated to high-impact philanthropic giving.
+
+While not a musician herself, Karen is a steadfast advocate for the arts as a powerful vehicle for youth development, mental well-being, and expanded opportunity. She believes that access to music and creative expression enables young people to imagine futures beyond immediate barriers-an outlook that closely aligns with Harmony 4 All's mission of Making Music Accessible.
+
+Through her combined experience in government, law, and nonprofit leadership, Karen brings to Harmony 4 All a deeply strategic perspective-grounded in equity, policy insight, and community-centered impact-helping to strengthen the organization's ability to serve underserved communities across New York City.
+`,
     },
     {
       name: "Jo-Ann Sternberg",
       title: "Board of Advisors",
       image: "https://res.cloudinary.com/dhsatxsrt/image/upload/v1777209657/harmony4all/media/uja7brwyyf4ytcue0nij.jpg",
-      bio: "Jo-Ann Sternberg (she/her) is a distinguished clarinetist, educator, and arts leader whose work spans performance, mentorship, and the advancement of the next generation of musicians. She serves on the faculties of Princeton University, Rutgers Mason Gross School of the Arts, and Juilliard Music Advancement Program.",
-      details: "An accomplished performer, Jo-Ann is a member of the Borealis Wind Quintet and has appeared with leading ensembles including the Orpheus Chamber Orchestra, American Composers Orchestra, and the Chamber Music Society of Lincoln Center. She is also a dedicated mentor through programs such as the Juilliard Mentoring Program and the New York Youth Symphony."
+      bio: `Jo-Ann Sternberg (she/her) is a distinguished clarinetist, educator, and arts leader whose work spans performance, mentorship, and the advancement of the next generation of musicians. She serves on the faculties of Princeton University, Rutgers Mason Gross School of the Arts, and Juilliard Music Advancement Program, where she is deeply committed to expanding access to high-quality music education.
+
+An accomplished performer, Jo-Ann is a member of the Borealis Wind Quintet and has appeared with leading ensembles including the Orpheus Chamber Orchestra, American Composers Orchestra, and the Chamber Music Society of Lincoln Center. Her career reflects a deep engagement with both classical and contemporary repertoire, including performances as a featured soloist at the Kennedy Center.
+
+Beyond the stage, Jo-Ann is a dedicated mentor and educator. She works closely with emerging musicians through programs such as the Juilliard Mentoring Program and the New York Youth Symphony, helping students develop not only technical skill, but confidence, identity, and artistic voice.
+
+She is also the Founder and Artistic Director of the Maine Chamber Music Seminar, where she leads intensive summer programs for college and graduate-level musicians-creating spaces for collaboration, growth, and creative exploration.
+As a first-generation American with deep roots in New York City, Jo-Ann brings a profound belief in the power of the arts to reflect community, build belonging, and expand opportunity. Her work aligns closely with Harmony 4 All's mission of Making Music Accessible-ensuring that young people, regardless of background, have the opportunity to engage with music as a pathway to confidence, connection, and lifelong growth.
+
+Through her artistry, mentorship, and leadership, Jo-Ann Sternberg strengthens Harmony 4 All's ability to deliver transformative, high-quality musical experiences to underserved communities across New York City.`,
     },
     {
       name: "Anthony C. Sears, Esq.",
       title: "Board of Advisors",
       image: "https://res.cloudinary.com/dhsatxsrt/image/upload/v1777209655/harmony4all/media/wajzskw7zmxvpxwal2te.jpg",
-      bio: "Anthony C. Sears, Esq. is a distinguished trial attorney, community advocate, and supporter of youth arts access whose career reflects both legal excellence and a deep personal connection to the transformative power of music.",
-      details: "Anthony is recognized for handling complex litigation across New York and New Jersey, including catastrophic injury, wrongful death, construction accidents, and major transportation cases. A Super Lawyers Rising Star (2019-2025), he has built a strong reputation for strategic advocacy and successful outcomes."
+      bio: `Anthony C. Sears, Esq. is a distinguished trial attorney, community advocate, and supporter of youth arts access whose career reflects both legal excellence and a deep personal connection to the transformative power of music.
+
+Anthony is widely recognized for handling high-profile, complex litigation across New York and New Jersey, including catastrophic injury, wrongful death, construction accidents, and major transportation cases. His work includes notable matters such as the Empire State Building shooting case and the Medford Multicare cases. Known for his strategic precision and efficiency, he has secured numerous seven-figure settlements and has built a reputation for achieving strong outcomes for his clients-often early in the litigation process.
+
+His professional excellence has earned him repeated recognition as a Super Lawyers Rising Star (2019-2025)-an honor awarded to fewer than 2.5% of attorneys-as well as being named among the Top 100 Lawyers of the Year. His work has also been featured in major media outlets, including PIX11 News and New York Post.
+
+Beyond his legal career, Anthony's commitment to community is deeply personal. Raised in a close-knit New York family, his earliest experiences with music-sharing moments of joy, rhythm, and connection with his grandmother-shaped a lifelong belief in music as a source of emotional expression, healing, and belonging.
+Today, as a proud sponsor and board of advisor of Harmony 4 All, Anthony brings that full-circle perspective to his work in the nonprofit space. He understands that music is not simply an art form-it is a powerful tool for youth development, mental well-being, and opportunity. His support helps advance Harmony 4 All's mission of Making Music Accessible, ensuring that underserved K-12 students across New York City have access to free instruments, education, and community-centered musical experiences.
+
+Anthony's presence within Harmony 4 All reflects a broader commitment: using professional success to create pathways for others. Through his leadership and support, he helps expand access, inspire confidence, and ensure that more young people can experience the same sense of joy, connection, and possibility that music brought into his own life.`,
     },
     {
       name: "April Litt Rachmuth",
       title: "Board of Advisors",
       image: "https://res.cloudinary.com/dhsatxsrt/image/upload/v1777209653/harmony4all/media/xtergr5ffox7eki0pdoy.jpg",
-      bio: "April Litt Rachmuth is a New York City-based music educator and retired public school teacher whose career bridges finance, education, and community-centered arts instruction.",
-      details: "April began her career in senior finance roles at institutions including American Express, Chase Bank, Bankers Trust, and Shearson Lehman Hutton. She later transitioned into education, earning advanced credentials in elementary and special education and dedicating her work to expanding opportunity for young learners."
-    }
+      bio: `April Litt Rachmuth is a New York City-based music educator and retired public school teacher whose career uniquely bridges high-level finance, education, and community-centered arts instruction.
+
+April began her professional journey in the financial sector, holding leadership roles at major institutions including American Express, Chase Bank, Bankers Trust, and Shearson Lehman Hutton, where she served in senior positions such as Assistant Vice President and Vice President. She holds an MBA in Finance from New York University Stern School of Business and a Bachelor of Science in Finance and Sociology from University of Pennsylvania Wharton School.
+
+Driven by a deep commitment to youth development and education, April transitioned into teaching, earning a Master of Science in Elementary and Special Education from Adelphi University, where she graduated with a 4.0 GPA and was inducted into the Kappa Delta Pi International Education Honor Society. She holds New York State Professional Certification in Elementary and Special Education.
+
+April dedicated over two decades to education at Public School 100Q in Queens, where she developed and led a Literacy Through Creative Expression program integrating music, history, mathematics, science, and the arts. Her work spanned both general and special education, with a strong emphasis on differentiated instruction, accessibility, and inclusive learning environments.
+
+Her music education practice has been deeply experiential and interdisciplinary. She has taught recorder, chorus, percussion, and instrumental music, incorporating movement, improvisation, and collaborative performance into her classrooms. Through programs such as the Carnegie Hall Link Up Program, she guided students in exploring musical genres, composition, and performance-helping them connect music to both academic concepts and their lived experiences.
+
+Her students participated in major performance initiatives, including collaborations connected to Carnegie Hall, where they performed in large-scale concerts and engaged in cross-disciplinary artistic roles. April also contributed to borough-wide arts initiatives such as the Queens Borough Arts Festival and served as a facilitator for the Connected Arts Network, supporting educators in curriculum design, equity-centered instruction, and assessment practices.
+
+Beyond the classroom, April held leadership roles in youth programs, mentoring educators and overseeing large student groups. Her professional development includes advanced training in Orff methodology, choral conducting, and arts integration, alongside active involvement in organizations such as the National Association for Music Education and the American Orff-Schulwerk Association.
+
+At the heart of April's work is a belief that music is a powerful tool for connection, confidence, and cognitive growth. Her career has been defined by creating environments where students are encouraged to take risks, collaborate, and express themselves-building not only musical skills, but a sense of belonging and self-worth.
+
+Now, as a retired educator and advisor, April continues to support initiatives that expand access to music education. Her philosophy aligns closely with Harmony 4 All's mission of Making Music Accessible, helping ensure that students across New York City have the opportunity to experience music as a pathway to growth, empowerment, and community.`,
+    },
   ]
 
   const storyMilestones = [
@@ -624,8 +664,24 @@ export default function AboutPage() {
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-3 pb-6 pt-0">
-                    <p className="text-gray-700 text-sm md:text-base leading-relaxed">{advisor.bio}</p>
-                    <p className="text-gray-700 text-sm md:text-base leading-relaxed">{advisor.details}</p>
+                    <p
+                      className="text-gray-700 text-sm md:text-base leading-relaxed whitespace-pre-line overflow-hidden"
+                      style={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: 10,
+                        WebkitBoxOrient: "vertical",
+                      }}
+                    >
+                      {advisor.bio}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedAdvisorIndex(index)}
+                      className="text-sm font-semibold text-black underline underline-offset-2 hover:text-gray-700 transition-colors"
+                      aria-haspopup="dialog"
+                    >
+                      See more
+                    </button>
                   </CardContent>
                 </Card>
               ))}
@@ -633,6 +689,41 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {selectedAdvisorIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4"
+          onClick={() => setSelectedAdvisorIndex(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="advisor-modal-title"
+        >
+          <div
+            className="w-full max-w-3xl bg-white rounded-2xl shadow-2xl relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedAdvisorIndex(null)}
+              className="absolute top-3 right-3 text-2xl leading-none text-gray-500 hover:text-gray-800"
+              aria-label="Close advisor details"
+            >
+              ×
+            </button>
+            <div className="p-6 border-b border-gray-200 pr-12">
+              <h3 id="advisor-modal-title" className="text-2xl font-bold text-gray-900">
+                {boardAdvisors[selectedAdvisorIndex].name}
+              </h3>
+              <p className="text-gray-600 mt-1">{boardAdvisors[selectedAdvisorIndex].title}</p>
+            </div>
+            <div className="p-6 max-h-[70vh] overflow-y-auto">
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed whitespace-pre-line">
+                {boardAdvisors[selectedAdvisorIndex].bio}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Organization Information Section */}
       <section className="py-24 bg-gray-50">
