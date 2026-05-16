@@ -711,10 +711,30 @@ Now, as a retired educator and advisor, April continues to support initiatives t
               ×
             </button>
             <div className="p-6 border-b border-gray-200 pr-12">
-              <h3 id="advisor-modal-title" className="text-2xl font-bold text-gray-900">
-                {boardAdvisors[selectedAdvisorIndex].name}
-              </h3>
-              <p className="text-gray-600 mt-1">{boardAdvisors[selectedAdvisorIndex].title}</p>
+              <div className="flex items-center gap-4">
+                <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border border-gray-200 bg-gray-100 flex-shrink-0">
+                  {boardAdvisors[selectedAdvisorIndex].image ? (
+                    <Image
+                      src={boardAdvisors[selectedAdvisorIndex].image}
+                      alt={boardAdvisors[selectedAdvisorIndex].name}
+                      fill
+                      sizes="80px"
+                      quality={85}
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center">
+                      <Users className="h-8 w-8 text-gray-400" />
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <h3 id="advisor-modal-title" className="text-2xl font-bold text-gray-900">
+                    {boardAdvisors[selectedAdvisorIndex].name}
+                  </h3>
+                  <p className="text-gray-600 mt-1">{boardAdvisors[selectedAdvisorIndex].title}</p>
+                </div>
+              </div>
             </div>
             <div className="p-6 max-h-[70vh] overflow-y-auto">
               <p className="text-gray-700 text-sm md:text-base leading-relaxed whitespace-pre-line">

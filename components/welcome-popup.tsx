@@ -148,8 +148,8 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-0 lg:p-4"> 
-      <Card className="w-full h-full lg:w-full lg:max-w-xl lg:h-auto bg-white rounded-none lg:rounded-2xl shadow-2xl relative overflow-y-auto">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-0 lg:p-4 lg:overflow-y-auto"> 
+      <Card className="w-full h-full lg:w-full lg:max-w-xl lg:h-auto lg:max-h-[calc(100dvh-2rem)] lg:my-auto bg-white rounded-none lg:rounded-2xl shadow-2xl relative overflow-y-auto overscroll-contain">
         <button 
           onClick={onClose}
           className="absolute top-5 right-5 sm:top-1 sm:right-1 lg:top-4 lg:right-4 p-1 sm:p-2 hover:bg-gray-100 rounded-full z-10"
@@ -158,9 +158,9 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
           <X className="h-5 w-5 sm:h-4 sm:w-4 md:h-6 md:w-6 text-gray-600" />
         </button>
 
-        <CardContent className="p-4 sm:p-6 md:p-6">
+        <CardContent className="p-4 sm:p-6 md:p-6 lg:p-5">
           {/* Logo */}
-          <div className="text-center mb-4 sm:mb-6 lg:mb-6">
+          <div className="text-center mb-4 sm:mb-6 lg:mb-4">
             <div className="flex items-center justify-center mb-2 sm:mb-3 md:mb-2">
               <Image 
                 src={imageUrlsData.components.welcomePopup.logo.cloudinaryUrl}
@@ -175,7 +175,7 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
           </div>
 
           {/* Title */}
-          <h2 className="text-sm sm:text-base lg:text-lg font-semibold text-center text-gray-900 mb-4 sm:mb-5 lg:mb-6 leading-tight">
+          <h2 className="text-sm sm:text-base lg:text-lg font-semibold text-center text-gray-900 mb-4 sm:mb-5 lg:mb-4 leading-tight">
             Thank you for joining our mission and get a free gift!
           </h2>
 
@@ -323,7 +323,7 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full bg-black hover:bg-gray-800 text-white py-3 sm:py-4 lg:py-4 rounded-full font-medium mt-4 sm:mt-5 lg:mt-6 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base lg:text-base"
+              className="w-full bg-black hover:bg-gray-800 text-white py-3 sm:py-4 lg:py-3 rounded-full font-medium mt-4 sm:mt-5 lg:mt-4 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base lg:text-base"
               disabled={!formData.agreeToTerms || isLoading}
             >
               {isLoading ? (
