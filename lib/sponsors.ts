@@ -439,6 +439,80 @@ export const SPONSORS: Sponsor[] = [
     ]
   },
   {
+    slug: "grow-with-google",
+    name: "Grow with Google Partner Program",
+    logoLookupName: "Grow with Google",
+    logoUrl:
+      "https://static.wixstatic.com/media/bb6757_78445bb9ccb64bc1beb737e1cb6ffedb~mv2.jpeg",
+    website: "https://grow.google/",
+    tier: "Platinum",
+    category: "Learning & Technology Partner",
+    impact: "Digital Skills & Career Growth",
+    description:
+      "Grow with Google helps create economic opportunity for everyone. Through free training, tools, and resources, the program equips people and organizations with practical digital skills to grow careers, businesses, and communities.",
+    detailBlocks: [
+      {
+        title: "About Grow with Google",
+        paragraphs: [
+          "Grow with Google is Google's initiative to help people and businesses get the skills they need to succeed in the digital economy. The program offers free courses, workshops, and certifications across topics like career development, marketing, data, and productivity.",
+        ],
+        image: {
+          src: "https://res.cloudinary.com/da5qsxtri/image/upload/v1779000585/harmony4all/assets/educational-excellence-through-music.avif",
+          alt: "Students learning with digital tools",
+        },
+      },
+      {
+        title: "Partnership with Harmony 4 All",
+        paragraphs: [
+          "As a Grow with Google Partner, Harmony 4 All extends learning beyond music by connecting K–12 students, older adults, and community cohorts to trusted digital-skills resources that support life, career, and creative empowerment.",
+        ],
+      },
+      {
+        title: "Community Impact",
+        paragraphs: [
+          "This partnership helps learners build confidence with technology, explore career pathways, and access tools that complement Harmony 4 All's guided learning-access and microlearning pilot programs.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "coursera",
+    name: "Coursera",
+    logoLookupName: "Coursera",
+    logoUrl:
+      "https://static.wixstatic.com/media/bb6757_ee02ee0eeb67464ea4b41a1e42dcd587~mv2.png",
+    website: "https://www.coursera.org/",
+    tier: "Platinum",
+    category: "Learning & Technology Partner",
+    impact: "Online Learning & Career Certificates",
+    description:
+      "Coursera partners with leading universities and companies worldwide to deliver flexible, job-relevant online courses, professional certificates, and degrees—making high-quality education accessible to learners everywhere.",
+    detailBlocks: [
+      {
+        title: "About Coursera",
+        paragraphs: [
+          "Founded by Stanford professors, Coursera is a global online learning platform offering thousands of courses in business, technology, health, arts, and more. Learners can study at their own pace with content from top institutions and industry leaders.",
+        ],
+        image: {
+          src: "https://res.cloudinary.com/da5qsxtri/image/upload/v1779000634/harmony4all/assets/music-education-programs.jpg",
+          alt: "Collaborative learning environment",
+        },
+      },
+      {
+        title: "Partnership with Harmony 4 All",
+        paragraphs: [
+          "Through our Coursera partnership, Harmony 4 All supports guided pathways in life skills, career readiness, and creative empowerment—helping students and community members access structured learning alongside music education.",
+        ],
+      },
+      {
+        title: "Learner Outcomes",
+        paragraphs: [
+          "Coursera's flexible format supports Harmony 4 All cohorts including K–12 students, older adults, and community-based learning groups seeking credentials, upskilling, and lifelong learning opportunities.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "blinkist",
     name: "Blinkist",
     logoLookupName: "Blinkist",
@@ -578,6 +652,8 @@ export function getSponsorLogoUrl(sponsor: Sponsor): string {
 
 export function getAllSponsors(): Sponsor[] {
   const priorityOrder = [
+    "grow-with-google",
+    "coursera",
     "resorts-world-new-york-city",
     "the-newyork-injury-law-firm",
   ]

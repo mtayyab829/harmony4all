@@ -28,6 +28,7 @@ import NewsletterSection from "@/components/news-letter"
 import { TestimonialsSection } from "@/components/Testimonial"
 import api from "../api/api"
 import { imageUrlsData } from "@/lib/image-urls"
+import { LearningPartnersSection } from "@/components/partners/learning-partners-section"
 
 // Hero Carousel Component
 const HeroCarousel = () => {
@@ -595,6 +596,8 @@ const DonorsMarqueeSection = () => {
     "New York Foundation for the Arts",
     "Citizens Committee for New York City",
     "Villa Russo",
+    "Grow with Google Partner Program",
+    "Coursera",
   ]
   const extendedDonors = [...donors, ...donors, ...donors, ...donors, ...donors, ...donors,...donors, ...donors, ...donors, ...donors, ...donors, ...donors]
 
@@ -823,6 +826,7 @@ export default function HomePage() {
       <ImpactStatisticsSection />
       <MissionValuesSection />
       <ProgramsSection />
+      <LearningPartnersSection />
       <GetInvolvedSection />
       <TestimonialsSection />
       <ContactSection />

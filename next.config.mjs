@@ -49,6 +49,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'static.wixstatic.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   async headers() {

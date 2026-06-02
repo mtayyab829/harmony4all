@@ -532,9 +532,35 @@
         "name": "The Assembly State of New York Albany",
         "url": "/assets/the-assembly-state-of-new-york-albany-min.png",
         "cloudinaryUrl": "https://res.cloudinary.com/da5qsxtri/image/upload/v1779000648/harmony4all/assets/the-assembly-state-of-new-york-albany.png"
+      },
+      {
+        "name": "Grow with Google",
+        "url": "https://static.wixstatic.com/media/bb6757_78445bb9ccb64bc1beb737e1cb6ffedb~mv2.jpeg",
+        "cloudinaryUrl": "https://static.wixstatic.com/media/bb6757_78445bb9ccb64bc1beb737e1cb6ffedb~mv2.jpeg"
+      },
+      {
+        "name": "Coursera",
+        "url": "https://static.wixstatic.com/media/bb6757_ee02ee0eeb67464ea4b41a1e42dcd587~mv2.png",
+        "cloudinaryUrl": "https://static.wixstatic.com/media/bb6757_ee02ee0eeb67464ea4b41a1e42dcd587~mv2.png"
       }
     ]
   },
+  "learningPartners": [
+    {
+      "slug": "grow-with-google",
+      "featuredImage": {
+        "name": "Digital learning for students",
+        "cloudinaryUrl": "https://res.cloudinary.com/da5qsxtri/image/upload/v1779000585/harmony4all/assets/educational-excellence-through-music.avif"
+      }
+    },
+    {
+      "slug": "coursera",
+      "featuredImage": {
+        "name": "Online education programs",
+        "cloudinaryUrl": "https://res.cloudinary.com/da5qsxtri/image/upload/v1779000634/harmony4all/assets/music-education-programs.jpg"
+      }
+    }
+  ],
   "programs": {
     "programImages": [
       {
@@ -693,6 +719,21 @@
         "name": "Villa Russo",
         "url": "/assets/villa-russo-min.png",
         "cloudinaryUrl": "https://res.cloudinary.com/da5qsxtri/image/upload/v1779000650/harmony4all/assets/villa-russo.png"
+      },
+      {
+        "name": "Grow with Google",
+        "url": "https://static.wixstatic.com/media/bb6757_78445bb9ccb64bc1beb737e1cb6ffedb~mv2.jpeg",
+        "cloudinaryUrl": "https://static.wixstatic.com/media/bb6757_78445bb9ccb64bc1beb737e1cb6ffedb~mv2.jpeg"
+      },
+      {
+        "name": "Coursera",
+        "url": "https://static.wixstatic.com/media/bb6757_ee02ee0eeb67464ea4b41a1e42dcd587~mv2.png",
+        "cloudinaryUrl": "https://static.wixstatic.com/media/bb6757_ee02ee0eeb67464ea4b41a1e42dcd587~mv2.png"
+      },
+      {
+        "name": "Blinkist",
+        "url": "https://res.cloudinary.com/dhsatxsrt/image/upload/v1776833808/harmony4all/media/ugt39dl51dt6gybfpnpz.png",
+        "cloudinaryUrl": "https://res.cloudinary.com/dhsatxsrt/image/upload/v1776833808/harmony4all/media/ugt39dl51dt6gybfpnpz.png"
       }
     ]
   },

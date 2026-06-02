@@ -8,6 +8,12 @@ import { imageUrlsData } from "@/lib/image-urls"
 
 export const Footer = () => {
   const pathname = usePathname()
+  const growWithGoogleLogo = imageUrlsData.sponsors.sponsorLogos.find(
+    (logo) => logo.name === "Grow with Google"
+  )?.cloudinaryUrl
+  const courseraLogo = imageUrlsData.sponsors.sponsorLogos.find(
+    (logo) => logo.name === "Coursera"
+  )?.cloudinaryUrl
 
   const isActiveLink = (href: string) => {
     if (href === "/") {
@@ -90,6 +96,34 @@ export const Footer = () => {
             <p className="text-white/70 mb-6 leading-relaxed text-base max-w-2xl mx-auto lg:mx-0">
               Shaping future generations through the power of music. Where every child's voice find its song.
             </p>
+
+            <div className="mb-6">
+              <p className="text-white font-semibold mb-3">Learning Partners</p>
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+                {growWithGoogleLogo ? (
+                  <div className="relative w-40 h-14 bg-white rounded-md p-2">
+                    <Image
+                      src={growWithGoogleLogo}
+                      alt="Grow with Google Partner Program"
+                      fill
+                      className="object-contain"
+                      sizes="160px"
+                    />
+                  </div>
+                ) : null}
+                {courseraLogo ? (
+                  <div className="relative w-32 h-14 bg-white rounded-md p-2">
+                    <Image
+                      src={courseraLogo}
+                      alt="Coursera"
+                      fill
+                      className="object-contain"
+                      sizes="128px"
+                    />
+                  </div>
+                ) : null}
+              </div>
+            </div>
             
             {/* Legal Status - Prominently Displayed */}
             <div className="bg-white/10 border border-white/20 w-full sm:w-1/2 mx-auto lg:mx-0 rounded-lg p-4 mb-6">

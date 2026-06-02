@@ -30,6 +30,7 @@ import {
     Lightbulb
 } from "lucide-react"
 import { imageUrlsData } from "@/lib/image-urls"
+import { LearningPartnersSection } from "@/components/partners/learning-partners-section"
 
 export default function PartnersPage() {
     const [isVisible, setIsVisible] = useState(false)
@@ -64,6 +65,8 @@ export default function PartnersPage() {
             { name: "Friends of Maple Grove Cemetery", logo: getPartnerLogo("Friends of Maple Grove Cemetery"), website: "https://www.friendsofmaplegrove.org/" },
         ],
         community: [
+            { name: "Grow with Google Partner Program", logo: getPartnerLogo("Grow with Google"), website: "https://grow.google/" },
+            { name: "Coursera", logo: getPartnerLogo("Coursera"), website: "https://www.coursera.org/" },
             { name: "Education Through Music", logo: getPartnerLogo("Education Through Music"), website: "https://etmonline.org/" },
             { name: "Maspeth Elementary School", logo: getPartnerLogo("Maspeth Elementary School"), website: "https://www.psl53online.org/" },
             { name: "Maple Grove Cemetery", logo: getPartnerLogo("Friends of Maple Grove Cemetery"), website: "https://www.friendsofmaplegrove.org/" },
@@ -399,6 +402,10 @@ export default function PartnersPage() {
                                 creating a symphony of opportunities that resonate across communities.
                             </p>
                             <div className="w-12 md:w-16 lg:w-32 h-1 bg-black mx-auto rounded-full"></div>
+                        </div>
+
+                        <div className="mb-12 md:mb-20">
+                            <LearningPartnersSection embedded />
                         </div>
 
                         {/* Major Partners - Timeline Style */}
