@@ -1,10 +1,24 @@
 "use client"
 
-import Link from "next/link"
+import { useEffect } from "react"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
-import { getLearningPartners } from "@/lib/learning-partners"
+import {
+  getLearningPartners,
+  LEARNING_PARTNER_HASH_IDS,
+  resolveLearningPartnerHash,
+} from "@/lib/learning-partners"
+
+function scrollToLearningPartnerHash() {
+  const targetId = resolveLearningPartnerHash(window.location.hash)
+  if (!targetId) return
+
+  const el = document.getElementById(targetId)
+  if (!el) return
+
+  el.scrollIntoView({ behavior: "smooth", block: "start" })
+}
 
 export function LearningPartnersSection({
   compact = false,
@@ -15,10 +29,22 @@ export function LearningPartnersSection({
 }) {
   const partners = getLearningPartners()
 
+  useEffect(() => {
+    const runScroll = () => {
+      requestAnimationFrame(() => {
+        scrollToLearningPartnerHash()
+      })
+    }
+
+    runScroll()
+    window.addEventListener("hashchange", runScroll)
+    return () => window.removeEventListener("hashchange", runScroll)
+  }, [])
+
   return (
     <section
       id="learning-partners-section"
-      className={`${
+      className={`scroll-mt-28 ${
         embedded
           ? "py-0 bg-transparent"
           : compact
@@ -52,7 +78,8 @@ export function LearningPartnersSection({
           {partners.map((partner) => (
             <Card
               key={partner.slug}
-              className="overflow-hidden border border-gray-100 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl md:rounded-3xl"
+              id={LEARNING_PARTNER_HASH_IDS[partner.slug as keyof typeof LEARNING_PARTNER_HASH_IDS]}
+              className="scroll-mt-28 overflow-hidden border border-gray-100 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl md:rounded-3xl"
             >
               <div className="p-5 md:p-6 flex flex-col">
                   <div className="w-full h-32 md:h-40 relative mb-4 bg-white rounded-lg border border-gray-100">

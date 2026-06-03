@@ -101,7 +101,7 @@ export const Footer = () => {
               <p className="text-white font-semibold mb-3">Learning Partners</p>
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
                 {growWithGoogleLogo ? (
-                  <div className="relative w-40 h-14 bg-white rounded-md p-2">
+                  <Link href="/#google" className="relative w-40 h-14 bg-white rounded-md p-2 block">
                     <Image
                       src={growWithGoogleLogo}
                       alt="Grow with Google Partner Program"
@@ -109,10 +109,10 @@ export const Footer = () => {
                       className="object-contain"
                       sizes="160px"
                     />
-                  </div>
+                  </Link>
                 ) : null}
                 {courseraLogo ? (
-                  <div className="relative w-32 h-14 bg-white rounded-md p-2">
+                  <Link href="/#coursera" className="relative w-32 h-14 bg-white rounded-md p-2 block">
                     <Image
                       src={courseraLogo}
                       alt="Coursera"
@@ -120,7 +120,7 @@ export const Footer = () => {
                       className="object-contain"
                       sizes="128px"
                     />
-                  </div>
+                  </Link>
                 ) : null}
               </div>
             </div>

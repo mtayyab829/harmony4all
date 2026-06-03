@@ -18,6 +18,29 @@ export type LearningPartnerDisplay = {
 
 const LEARNING_PARTNER_SLUGS = ["grow-with-google", "coursera"] as const
 
+/** DOM id on homepage cards (short hashes for URLs like /#coursera, /#google) */
+export const LEARNING_PARTNER_HASH_IDS: Record<(typeof LEARNING_PARTNER_SLUGS)[number], string> = {
+  "grow-with-google": "google",
+  coursera: "coursera",
+}
+
+/** Alternate hash fragments that scroll to the same partner card */
+const HASH_ALIASES: Record<string, string> = {
+  coursera: "coursera",
+  google: "google",
+  growwithgoogle: "google",
+  "grow-with-google": "google",
+  growwithgooglepartner: "google",
+  "learning-partners": "learning-partners-section",
+  partners: "learning-partners-section",
+}
+
+export function resolveLearningPartnerHash(hash: string): string | null {
+  const normalized = hash.replace(/^#/, "").trim().toLowerCase()
+  if (!normalized) return null
+  return HASH_ALIASES[normalized] ?? null
+}
+
 type LearningPartnerImageEntry = {
   slug: string
   featuredImage?: { cloudinaryUrl?: string }
