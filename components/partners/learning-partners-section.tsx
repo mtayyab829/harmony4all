@@ -54,24 +54,42 @@ export function LearningPartnersSection({
     >
       <div className="container mx-auto px-4">
         <div className={`text-center ${compact ? "mb-6 sm:mb-8" : "mb-8 sm:mb-12"}`}>
-          <Badge className="bg-black text-white mb-3 md:mb-4">Learning &amp; Technology Partners</Badge>
+          <Badge className="bg-black text-white mb-3 md:mb-4">Creative Pathways Partners</Badge>
           <h2
-            className={`font-bold text-gray-900 mb-3 sm:mb-4 ${
+            className={`font-bold text-gray-900 mb-4 sm:mb-6 ${
               compact
                 ? "text-xl sm:text-2xl md:text-3xl"
                 : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
             }`}
           >
-            Expanding Access Beyond Music
+            Making Music Accessible. Expanding Opportunity.
           </h2>
-          <p
-            className={`text-gray-600 max-w-3xl mx-auto leading-relaxed ${
+          <div
+            className={`text-gray-600 max-w-3xl mx-auto leading-relaxed space-y-4 text-left sm:text-center ${
               compact ? "text-sm sm:text-base" : "text-sm sm:text-base md:text-lg"
             }`}
           >
-            Together with leading education platforms, Harmony 4 All connects students, families, and
-            community learners to digital skills, career pathways, and lifelong learning.
-          </p>
+            <p>
+              Harmony 4 All&apos;s mission begins with music access — removing financial and systemic
+              barriers so underserved students and communities can experience the confidence, belonging,
+              and possibility that music creates.
+            </p>
+            <p>
+              Through our learning and career-readiness partners, we are strengthening that mission by
+              helping young musicians, youth volunteers, interns, and community learners build practical
+              skills for the future.
+            </p>
+            <p>
+              These opportunities support digital confidence, AI awareness, career readiness, personal
+              growth, and creative pathways — not as a replacement for music education, but as an
+              extension of what music already teaches: discipline, creativity, confidence,
+              collaboration, and purpose.
+            </p>
+            <p className="font-medium text-gray-800">
+              Our goal is simple: to help underserved students and community members turn access to
+              music into access to opportunity.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">

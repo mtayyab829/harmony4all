@@ -98,7 +98,7 @@ export const Footer = () => {
             </p>
 
             <div className="mb-6">
-              <p className="text-white font-semibold mb-3">Learning Partners</p>
+              <p className="text-white font-semibold mb-3">Creative Pathways Partners</p>
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
                 {growWithGoogleLogo ? (
                   <Link href="/#google" className="relative w-40 h-14 bg-white rounded-md p-2 block">

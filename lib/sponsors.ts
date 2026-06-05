@@ -446,8 +446,8 @@ export const SPONSORS: Sponsor[] = [
       "https://static.wixstatic.com/media/bb6757_78445bb9ccb64bc1beb737e1cb6ffedb~mv2.jpeg",
     website: "https://grow.google/",
     tier: "Platinum",
-    category: "Learning & Technology Partner",
-    impact: "Digital Skills & Career Growth",
+    category: "Creative Pathways Partner",
+    impact: "Digital Skills & Career Readiness",
     description:
       "Grow with Google helps create economic opportunity for everyone. Through free training, tools, and resources, the program equips people and organizations with practical digital skills to grow careers, businesses, and communities.",
     detailBlocks: [
@@ -483,8 +483,8 @@ export const SPONSORS: Sponsor[] = [
       "https://static.wixstatic.com/media/bb6757_ee02ee0eeb67464ea4b41a1e42dcd587~mv2.png",
     website: "https://www.coursera.org/",
     tier: "Platinum",
-    category: "Learning & Technology Partner",
-    impact: "Online Learning & Career Certificates",
+    category: "Creative Pathways Partner",
+    impact: "Online Learning & Career Readiness",
     description:
       "Coursera partners with leading universities and companies worldwide to deliver flexible, job-relevant online courses, professional certificates, and degrees—making high-quality education accessible to learners everywhere.",
     detailBlocks: [
