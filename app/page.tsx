@@ -28,6 +28,7 @@ import NewsletterSection from "@/components/news-letter"
 import { TestimonialsSection } from "@/components/Testimonial"
 import api from "../api/api"
 import { imageUrlsData } from "@/lib/image-urls"
+import FeaturedBlogImage from "@/components/FeaturedBlogImage"
 import { LearningPartnersSection } from "@/components/partners/learning-partners-section"
 
 // Hero Carousel Component
@@ -703,34 +704,17 @@ const HomeBlogSection = () => {
                 <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
                   <Card className="bg-white shadow-xl border-0 rounded-3xl overflow-hidden hover:shadow-2xl">
                     <div className="relative">
-                      <div className="aspect-video overflow-hidden">
-                        {post.url ? (
-                          <a
-                            href={post.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="block w-full h-full"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <Image
-                              src={post.image || imageUrlsData.media.placeholder.cloudinaryUrl}
-                              alt={post.title}
-                              fill
-                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                              quality={80}
-                              className="object-cover cursor-pointer"
-                            />
-                          </a>
-                        ) : (
-                          <Image
-                            src={post.image || imageUrlsData.media.placeholder.cloudinaryUrl}
-                            alt={post.title}
-                            fill
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            quality={80}
-                            className="object-cover"
-                          />
-                        )}
+                      <div className="aspect-video overflow-hidden relative">
+                        <FeaturedBlogImage
+                          image={post.image || imageUrlsData.media.placeholder.cloudinaryUrl}
+                          alt={post.title}
+                          url={post.url}
+                          videoUrl={post.videoUrl}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          quality={80}
+                          className="object-cover"
+                          onImageClick={(e) => e.stopPropagation()}
+                        />
                       </div>
                       <div className="absolute top-4 left-4">
                         <Badge className="bg-black/80 text-white backdrop-blur-sm border-0">

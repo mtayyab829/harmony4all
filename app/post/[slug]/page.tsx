@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import api from '../../../api/api';
 import WixBlogRenderer from '../../../components/blogRender';
+import FeaturedBlogImage from '../../../components/FeaturedBlogImage';
 
 interface Blog {
   _id: string;
@@ -16,6 +17,7 @@ interface Blog {
   image: string;
   imageAlt?: string;
   url?: string;
+  videoUrl?: string;
   category: string;
   tags: string[];
   views: number;
@@ -45,6 +47,7 @@ interface RelatedBlog {
   image: string;
   imageAlt?: string;
   url?: string;
+  videoUrl?: string;
   category: string;
   views: number;
   likes: number;
@@ -269,35 +272,16 @@ export default function BlogPostPage() {
         {/* Blog Image */}
         {blog.image && (
           <div className="relative h-48 md:h-64 lg:h-96 bg-gray-200 rounded-lg overflow-hidden mb-6 md:mb-8">
-            {blog.url ? (
-              <a 
-                href={blog.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block w-full h-full cursor-pointer group"
-                title="Click to open in new tab"
-              >
-                <Image
-                  src={blog.image}
-                  alt={blog.imageAlt || blog.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                  quality={85}
-                  priority
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </a>
-            ) : (
-              <Image
-                src={blog.image}
-                alt={blog.imageAlt || blog.title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                quality={85}
-                priority
-                className="object-cover"
-              />
-            )}
+            <FeaturedBlogImage
+              image={blog.image}
+              alt={blog.imageAlt || blog.title}
+              url={blog.url}
+              videoUrl={blog.videoUrl}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+              quality={85}
+              priority
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+            />
           </div>
         )}
 
@@ -421,36 +405,13 @@ export default function BlogPostPage() {
                 <article key={relatedBlog._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="relative h-32 md:h-40 lg:h-48 bg-gray-200">
                     {relatedBlog.image ? (
-                      relatedBlog.url ? (
-                        <a 
-                          href={relatedBlog.url} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="block w-full h-full cursor-pointer group"
-                          title="Click to open in new tab"
-                        >
-                          <Image
-                            src={relatedBlog.image}
-                            alt={relatedBlog.imageAlt || relatedBlog.title}
-                            fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
-                            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white bg-opacity-90 rounded-full p-2">
-                              <svg className="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                              </svg>
-                            </div>
-                          </div>
-                        </a>
-                      ) : (
-                        <Image
-                          src={relatedBlog.image}
-                          alt={relatedBlog.imageAlt || relatedBlog.title}
-                          fill
-                          className="object-cover"
-                        />
-                      )
+                      <FeaturedBlogImage
+                        image={relatedBlog.image}
+                        alt={relatedBlog.imageAlt || relatedBlog.title}
+                        url={relatedBlog.url}
+                        videoUrl={relatedBlog.videoUrl}
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
                     ) : (
                       <div className="flex items-center justify-center h-full text-gray-400">
                         <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">

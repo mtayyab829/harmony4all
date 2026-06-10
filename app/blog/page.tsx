@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { blogAPI } from '../../lib/api';
+import FeaturedBlogImage from '../../components/FeaturedBlogImage';
 
 interface Blog {
   _id: string;
@@ -13,6 +14,7 @@ interface Blog {
   image: string;
   imageAlt?: string;
   url?: string;
+  videoUrl?: string;
   category: string;
   tags: string[];
   views: number;
@@ -153,34 +155,16 @@ export default function BlogPage() {
                 {/* Blog Image */}
                 <div className="relative h-40 md:h-48 lg:h-56 bg-gradient-to-br from-gray-100 to-gray-200">
                   {blog.image ? (
-                    blog.url ? (
-                      <a 
-                        href={blog.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="block w-full h-full cursor-pointer group/image"
-                        title="Click to open in new tab"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Image
-                          src={blog.image}
-                          alt={blog.imageAlt || blog.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          quality={80}
-                          className="object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                      </a>
-                    ) : (
-                      <Image
-                        src={blog.image}
-                        alt={blog.imageAlt || blog.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        quality={80}
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                    )
+                    <FeaturedBlogImage
+                      image={blog.image}
+                      alt={blog.imageAlt || blog.title}
+                      url={blog.url}
+                      videoUrl={blog.videoUrl}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      quality={80}
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      onImageClick={(e) => e.stopPropagation()}
+                    />
                   ) : (
                     <div className="flex items-center justify-center h-full text-gray-400">
                       <div className="text-center">
