@@ -42,6 +42,7 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
     
     // Clear previous errors
     setError("")
+    setSuccess("")
     setFieldErrors({
       firstName: "",
       lastName: "",
@@ -50,7 +51,6 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
       agreeToTerms: "",
     })
     
-    // Individual field validation
     const newFieldErrors = {
       firstName: "",
       lastName: "",
@@ -58,47 +58,53 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
       cellNumber: "",
       agreeToTerms: "",
     }
+
+    const missingFields: string[] = []
     
-    let hasErrors = false
-    
-    // First Name validation
     if (!formData.firstName.trim()) {
       newFieldErrors.firstName = "First name is required"
-      hasErrors = true
+      missingFields.push("First Name")
     }
     
-    // Last Name validation
     if (!formData.lastName.trim()) {
       newFieldErrors.lastName = "Last name is required"
-      hasErrors = true
+      missingFields.push("Last Name")
     }
     
-    // Email validation
     if (!formData.email.trim()) {
       newFieldErrors.email = "Email is required"
-      hasErrors = true
+      missingFields.push("Email")
     } else {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      if (!emailRegex.test(formData.email)) {
+      if (!emailRegex.test(formData.email.trim())) {
         newFieldErrors.email = "Please enter a valid email address"
-        hasErrors = true
       }
     }
     
-    // Cell Number validation
     if (!formData.cellNumber.trim()) {
       newFieldErrors.cellNumber = "Cell number is required"
-      hasErrors = true
+      missingFields.push("Cell Number")
     }
     
-    // Terms agreement validation
     if (!formData.agreeToTerms) {
       newFieldErrors.agreeToTerms = "Please agree to the terms and conditions"
-      hasErrors = true
     }
+
+    const hasFieldErrors = Object.values(newFieldErrors).some((msg) => msg !== "")
     
-    if (hasErrors) {
+    if (hasFieldErrors) {
       setFieldErrors(newFieldErrors)
+
+      if (missingFields.length === 1) {
+        setError(`Please fill in the missing field: ${missingFields[0]}.`)
+      } else if (missingFields.length > 1) {
+        setError(`Please fill in the missing fields: ${missingFields.join(", ")}.`)
+      } else if (newFieldErrors.email) {
+        setError(newFieldErrors.email)
+      } else if (newFieldErrors.agreeToTerms) {
+        setError(newFieldErrors.agreeToTerms)
+      }
+
       return
     }
     
@@ -106,7 +112,13 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
       setIsLoading(true)
       setError("")
       
-      const result = await welcomePopupAPI.submitForm(formData)
+      const result = await welcomePopupAPI.submitForm({
+        ...formData,
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
+        email: formData.email.trim(),
+        cellNumber: formData.cellNumber.trim(),
+      })
       
       setSuccess(result.message)
       setFormData({
@@ -142,6 +154,11 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
     // Clear field error when user starts typing
     if (fieldErrors[field as keyof typeof fieldErrors]) {
       setFieldErrors((prev) => ({ ...prev, [field]: "" }))
+    }
+
+    // Clear the summary missing-fields message once they start correcting
+    if (error) {
+      setError("")
     }
   }
 
@@ -180,7 +197,7 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
           </h2>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 lg:space-y-4">
+          <form onSubmit={handleSubmit} noValidate className="space-y-3 sm:space-y-4 lg:space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                 First Name <span className="text-red-500">*</span>
@@ -189,6 +206,9 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
                 type="text"
                 value={formData.firstName}
                 onChange={(e) => handleInputChange("firstName", e.target.value)}
+                required
+                aria-required="true"
+                aria-invalid={!!fieldErrors.firstName}
                 className={`w-full border-gray-300 rounded-md h-10 sm:h-11 lg:h-11 text-sm sm:text-base ${
                   fieldErrors.firstName ? "border-red-500 focus:border-red-500" : ""
                 }`}
@@ -209,6 +229,9 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
                 type="text"
                 value={formData.lastName}
                 onChange={(e) => handleInputChange("lastName", e.target.value)}
+                required
+                aria-required="true"
+                aria-invalid={!!fieldErrors.lastName}
                 className={`w-full border-gray-300 rounded-md h-10 sm:h-11 lg:h-11 text-sm sm:text-base ${
                   fieldErrors.lastName ? "border-red-500 focus:border-red-500" : ""
                 }`}
@@ -229,6 +252,9 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
+                required
+                aria-required="true"
+                aria-invalid={!!fieldErrors.email}
                 className={`w-full border-gray-300 rounded-md h-10 sm:h-11 lg:h-11 text-sm sm:text-base ${
                   fieldErrors.email ? "border-red-500 focus:border-red-500" : ""
                 }`}
@@ -250,6 +276,9 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
                 value={formData.cellNumber}
                 onChange={(e) => handleInputChange("cellNumber", e.target.value)}
                 placeholder="+13245667890"
+                required
+                aria-required="true"
+                aria-invalid={!!fieldErrors.cellNumber}
                 className={`w-full border-gray-300 rounded-md h-10 sm:h-11 lg:h-11 text-sm sm:text-base ${
                   fieldErrors.cellNumber ? "border-red-500 focus:border-red-500" : ""
                 }`}
