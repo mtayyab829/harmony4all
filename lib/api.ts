@@ -326,5 +326,14 @@ export const adminAPI = {
   },
 };
 
+// Partnership Agreement API functions
+export const partnershipAPI = {
+  // Submit the Community Performance Partnership form
+  submitForm: async (formData: Record<string, any>) => {
+    const response = await api.post("/partnership/submit", formData);
+    return response.data;
+  },
+};
+
 // Export the base api instance for custom requests
 export default api;
