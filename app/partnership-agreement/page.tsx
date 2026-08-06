@@ -572,6 +572,7 @@ export default function PartnershipAgreementPage() {
                 <h1 className="text-2xl font-semibold text-gray-900 mb-2">You're all set!</h1>
                 <p className="text-gray-600 mb-6">
                   Thank you! Your Community Performance Partnership form has been submitted successfully.
+                  A confirmation email with a PDF copy has been sent to your inbox for your records.
                 </p>
                 <Button asChild className="rounded-full bg-black hover:bg-gray-800 text-white">
                   <Link href="/">
@@ -592,10 +593,6 @@ export default function PartnershipAgreementPage() {
       <section className="py-10">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto mb-8 text-center">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <Music className="h-6 w-6" />
-              <span className="text-sm font-semibold uppercase tracking-wide text-gray-500">Harmony 4 All</span>
-            </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-3">Community Performance Partnership</h1>
             <p className="text-gray-600">
               We're so glad you've invited Harmony 4 All to be part of your event. Fill out this friendly agreement
