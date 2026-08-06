@@ -354,8 +354,26 @@ function StatusBar({
   return (
     <div className="flex items-center justify-between gap-3 rounded-xl bg-black px-4 py-3 text-white">
       <p className="text-sm">{children}</p>
-      {actions ? <div className="flex gap-2 flex-shrink-0">{actions}</div> : null}
+      {actions ? <div className="flex gap-2 flex-shrink-0 [&_button]:text-white">{actions}</div> : null}
     </div>
+  )
+}
+
+function StatusBarButton({
+  variant = "ghost",
+  className = "",
+  ...props
+}: React.ComponentProps<typeof Button> & { variant?: "ghost" | "outline" }) {
+  return (
+    <Button
+      type="button"
+      size="sm"
+      variant={variant}
+      className={`bg-transparent text-white hover:bg-white/10 hover:text-white ${
+        variant === "outline" ? "border-white" : ""
+      } ${className}`}
+      {...props}
+    />
   )
 }
 
@@ -621,24 +639,10 @@ export default function PartnershipAgreementPage() {
               <StatusBar
                 actions={
                   <>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      className="text-white hover:bg-white/10 hover:text-white"
-                      onClick={dismissDraftBanner}
-                    >
-                      Got it
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      className="border-white text-white hover:bg-white/10 hover:text-white"
-                      onClick={startOver}
-                    >
+                    <StatusBarButton onClick={dismissDraftBanner}>Got it</StatusBarButton>
+                    <StatusBarButton variant="outline" onClick={startOver}>
                       Start over
-                    </Button>
+                    </StatusBarButton>
                   </>
                 }
               >
