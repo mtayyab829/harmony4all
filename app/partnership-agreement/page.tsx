@@ -554,7 +554,7 @@ export default function PartnershipAgreementPage() {
     } catch (submitError: any) {
       setError(
         submitError?.response?.data?.message ||
-          "Something went wrong submitting your form. Please try again, or email info@harmony4all.org directly."
+          "Something went wrong submitting your form. Please try again."
       )
     } finally {
       setIsLoading(false)
@@ -599,8 +599,7 @@ export default function PartnershipAgreementPage() {
             <h1 className="text-3xl font-bold text-gray-900 mb-3">Community Performance Partnership</h1>
             <p className="text-gray-600">
               We're so glad you've invited Harmony 4 All to be part of your event. Fill out this friendly agreement
-              online and we'll take care of the rest &mdash; it goes straight to our team at{" "}
-              <a href="mailto:info@harmony4all.org" className="underline">info@harmony4all.org</a>, and you'll get a
+              online and we'll take care of the rest &mdash; it goes straight to our team and you'll get a
               copy for your own records too. Nothing is locked in until we send written confirmation.
             </p>
           </div>
@@ -1320,11 +1319,6 @@ export default function PartnershipAgreementPage() {
               )}
             </div>
 
-            {step === LAST_STEP && (
-              <p className="text-center text-xs text-gray-500 pb-6">
-                Your submission will be emailed to info@harmony4all.org, and we'll send a copy to your email too.
-              </p>
-            )}
           </form>
         </div>
       </section>
