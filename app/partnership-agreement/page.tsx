@@ -277,7 +277,7 @@ function SectionCard({
 function FieldLabel({ children, required }: { children: React.ReactNode; required?: boolean }) {
   return (
     <label className="block text-sm font-medium text-gray-700 mb-1.5">
-      {children} {required && <span className="text-red-500">*</span>}
+      {children} {required && <span className="text-black">*</span>}
     </label>
   )
 }
@@ -340,6 +340,21 @@ function RadioPills({
           </button>
         )
       })}
+    </div>
+  )
+}
+
+function StatusBar({
+  children,
+  actions,
+}: {
+  children: React.ReactNode
+  actions?: React.ReactNode
+}) {
+  return (
+    <div className="flex items-center justify-between gap-3 rounded-xl bg-black px-4 py-3 text-white">
+      <p className="text-sm">{children}</p>
+      {actions ? <div className="flex gap-2 flex-shrink-0">{actions}</div> : null}
     </div>
   )
 }
@@ -568,7 +583,7 @@ export default function PartnershipAgreementPage() {
           <div className="container mx-auto px-4">
             <Card className="w-full max-w-lg mx-auto bg-white rounded-2xl shadow-2xl">
               <CardContent className="p-8 text-center">
-                <CheckCircle className="h-14 w-14 text-green-600 mx-auto mb-4" />
+                <CheckCircle className="h-14 w-14 text-black mx-auto mb-4" />
                 <h1 className="text-2xl font-semibold text-gray-900 mb-2">You're all set!</h1>
                 <p className="text-gray-600 mb-6">
                   Thank you! Your Community Performance Partnership form has been submitted successfully.
@@ -603,17 +618,32 @@ export default function PartnershipAgreementPage() {
 
           {draftRestored && (
             <div className="max-w-3xl mx-auto mb-6">
-              <div className="flex items-center justify-between gap-3 rounded-xl border border-dashed border-blue-300 bg-blue-50 px-4 py-3">
-                <p className="text-sm text-blue-800">We picked up where you left off on a saved draft.</p>
-                <div className="flex gap-2 flex-shrink-0">
-                  <Button type="button" variant="ghost" size="sm" className="text-blue-800 hover:bg-blue-100" onClick={dismissDraftBanner}>
-                    Got it
-                  </Button>
-                  <Button type="button" variant="outline" size="sm" className="border-blue-300 text-blue-800 hover:bg-blue-100" onClick={startOver}>
-                    Start over
-                  </Button>
-                </div>
-              </div>
+              <StatusBar
+                actions={
+                  <>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="text-white hover:bg-white/10 hover:text-white"
+                      onClick={dismissDraftBanner}
+                    >
+                      Got it
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="border-white text-white hover:bg-white/10 hover:text-white"
+                      onClick={startOver}
+                    >
+                      Start over
+                    </Button>
+                  </>
+                }
+              >
+                We picked up where you left off on a saved draft.
+              </StatusBar>
             </div>
           )}
 
@@ -632,7 +662,7 @@ export default function PartnershipAgreementPage() {
                         value={formData.eventName}
                         onChange={(e) => update("eventName", e.target.value)}
                         data-error={!!fieldErrors.eventName}
-                        className={fieldErrors.eventName ? "border-red-500" : ""}
+                        className={fieldErrors.eventName ? "border-black" : ""}
                       />
                       {fieldErrors.eventName && <FieldError message={fieldErrors.eventName} />}
                     </div>
@@ -653,7 +683,7 @@ export default function PartnershipAgreementPage() {
                         value={formData.location}
                         onChange={(e) => update("location", e.target.value)}
                         data-error={!!fieldErrors.location}
-                        className={fieldErrors.location ? "border-red-500" : ""}
+                        className={fieldErrors.location ? "border-black" : ""}
                       />
                       {fieldErrors.location && <FieldError message={fieldErrors.location} />}
                     </div>
@@ -713,7 +743,7 @@ export default function PartnershipAgreementPage() {
                           value={formData.organizer.name}
                           onChange={(e) => updateNested("organizer", "name", e.target.value)}
                           data-error={!!fieldErrors["organizer.name"]}
-                          className={fieldErrors["organizer.name"] ? "border-red-500" : ""}
+                          className={fieldErrors["organizer.name"] ? "border-black" : ""}
                         />
                         {fieldErrors["organizer.name"] && <FieldError message={fieldErrors["organizer.name"]} />}
                       </div>
@@ -734,7 +764,7 @@ export default function PartnershipAgreementPage() {
                           value={formData.organizer.phone}
                           onChange={(e) => updateNested("organizer", "phone", e.target.value)}
                           data-error={!!fieldErrors["organizer.phone"]}
-                          className={fieldErrors["organizer.phone"] ? "border-red-500" : ""}
+                          className={fieldErrors["organizer.phone"] ? "border-black" : ""}
                         />
                         {fieldErrors["organizer.phone"] && <FieldError message={fieldErrors["organizer.phone"]} />}
                       </div>
@@ -746,7 +776,7 @@ export default function PartnershipAgreementPage() {
                           value={formData.organizer.email}
                           onChange={(e) => updateNested("organizer", "email", e.target.value)}
                           data-error={!!fieldErrors["organizer.email"]}
-                          className={fieldErrors["organizer.email"] ? "border-red-500" : ""}
+                          className={fieldErrors["organizer.email"] ? "border-black" : ""}
                         />
                         {fieldErrors["organizer.email"] && <FieldError message={fieldErrors["organizer.email"]} />}
                       </div>
@@ -1196,7 +1226,7 @@ export default function PartnershipAgreementPage() {
                       value={formData.organizerSignature.name}
                       onChange={(e) => updateNested("organizerSignature", "name", e.target.value)}
                       data-error={!!fieldErrors["organizerSignature.name"]}
-                      className={fieldErrors["organizerSignature.name"] ? "border-red-500" : ""}
+                      className={fieldErrors["organizerSignature.name"] ? "border-black" : ""}
                       placeholder="Full name"
                     />
                     {fieldErrors["organizerSignature.name"] && <FieldError message={fieldErrors["organizerSignature.name"]} />}
@@ -1216,7 +1246,7 @@ export default function PartnershipAgreementPage() {
                       value={formData.organizerSignature.date}
                       onChange={(e) => updateNested("organizerSignature", "date", e.target.value)}
                       data-error={!!fieldErrors["organizerSignature.date"]}
-                      className={fieldErrors["organizerSignature.date"] ? "border-red-500" : ""}
+                      className={fieldErrors["organizerSignature.date"] ? "border-black" : ""}
                     />
                     {fieldErrors["organizerSignature.date"] && <FieldError message={fieldErrors["organizerSignature.date"]} />}
                   </div>
@@ -1268,7 +1298,7 @@ export default function PartnershipAgreementPage() {
                     <span>
                       I've read and understood this Community Performance Partnership agreement, will communicate
                       clearly and treat everyone with respect, and I'm genuinely excited to work together to create a
-                      wonderful event. <span className="text-red-500">*</span>
+                      wonderful event. <span className="text-black">*</span>
                     </span>
                   </label>
                   {fieldErrors.agreeToTerms && <FieldError message={fieldErrors.agreeToTerms} />}
@@ -1277,10 +1307,12 @@ export default function PartnershipAgreementPage() {
             )}
 
             {error && (
-              <div className="flex items-start gap-3 p-3 bg-red-50 border border-red-200 rounded-lg">
-                <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                <p className="text-red-800 text-sm">{error}</p>
-              </div>
+              <StatusBar>
+                <span className="flex items-start gap-2">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                  {error}
+                </span>
+              </StatusBar>
             )}
 
             <div className="flex items-center justify-between gap-3 pt-2">
@@ -1325,9 +1357,9 @@ export default function PartnershipAgreementPage() {
 
 function FieldError({ message }: { message: string }) {
   return (
-    <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
-      <AlertCircle className="h-4 w-4" />
+    <div className="mt-1.5 flex items-start gap-2 rounded-lg bg-black px-3 py-2 text-sm text-white">
+      <AlertCircle className="h-4 w-4 flex-shrink-0 mt-0.5" />
       {message}
-    </p>
+    </div>
   )
 }
