@@ -9,8 +9,8 @@ import { headers } from 'next/headers'
 
 export const metadata: Metadata = {
   title: 'Harmony 4 All - Making Music Accessible',
-  description: 'Comprehensive therapy, education, and community support for individuals with disabilities. Building inclusive communities where everyone can thrive.',
-  keywords: 'disability services, therapy, occupational therapy, physical therapy, speech therapy, special education, community support, New York',
+  description: 'A New York City nonprofit making music education accessible to underserved K-12 students through free instruments, educational resources, and community programs.',
+  keywords: 'music education, free instruments, music programs, underserved students, nonprofit, New York City, Harmony 4 All, instrument rental, arts education, K-12 music',
   authors: [{ name: 'Harmony 4 All' }],
   creator: 'Harmony 4 All',
   publisher: 'Harmony 4 All',
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://harmony4all.org'),
   openGraph: {
     title: 'Harmony 4 All - Making Music Accessible',
-    description: 'Comprehensive therapy, education, and community support for individuals with disabilities.',
+    description: 'Making music education accessible to underserved K-12 students across New York City through free instruments, resources, and community programs.',
     url: 'https://harmony4all.org',
     siteName: 'Harmony 4 All',
     locale: 'en_US',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Harmony 4 All - Making Music Accessible',
-    description: 'Comprehensive therapy, education, and community support for individuals with disabilities.',
+    description: 'Making music education accessible to underserved K-12 students across New York City through free instruments, resources, and community programs.',
   },
   robots: {
     index: true,

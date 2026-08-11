@@ -82,51 +82,51 @@ export default function ResourcesPage() {
   const resourceCategories = [
     {
       title: "Getting Started Guides",
-      description: "Essential information for families new to our services",
+      description: "Essential information for families and schools new to Harmony 4 All",
       resources: [
         { name: "Welcome Guide for New Families", type: "PDF", size: "2.3 MB" },
-        { name: "Understanding Your Child's Assessment", type: "PDF", size: "1.8 MB" },
-        { name: "Insurance and Billing Guide", type: "PDF", size: "1.2 MB" },
-        { name: "What to Expect in Therapy", type: "Video", duration: "12 min" },
+        { name: "How Free Instrument Rentals Work", type: "PDF", size: "1.8 MB" },
+        { name: "School Partnership Overview", type: "PDF", size: "1.2 MB" },
+        { name: "What to Expect in Our Programs", type: "Video", duration: "12 min" },
       ],
     },
     {
-      title: "Educational Resources",
-      description: "Learning materials and educational support tools",
+      title: "Music Education Resources",
+      description: "Learning materials and practice tools for students and teachers",
       resources: [
-        { name: "Home Learning Activities Guide", type: "PDF", size: "3.1 MB" },
-        { name: "Adaptive Technology Resources", type: "PDF", size: "2.7 MB" },
-        { name: "IEP Meeting Preparation Checklist", type: "PDF", size: "0.8 MB" },
-        { name: "Educational Rights and Advocacy", type: "PDF", size: "2.2 MB" },
+        { name: "At-Home Practice Activities Guide", type: "PDF", size: "3.1 MB" },
+        { name: "Beginner Instrument Care Tips", type: "PDF", size: "2.7 MB" },
+        { name: "Music Curriculum Support Checklist", type: "PDF", size: "0.8 MB" },
+        { name: "Teacher Resources for Music Classrooms", type: "PDF", size: "2.2 MB" },
       ],
     },
     {
-      title: "Therapy Support Materials",
-      description: "Tools and exercises to support therapy goals at home",
+      title: "Practice & Performance Materials",
+      description: "Tools to help students grow as musicians at home and on stage",
       resources: [
-        { name: "Fine Motor Skills Activities", type: "PDF", size: "4.2 MB" },
-        { name: "Speech and Language Exercises", type: "PDF", size: "3.5 MB" },
-        { name: "Sensory Integration Strategies", type: "PDF", size: "2.9 MB" },
-        { name: "Physical Therapy Home Exercises", type: "Video", duration: "25 min" },
+        { name: "Daily Practice Habit Tracker", type: "PDF", size: "4.2 MB" },
+        { name: "Sight-Reading Warm-Ups", type: "PDF", size: "3.5 MB" },
+        { name: "Ensemble Etiquette Guide", type: "PDF", size: "2.9 MB" },
+        { name: "Preparing for Your First Recital", type: "Video", duration: "25 min" },
       ],
     },
     {
       title: "Community Resources",
-      description: "Local services and community support information",
+      description: "Local music programs, events, and ways to get involved",
       resources: [
-        { name: "Local Support Groups Directory", type: "PDF", size: "1.5 MB" },
-        { name: "Community Recreation Programs", type: "PDF", size: "2.1 MB" },
-        { name: "Transportation Resources", type: "PDF", size: "1.3 MB" },
-        { name: "Emergency Contact Information", type: "PDF", size: "0.6 MB" },
+        { name: "NYC Youth Music Programs Directory", type: "PDF", size: "1.5 MB" },
+        { name: "Upcoming Workshops & Concerts", type: "PDF", size: "2.1 MB" },
+        { name: "Volunteer & Mentor Opportunities", type: "PDF", size: "1.3 MB" },
+        { name: "Contact & Referral Information", type: "PDF", size: "0.6 MB" },
       ],
     },
   ]
 
   const quickLinks = [
-    { title: "Crisis Support Hotline", content: "24/7 Support: (555) 911-HELP", icon: Phone },
-    { title: "Family Support Groups", content: "Every Tuesday 7:00 PM", icon: Users },
-    { title: "Resource Library Hours", content: "Mon-Fri 9:00 AM - 5:00 PM", icon: Calendar },
-    { title: "Email Support", content: "resources@harmony4all.org", icon: Mail },
+    { title: "Call Us", content: "(888) 31-MUSIC", icon: Phone },
+    { title: "Family & School Support", content: "Partner with our team", icon: Users },
+    { title: "Program Hours", content: "Mon-Fri 9:00 AM - 5:00 PM", icon: Calendar },
+    { title: "Email Support", content: "info@harmony4all.org", icon: Mail },
   ]
 
   return (
@@ -155,8 +155,8 @@ export default function ResourcesPage() {
           >
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4 md:mb-6">Family Resources</h1>
             <p className="text-sm md:text-lg lg:text-xl text-gray-600 leading-relaxed">
-              Comprehensive resources, guides, and support materials to help families navigate their journey with us.
-              Everything you need to support your loved one's growth and development.
+              Guides, practice tools, and support materials to help families and schools make the most of
+              Harmony 4 All&apos;s music education programs.
             </p>
           </div>
         </div>
@@ -283,7 +283,7 @@ export default function ResourcesPage() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              Our family support team is here to help you find the resources you need and answer any questions.
+              Our team is here to help families and schools find the music education resources they need.
             </p>
             <div
               className={`flex flex-col sm:flex-row gap-3 md:gap-4 justify-center transition-all duration-1000 delay-500 ${

@@ -142,8 +142,8 @@ export default function AccessibilityPage() {
             >
               <CardContent className="p-4 md:p-6 lg:p-8">
                 <p className="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6">
-                  At <span className="font-bold">Harmony 4 All</span>, accessibility is not just a compliance requirement—it's a core value that reflects
-                  our mission to serve individuals with disabilities. We believe that everyone deserves equal access to
+                  At <span className="font-bold">Harmony 4 All</span>, accessibility is not just a compliance requirement—it&apos;s a core value that reflects
+                  our mission of making music education accessible to all. We believe that everyone deserves equal access to
                   information and functionality, and we are dedicated to providing an inclusive digital experience.
                 </p>
                 <p className="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed">
