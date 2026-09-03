@@ -162,7 +162,7 @@ export default function BlogPage() {
                       videoUrl={blog.videoUrl}
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       quality={80}
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="object-contain object-center"
                       onImageClick={(e) => e.stopPropagation()}
                     />
                   ) : (

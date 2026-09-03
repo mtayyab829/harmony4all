@@ -280,7 +280,7 @@ export default function BlogPostPage() {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
               quality={85}
               priority
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-contain object-center"
             />
           </div>
         )}
@@ -410,7 +410,7 @@ export default function BlogPostPage() {
                         alt={relatedBlog.imageAlt || relatedBlog.title}
                         url={relatedBlog.url}
                         videoUrl={relatedBlog.videoUrl}
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="object-contain object-center"
                       />
                     ) : (
                       <div className="flex items-center justify-center h-full text-gray-400">

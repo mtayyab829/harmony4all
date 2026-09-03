@@ -24,7 +24,7 @@ export default function FeaturedBlogImage({
   url,
   videoUrl,
   fill = true,
-  className = 'object-cover',
+  className = 'object-contain',
   sizes,
   quality = 85,
   priority = false,

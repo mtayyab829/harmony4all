@@ -160,7 +160,7 @@ export default function BlogPage() {
                       alt={blog.imageAlt || blog.title}
                       url={blog.url}
                       videoUrl={blog.videoUrl}
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="object-contain object-center"
                       onImageClick={(e) => e.stopPropagation()}
                     />
                   ) : (
