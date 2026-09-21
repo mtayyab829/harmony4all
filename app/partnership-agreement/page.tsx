@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
 import { Textarea } from "@/components/ui/textarea"
 import {
   Loader2,
@@ -17,6 +18,7 @@ import {
   Home,
 } from "lucide-react"
 import { partnershipAPI } from "@/lib/api"
+import { getUSPhoneValidationError } from "@/lib/us-phone"
 
 // ---------- Option lists (mirrors the printed "Community Performance Partnership" PDF) ----------
 
@@ -196,7 +198,8 @@ const STEP_VALIDATORS: Record<number, (d: FormData) => Record<string, string>> =
     if (!d.eventName.trim()) errs.eventName = "Event name is required"
     if (!d.location.trim()) errs.location = "Location / address is required"
     if (!d.organizer.name.trim()) errs["organizer.name"] = "Contact name is required"
-    if (!d.organizer.phone.trim()) errs["organizer.phone"] = "Phone is required"
+    const organizerPhoneError = getUSPhoneValidationError(d.organizer.phone, { required: true })
+    if (organizerPhoneError) errs["organizer.phone"] = organizerPhoneError
     if (!d.organizer.email.trim()) {
       errs["organizer.email"] = "Email is required"
     } else if (!EMAIL_REGEX.test(d.organizer.email)) {
@@ -495,12 +498,17 @@ export default function PartnershipAgreementPage() {
     if (!formData.eventName.trim()) errs.eventName = "Event name is required"
     if (!formData.location.trim()) errs.location = "Location / address is required"
     if (!formData.organizer.name.trim()) errs["organizer.name"] = "Contact name is required"
-    if (!formData.organizer.phone.trim()) errs["organizer.phone"] = "Phone is required"
+    const organizerPhoneError = getUSPhoneValidationError(formData.organizer.phone, { required: true })
+    if (organizerPhoneError) errs["organizer.phone"] = organizerPhoneError
     if (!formData.organizer.email.trim()) {
       errs["organizer.email"] = "Email is required"
     } else if (!EMAIL_REGEX.test(formData.organizer.email)) {
       errs["organizer.email"] = "Please enter a valid email address"
     }
+    const venueHostPhoneError = getUSPhoneValidationError(formData.venueHost.phone)
+    if (venueHostPhoneError) errs["venueHost.phone"] = venueHostPhoneError
+    const dayOfContactPhoneError = getUSPhoneValidationError(formData.dayOfContactPhone)
+    if (dayOfContactPhoneError) errs.dayOfContactPhone = dayOfContactPhoneError
     if (!formData.organizerSignature.name.trim()) errs["organizerSignature.name"] = "Please type your full name as your signature"
     if (!formData.organizerSignature.date.trim()) errs["organizerSignature.date"] = "Date is required"
     if (!formData.agreeToTerms) errs.agreeToTerms = "Please confirm you've read and agree to this partnership agreement"
@@ -761,12 +769,9 @@ export default function PartnershipAgreementPage() {
                       </div>
                       <div>
                         <FieldLabel required>Phone</FieldLabel>
-                        <Input
-                          type="tel"
-                          inputMode="tel"
-                          autoComplete="tel"
+                        <PhoneInput
                           value={formData.organizer.phone}
-                          onChange={(e) => updateNested("organizer", "phone", e.target.value)}
+                          onValueChange={(value) => updateNested("organizer", "phone", value)}
                           data-error={!!fieldErrors["organizer.phone"]}
                           className={fieldErrors["organizer.phone"] ? "border-black" : ""}
                         />
@@ -801,7 +806,13 @@ export default function PartnershipAgreementPage() {
                         </div>
                         <div>
                           <FieldLabel>Phone</FieldLabel>
-                          <Input type="tel" inputMode="tel" autoComplete="tel" value={formData.venueHost.phone} onChange={(e) => updateNested("venueHost", "phone", e.target.value)} />
+                          <PhoneInput
+                            value={formData.venueHost.phone}
+                            onValueChange={(value) => updateNested("venueHost", "phone", value)}
+                            data-error={!!fieldErrors["venueHost.phone"]}
+                            className={fieldErrors["venueHost.phone"] ? "border-black" : ""}
+                          />
+                          {fieldErrors["venueHost.phone"] && <FieldError message={fieldErrors["venueHost.phone"]} />}
                         </div>
                         <div>
                           <FieldLabel>Email</FieldLabel>
@@ -1107,7 +1118,13 @@ export default function PartnershipAgreementPage() {
                     </div>
                     <div>
                       <FieldLabel>Their phone</FieldLabel>
-                      <Input type="tel" inputMode="tel" autoComplete="tel" value={formData.dayOfContactPhone} onChange={(e) => update("dayOfContactPhone", e.target.value)} />
+                      <PhoneInput
+                        value={formData.dayOfContactPhone}
+                        onValueChange={(value) => update("dayOfContactPhone", value)}
+                        data-error={!!fieldErrors.dayOfContactPhone}
+                        className={fieldErrors.dayOfContactPhone ? "border-black" : ""}
+                      />
+                      {fieldErrors.dayOfContactPhone && <FieldError message={fieldErrors.dayOfContactPhone} />}
                     </div>
                   </div>
                 </SectionCard>

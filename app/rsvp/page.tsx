@@ -6,8 +6,10 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
 import { Loader2, CheckCircle, AlertCircle } from "lucide-react"
 import { rsvpAPI } from "@/lib/api"
+import { getUSPhoneValidationError, formatUSPhoneForStorage } from "@/lib/us-phone"
 
 export default function RSVPPage() {
   const [formData, setFormData] = useState({
@@ -73,8 +75,9 @@ export default function RSVPPage() {
       }
     }
 
-    if (!formData.cellNumber.trim()) {
-      nextFieldErrors.cellNumber = "Cell number is required"
+    const cellNumberError = getUSPhoneValidationError(formData.cellNumber, { required: true })
+    if (cellNumberError) {
+      nextFieldErrors.cellNumber = cellNumberError
       hasErrors = true
     }
 
@@ -90,7 +93,10 @@ export default function RSVPPage() {
 
     try {
       setIsLoading(true)
-      const result = await rsvpAPI.submitForm(formData)
+      const result = await rsvpAPI.submitForm({
+        ...formData,
+        cellNumber: formatUSPhoneForStorage(formData.cellNumber),
+      })
       setSuccess(result.message || "Thank you for your submission!")
       setFormData({
         firstName: "",
@@ -190,11 +196,9 @@ export default function RSVPPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Cell Number <span className="text-red-500">*</span>
                   </label>
-                  <Input
-                    type="tel"
+                  <PhoneInput
                     value={formData.cellNumber}
-                    onChange={(e) => handleInputChange("cellNumber", e.target.value)}
-                    placeholder="+13245667890"
+                    onValueChange={(value) => handleInputChange("cellNumber", value)}
                     className={fieldErrors.cellNumber ? "border-red-500 focus:border-red-500" : ""}
                   />
                   {fieldErrors.cellNumber && (

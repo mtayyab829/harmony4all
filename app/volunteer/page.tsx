@@ -5,10 +5,12 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
 import { Textarea } from "@/components/ui/textarea"
 import { Heart, HandHeart, CheckCircle, Phone, Loader2, AlertCircle } from "lucide-react"
 import { volunteerAPI } from "../../lib/api"
 import { imageUrlsData } from "@/lib/image-urls"
+import { getUSPhoneValidationError } from "@/lib/us-phone"
 
 export default function VolunteerPage() {
   const [formData, setFormData] = useState({
@@ -36,6 +38,8 @@ export default function VolunteerPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const [phoneError, setPhoneError] = useState('')
+  const [emergencyPhoneError, setEmergencyPhoneError] = useState('')
 
   const requirements = [
     "Must be 18 years or older",
@@ -76,6 +80,7 @@ export default function VolunteerPage() {
       ...prev,
       [field]: value
     }))
+    if (field === 'phone' && phoneError) setPhoneError('')
   }
 
   const handleAddressChange = (field: string, value: string) => {
@@ -96,6 +101,7 @@ export default function VolunteerPage() {
         [field]: value
       }
     }))
+    if (field === 'phone' && emergencyPhoneError) setEmergencyPhoneError('')
   }
 
   const handleInterestChange = (value: string) => {
@@ -127,6 +133,14 @@ export default function VolunteerPage() {
       return
     }
 
+    const phoneErr = getUSPhoneValidationError(formData.phone, { required: true })
+    const emergencyPhoneErr = getUSPhoneValidationError(formData.emergencyContact.phone)
+    setPhoneError(phoneErr || '')
+    setEmergencyPhoneError(emergencyPhoneErr || '')
+    if (phoneErr || emergencyPhoneErr) {
+      return
+    }
+
     setIsSubmitting(true)
     setSubmitStatus('idle')
     setErrorMessage('')
@@ -136,6 +150,8 @@ export default function VolunteerPage() {
       
       if (result.success) {
         setSubmitStatus('success')
+        setPhoneError('')
+        setEmergencyPhoneError('')
         setFormData({
           firstName: '',
           lastName: '',
@@ -274,14 +290,18 @@ export default function VolunteerPage() {
                       </div>
                       <div>
                         <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">Phone <span className="text-red-500">*</span></label>
-                        <Input
-                          type="tel"
-                          placeholder="(555) 123-4567"
-                          className="rounded-lg text-sm sm:text-base"
+                        <PhoneInput
+                          className={`rounded-lg text-sm sm:text-base ${phoneError ? 'border-red-500 focus:border-red-500' : ''}`}
                           value={formData.phone}
-                          onChange={(e) => handleInputChange('phone', e.target.value)}
+                          onValueChange={(value) => handleInputChange('phone', value)}
                           required
                         />
+                        {phoneError && (
+                          <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                            <AlertCircle className="h-4 w-4" />
+                            {phoneError}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -356,13 +376,18 @@ export default function VolunteerPage() {
                     </div>
                     <div className="mt-3 sm:mt-4">
                       <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">Phone</label>
-                      <Input
-                        type="tel"
-                        placeholder="Emergency contact phone"
-                        className="rounded-lg text-sm sm:text-base"
+                      <PhoneInput
+                        placeholder="(555) 123-4567"
+                        className={`rounded-lg text-sm sm:text-base ${emergencyPhoneError ? 'border-red-500 focus:border-red-500' : ''}`}
                         value={formData.emergencyContact.phone}
-                        onChange={(e) => handleEmergencyContactChange('phone', e.target.value)}
+                        onValueChange={(value) => handleEmergencyContactChange('phone', value)}
                       />
+                      {emergencyPhoneError && (
+                        <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                          <AlertCircle className="h-4 w-4" />
+                          {emergencyPhoneError}
+                        </p>
+                      )}
                     </div>
                   </div>
 

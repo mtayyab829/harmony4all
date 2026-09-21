@@ -5,12 +5,14 @@ import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
 import { Card, CardContent } from "@/components/ui/card"
 import { X, Heart, Loader2, CheckCircle, AlertCircle } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { welcomePopupAPI } from '../lib/api'
 import { imageUrlsData } from "@/lib/image-urls"
+import { getUSPhoneValidationError, formatUSPhoneForStorage } from "@/lib/us-phone"
 
 interface WelcomePopupProps {
   isOpen: boolean
@@ -81,11 +83,14 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
       }
     }
     
-    if (!formData.cellNumber.trim()) {
-      newFieldErrors.cellNumber = "Cell number is required"
-      missingFields.push("Cell Number")
+    const cellNumberError = getUSPhoneValidationError(formData.cellNumber, { required: true })
+    if (cellNumberError) {
+      newFieldErrors.cellNumber = cellNumberError
+      if (!formData.cellNumber.trim()) {
+        missingFields.push("Cell Number")
+      }
     }
-    
+
     if (!formData.agreeToTerms) {
       newFieldErrors.agreeToTerms = "Please agree to the terms and conditions"
     }
@@ -104,6 +109,7 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
       } else if (newFieldErrors.agreeToTerms) {
         setError(newFieldErrors.agreeToTerms)
       }
+      // Invalid (non-empty) cell number format errors are shown only under the input.
 
       return
     }
@@ -117,7 +123,7 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
         firstName: formData.firstName.trim(),
         lastName: formData.lastName.trim(),
         email: formData.email.trim(),
-        cellNumber: formData.cellNumber.trim(),
+        cellNumber: formatUSPhoneForStorage(formData.cellNumber),
       })
       
       setSuccess(result.message)
@@ -271,11 +277,9 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
               <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                 Cell Number <span className="text-red-500">*</span>
               </label>
-              <Input
-                type="tel"
+              <PhoneInput
                 value={formData.cellNumber}
-                onChange={(e) => handleInputChange("cellNumber", e.target.value)}
-                placeholder="+13245667890"
+                onValueChange={(value) => handleInputChange("cellNumber", value)}
                 required
                 aria-required="true"
                 aria-invalid={!!fieldErrors.cellNumber}

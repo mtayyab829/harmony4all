@@ -6,9 +6,11 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Loader2, AlertCircle, CheckCircle, MessageSquare } from "lucide-react"
 import { textUpdatesAPI } from "@/lib/api"
+import { getUSPhoneValidationError } from "@/lib/us-phone"
 
 export default function TextUpdatesPage() {
   const router = useRouter()
@@ -22,10 +24,11 @@ export default function TextUpdatesPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const [phoneError, setPhoneError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     // Basic validation
     if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.phone.trim()) {
       setErrorMessage('Please fill in all required fields')
@@ -41,11 +44,10 @@ export default function TextUpdatesPage() {
       return
     }
 
-    // Phone validation (basic - at least 10 digits)
-    const phoneDigits = formData.phone.replace(/\D/g, '')
-    if (phoneDigits.length < 10) {
-      setErrorMessage('Please enter a valid phone number')
-      setSubmitStatus('error')
+    // Phone validation
+    const phoneErr = getUSPhoneValidationError(formData.phone, { required: true })
+    setPhoneError(phoneErr || '')
+    if (phoneErr) {
       return
     }
 
@@ -64,7 +66,8 @@ export default function TextUpdatesPage() {
       
       if (response.success) {
         setSubmitStatus('success')
-        
+        setPhoneError('')
+
         // Redirect to /donate after a short delay
         setTimeout(() => {
           router.push('/donate')
@@ -176,15 +179,22 @@ export default function TextUpdatesPage() {
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
                       Phone Number <span className="text-red-500">*</span>
                     </label>
-                    <Input
+                    <PhoneInput
                       id="phone"
-                      type="tel"
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      onValueChange={(value) => {
+                        setFormData({ ...formData, phone: value })
+                        if (phoneError) setPhoneError('')
+                      }}
                       required
-                      className="w-full"
-                      placeholder="Enter your phone number"
+                      className={`w-full ${phoneError ? 'border-red-500 focus:border-red-500' : ''}`}
                     />
+                    {phoneError && (
+                      <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                        <AlertCircle className="h-4 w-4" />
+                        {phoneError}
+                      </p>
+                    )}
                   </div>
 
                   {/* SMS Consent Checkbox */}

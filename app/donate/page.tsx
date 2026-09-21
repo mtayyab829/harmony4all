@@ -6,10 +6,12 @@ import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
 import { Badge } from "@/components/ui/badge"
-import { Heart, DollarSign, CreditCard, Gift, Users, Building, Calendar, CheckCircle, Star, Shield } from "lucide-react"
+import { Heart, DollarSign, CreditCard, Gift, Users, Building, Calendar, CheckCircle, Star, Shield, AlertCircle } from "lucide-react"
 import { donationAPI } from "@/lib/api"
 import { imageUrlsData } from "@/lib/image-urls"
+import { getUSPhoneValidationError } from "@/lib/us-phone"
 
 export default function DonatePage() {
   const [selectedAmount, setSelectedAmount] = useState(50)
@@ -27,6 +29,7 @@ export default function DonatePage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const [phoneError, setPhoneError] = useState('')
   const [donationId, setDonationId] = useState<string | null>(null)
 
   // Add ref for donation form section
@@ -155,6 +158,13 @@ export default function DonatePage() {
     if (!formData.donorName || !formData.email) {
       setSubmitStatus('error')
       setErrorMessage('Please fill in all required fields')
+      setIsSubmitting(false)
+      return
+    }
+
+    const phoneErr = getUSPhoneValidationError(formData.phone)
+    setPhoneError(phoneErr || '')
+    if (phoneErr) {
       setIsSubmitting(false)
       return
     }
@@ -477,13 +487,20 @@ export default function DonatePage() {
                     </div>
                     <div>
                       <label className="block text-xs md:text-sm font-medium text-gray-700 mb-1 md:mb-2">Phone Number</label>
-                      <Input
-                        type="tel"
-                        placeholder="(555) 123-4567"
-                        className="rounded-lg text-sm md:text-base"
+                      <PhoneInput
+                        className={`rounded-lg text-sm md:text-base ${phoneError ? 'border-red-500 focus:border-red-500' : ''}`}
                         value={formData.phone}
-                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        onValueChange={(value) => {
+                          handleInputChange('phone', value)
+                          if (phoneError) setPhoneError('')
+                        }}
                       />
+                      {phoneError && (
+                        <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                          <AlertCircle className="h-4 w-4" />
+                          {phoneError}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label className="block text-xs md:text-sm font-medium text-gray-700 mb-1 md:mb-2">Message (Optional)</label>

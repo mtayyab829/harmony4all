@@ -2,10 +2,12 @@
 import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { MapPin, Phone, Mail, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 import { contactAPI } from '../lib/api'
+import { getUSPhoneValidationError } from '../lib/us-phone'
 
 interface Contact {
     firstName: string;
@@ -29,6 +31,7 @@ export default function ContactSection() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
     const [errorMessage, setErrorMessage] = useState('')
+    const [phoneError, setPhoneError] = useState('')
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
         setFormData(prev => ({
@@ -47,6 +50,12 @@ export default function ContactSection() {
             return
         }
 
+        const phoneErr = getUSPhoneValidationError(formData.phone, { required: true })
+        setPhoneError(phoneErr || '')
+        if (phoneErr) {
+            return
+        }
+
         setIsSubmitting(true)
         setSubmitStatus('idle')
         setErrorMessage('')
@@ -54,6 +63,7 @@ export default function ContactSection() {
         try {
             await contactAPI.submitContact(formData)
             setSubmitStatus('success')
+            setPhoneError('')
             setFormData({
                 firstName: '',
                 lastName: '',
@@ -146,14 +156,21 @@ export default function ContactSection() {
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">Phone <span className="text-red-500">*</span></label>
-                                    <Input
-                                        type="tel"
-                                        placeholder="(555) 123-4567"
+                                    <PhoneInput
                                         name="phone"
                                         value={formData.phone}
-                                        onChange={handleInputChange}
-                                        className="rounded-lg transition-all duration-300 focus:scale-105"
+                                        onValueChange={(value) => {
+                                            setFormData(prev => ({ ...prev, phone: value }))
+                                            if (phoneError) setPhoneError('')
+                                        }}
+                                        className={`rounded-lg transition-all duration-300 focus:scale-105 ${phoneError ? 'border-red-500 focus:border-red-500' : ''}`}
                                     />
+                                    {phoneError && (
+                                        <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                                            <AlertCircle className="h-4 w-4" />
+                                            {phoneError}
+                                        </p>
+                                    )}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">Subject <span className="text-red-500">*</span></label>
