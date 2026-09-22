@@ -13,6 +13,7 @@ import Image from "next/image"
 import { welcomePopupAPI } from '../lib/api'
 import { imageUrlsData } from "@/lib/image-urls"
 import { getUSPhoneValidationError, formatUSPhoneForStorage } from "@/lib/us-phone"
+import { getEmailValidationError } from "@/lib/email"
 
 interface WelcomePopupProps {
   isOpen: boolean
@@ -74,13 +75,11 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
     }
     
     if (!formData.email.trim()) {
-      newFieldErrors.email = "Email is required"
       missingFields.push("Email")
-    } else {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      if (!emailRegex.test(formData.email.trim())) {
-        newFieldErrors.email = "Please enter a valid email address"
-      }
+    }
+    const emailError = getEmailValidationError(formData.email)
+    if (emailError) {
+      newFieldErrors.email = emailError
     }
     
     const cellNumberError = getUSPhoneValidationError(formData.cellNumber, { required: true })

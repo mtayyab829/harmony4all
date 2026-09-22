@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { newsletterAPI } from '../lib/api'
+import { getEmailValidationError } from '../lib/email'
 import { AlertCircle, CheckCircle, Loader2 } from "lucide-react"
 
 // Newsletter Section Component
@@ -14,21 +15,10 @@ export default function NewsletterSection() {
     const [messageType, setMessageType] = useState<"success" | "error" | "">("")
   
       const handleSubscribe = async () => {
-    // Basic validation
-    if (!email.trim()) {
-      setMessage("Please enter an email address")
-      setMessageType("error")
-      setTimeout(() => {
-        setMessage("")
-        setMessageType("")
-      }, 3000)
-      return
-    }
-
     // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      setMessage("Please enter a valid email address")
+    const emailError = getEmailValidationError(email)
+    if (emailError) {
+      setMessage(emailError)
       setMessageType("error")
       setTimeout(() => {
         setMessage("")

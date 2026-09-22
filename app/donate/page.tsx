@@ -12,6 +12,8 @@ import { Heart, DollarSign, CreditCard, Gift, Users, Building, Calendar, CheckCi
 import { donationAPI } from "@/lib/api"
 import { imageUrlsData } from "@/lib/image-urls"
 import { getUSPhoneValidationError } from "@/lib/us-phone"
+import { getEmailValidationError } from "@/lib/email"
+import { getFullNameError } from "@/lib/name"
 
 export default function DonatePage() {
   const [selectedAmount, setSelectedAmount] = useState(50)
@@ -30,6 +32,8 @@ export default function DonatePage() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [phoneError, setPhoneError] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [nameError, setNameError] = useState('')
   const [donationId, setDonationId] = useState<string | null>(null)
 
   // Add ref for donation form section
@@ -155,16 +159,18 @@ export default function DonatePage() {
       return
     }
 
-    if (!formData.donorName || !formData.email) {
-      setSubmitStatus('error')
-      setErrorMessage('Please fill in all required fields')
-      setIsSubmitting(false)
-      return
-    }
+    const nameErr = getFullNameError(formData.donorName, { label: 'Full name' })
+    setNameError(nameErr || '')
+
+    const emailErr = getEmailValidationError(formData.email)
+    setEmailError(emailErr || '')
 
     const phoneErr = getUSPhoneValidationError(formData.phone)
     setPhoneError(phoneErr || '')
-    if (phoneErr) {
+
+    if (nameErr || emailErr || phoneErr) {
+      setSubmitStatus('error')
+      setErrorMessage('Please correct the highlighted fields')
       setIsSubmitting(false)
       return
     }
@@ -467,22 +473,40 @@ export default function DonatePage() {
                         <label className="block text-xs md:text-sm font-medium text-gray-700 mb-1 md:mb-2">Full Name <span className="text-red-500">*</span></label>
                         <Input
                           placeholder="Your full name"
-                          className="rounded-lg text-sm md:text-base"
+                          className={`rounded-lg text-sm md:text-base ${nameError ? 'border-red-500 focus:border-red-500' : ''}`}
                           value={formData.donorName}
-                          onChange={(e) => handleInputChange('donorName', e.target.value)}
+                          onChange={(e) => {
+                            handleInputChange('donorName', e.target.value)
+                            if (nameError) setNameError('')
+                          }}
                           required
                         />
+                        {nameError && (
+                          <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                            <AlertCircle className="h-4 w-4" />
+                            {nameError}
+                          </p>
+                        )}
                       </div>
                       <div>
                         <label className="block text-xs md:text-sm font-medium text-gray-700 mb-1 md:mb-2">Email Address <span className="text-red-500">*</span></label>
                         <Input
                           type="email"
                           placeholder="your.email@example.com"
-                          className="rounded-lg text-sm md:text-base"
+                          className={`rounded-lg text-sm md:text-base ${emailError ? 'border-red-500 focus:border-red-500' : ''}`}
                           value={formData.email}
-                          onChange={(e) => handleInputChange('email', e.target.value)}
+                          onChange={(e) => {
+                            handleInputChange('email', e.target.value)
+                            if (emailError) setEmailError('')
+                          }}
                           required
                         />
+                        {emailError && (
+                          <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                            <AlertCircle className="h-4 w-4" />
+                            {emailError}
+                          </p>
+                        )}
                       </div>
                     </div>
                     <div>

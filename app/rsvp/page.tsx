@@ -10,6 +10,7 @@ import { PhoneInput } from "@/components/ui/phone-input"
 import { Loader2, CheckCircle, AlertCircle } from "lucide-react"
 import { rsvpAPI } from "@/lib/api"
 import { getUSPhoneValidationError, formatUSPhoneForStorage } from "@/lib/us-phone"
+import { getEmailValidationError } from "@/lib/email"
 
 export default function RSVPPage() {
   const [formData, setFormData] = useState({
@@ -64,15 +65,10 @@ export default function RSVPPage() {
       hasErrors = true
     }
 
-    if (!formData.email.trim()) {
-      nextFieldErrors.email = "Email is required"
+    const emailError = getEmailValidationError(formData.email)
+    if (emailError) {
+      nextFieldErrors.email = emailError
       hasErrors = true
-    } else {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      if (!emailRegex.test(formData.email)) {
-        nextFieldErrors.email = "Please enter a valid email address"
-        hasErrors = true
-      }
     }
 
     const cellNumberError = getUSPhoneValidationError(formData.cellNumber, { required: true })

@@ -19,6 +19,7 @@ import {
 } from "lucide-react"
 import { partnershipAPI } from "@/lib/api"
 import { getUSPhoneValidationError } from "@/lib/us-phone"
+import { getEmailValidationError } from "@/lib/email"
 
 // ---------- Option lists (mirrors the printed "Community Performance Partnership" PDF) ----------
 
@@ -177,8 +178,6 @@ const STEPS = [
 
 const LAST_STEP = STEPS.length - 1
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
 // Which step a given required-field error key lives on, so we can jump straight to it.
 const STEP_FOR_FIELD: Record<string, number> = {
   eventName: 0,
@@ -200,11 +199,8 @@ const STEP_VALIDATORS: Record<number, (d: FormData) => Record<string, string>> =
     if (!d.organizer.name.trim()) errs["organizer.name"] = "Contact name is required"
     const organizerPhoneError = getUSPhoneValidationError(d.organizer.phone, { required: true })
     if (organizerPhoneError) errs["organizer.phone"] = organizerPhoneError
-    if (!d.organizer.email.trim()) {
-      errs["organizer.email"] = "Email is required"
-    } else if (!EMAIL_REGEX.test(d.organizer.email)) {
-      errs["organizer.email"] = "Please enter a valid email address"
-    }
+    const organizerEmailError = getEmailValidationError(d.organizer.email)
+    if (organizerEmailError) errs["organizer.email"] = organizerEmailError
     return errs
   },
 }
@@ -500,11 +496,8 @@ export default function PartnershipAgreementPage() {
     if (!formData.organizer.name.trim()) errs["organizer.name"] = "Contact name is required"
     const organizerPhoneError = getUSPhoneValidationError(formData.organizer.phone, { required: true })
     if (organizerPhoneError) errs["organizer.phone"] = organizerPhoneError
-    if (!formData.organizer.email.trim()) {
-      errs["organizer.email"] = "Email is required"
-    } else if (!EMAIL_REGEX.test(formData.organizer.email)) {
-      errs["organizer.email"] = "Please enter a valid email address"
-    }
+    const organizerEmailError = getEmailValidationError(formData.organizer.email)
+    if (organizerEmailError) errs["organizer.email"] = organizerEmailError
     const venueHostPhoneError = getUSPhoneValidationError(formData.venueHost.phone)
     if (venueHostPhoneError) errs["venueHost.phone"] = venueHostPhoneError
     const dayOfContactPhoneError = getUSPhoneValidationError(formData.dayOfContactPhone)

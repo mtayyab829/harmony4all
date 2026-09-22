@@ -11,6 +11,8 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Loader2, AlertCircle, CheckCircle, MessageSquare } from "lucide-react"
 import { textUpdatesAPI } from "@/lib/api"
 import { getUSPhoneValidationError } from "@/lib/us-phone"
+import { getEmailValidationError } from "@/lib/email"
+import { getNamePartError } from "@/lib/name"
 
 export default function TextUpdatesPage() {
   const router = useRouter()
@@ -25,29 +27,28 @@ export default function TextUpdatesPage() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [phoneError, setPhoneError] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [firstNameError, setFirstNameError] = useState('')
+  const [lastNameError, setLastNameError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Basic validation
-    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.phone.trim()) {
-      setErrorMessage('Please fill in all required fields')
-      setSubmitStatus('error')
-      return
-    }
+    const firstNameErr = getNamePartError(formData.firstName, { label: 'First name' })
+    setFirstNameError(firstNameErr || '')
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(formData.email)) {
-      setErrorMessage('Please enter a valid email address')
-      setSubmitStatus('error')
-      return
-    }
+    const lastNameErr = getNamePartError(formData.lastName, { label: 'Last name' })
+    setLastNameError(lastNameErr || '')
 
-    // Phone validation
+    const emailErr = getEmailValidationError(formData.email)
+    setEmailError(emailErr || '')
+
     const phoneErr = getUSPhoneValidationError(formData.phone, { required: true })
     setPhoneError(phoneErr || '')
-    if (phoneErr) {
+
+    if (firstNameErr || lastNameErr || emailErr || phoneErr) {
+      setErrorMessage('Please correct the highlighted fields')
+      setSubmitStatus('error')
       return
     }
 
@@ -135,11 +136,20 @@ export default function TextUpdatesPage() {
                       id="firstName"
                       type="text"
                       value={formData.firstName}
-                      onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, firstName: e.target.value })
+                        if (firstNameError) setFirstNameError('')
+                      }}
                       required
-                      className="w-full"
+                      className={`w-full ${firstNameError ? 'border-red-500 focus:border-red-500' : ''}`}
                       placeholder="Enter your first name"
                     />
+                    {firstNameError && (
+                      <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                        <AlertCircle className="h-4 w-4" />
+                        {firstNameError}
+                      </p>
+                    )}
                   </div>
 
                   {/* Last Name */}
@@ -151,11 +161,20 @@ export default function TextUpdatesPage() {
                       id="lastName"
                       type="text"
                       value={formData.lastName}
-                      onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, lastName: e.target.value })
+                        if (lastNameError) setLastNameError('')
+                      }}
                       required
-                      className="w-full"
+                      className={`w-full ${lastNameError ? 'border-red-500 focus:border-red-500' : ''}`}
                       placeholder="Enter your last name"
                     />
+                    {lastNameError && (
+                      <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                        <AlertCircle className="h-4 w-4" />
+                        {lastNameError}
+                      </p>
+                    )}
                   </div>
 
                   {/* Email */}
@@ -167,11 +186,20 @@ export default function TextUpdatesPage() {
                       id="email"
                       type="email"
                       value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, email: e.target.value })
+                        if (emailError) setEmailError('')
+                      }}
                       required
-                      className="w-full"
+                      className={`w-full ${emailError ? 'border-red-500 focus:border-red-500' : ''}`}
                       placeholder="Enter your email address"
                     />
+                    {emailError && (
+                      <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                        <AlertCircle className="h-4 w-4" />
+                        {emailError}
+                      </p>
+                    )}
                   </div>
 
                   {/* Phone */}

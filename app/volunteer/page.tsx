@@ -11,6 +11,7 @@ import { Heart, HandHeart, CheckCircle, Phone, Loader2, AlertCircle } from "luci
 import { volunteerAPI } from "../../lib/api"
 import { imageUrlsData } from "@/lib/image-urls"
 import { getUSPhoneValidationError } from "@/lib/us-phone"
+import { getEmailValidationError } from "@/lib/email"
 
 export default function VolunteerPage() {
   const [formData, setFormData] = useState({
@@ -126,9 +127,9 @@ export default function VolunteerPage() {
     }
 
     // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(formData.email)) {
-      setErrorMessage('Please enter a valid email address')
+    const emailErr = getEmailValidationError(formData.email)
+    if (emailErr) {
+      setErrorMessage(emailErr)
       setSubmitStatus('error')
       return
     }
