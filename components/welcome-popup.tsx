@@ -5,6 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { EmailInput } from '@/components/ui/email-input'
 import { PhoneInput } from "@/components/ui/phone-input"
 import { Card, CardContent } from "@/components/ui/card"
 import { X, Heart, Loader2, CheckCircle, AlertCircle } from "lucide-react"
@@ -185,11 +186,11 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
           <div className="text-center mb-4 sm:mb-6 lg:mb-4">
             <div className="flex items-center justify-center mb-2 sm:mb-3 md:mb-2">
               <Image 
-                src={imageUrlsData.components.welcomePopup.logo.cloudinaryUrl}
+                src={imageUrlsData.components.header.logo.cloudinaryUrl}
                 alt="Harmony 4 All Logo"
-                width={391}
-                height={144}
-                className="w-full max-w-[180px] sm:max-w-[220px] lg:max-w-xs h-auto"
+                width={120}
+                height={120}
+                className="w-full max-w-[150px] sm:max-w-[120px] lg:max-w-xs h-[150px] object-contain"  
                 priority
               />
             </div>
@@ -253,8 +254,7 @@ export function WelcomePopup({ isOpen, onClose }: WelcomePopupProps) {
               <label className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                 Email <span className="text-red-500">*</span>
               </label>
-              <Input
-                type="email"
+              <EmailInput
                 value={formData.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
                 required

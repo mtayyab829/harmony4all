@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { EmailInput } from '@/components/ui/email-input'
 import { PhoneInput } from "@/components/ui/phone-input"
 import { Textarea } from "@/components/ui/textarea"
 import {
@@ -772,8 +773,7 @@ export default function PartnershipAgreementPage() {
                       </div>
                       <div>
                         <FieldLabel required>Email</FieldLabel>
-                        <Input
-                          type="email"
+                        <EmailInput
                           autoComplete="email"
                           value={formData.organizer.email}
                           onChange={(e) => updateNested("organizer", "email", e.target.value)}
@@ -809,7 +809,7 @@ export default function PartnershipAgreementPage() {
                         </div>
                         <div>
                           <FieldLabel>Email</FieldLabel>
-                          <Input type="email" autoComplete="email" value={formData.venueHost.email} onChange={(e) => updateNested("venueHost", "email", e.target.value)} />
+                          <EmailInput autoComplete="email" value={formData.venueHost.email} onChange={(e) => updateNested("venueHost", "email", e.target.value)} />
                         </div>
                       </div>
                     </div>

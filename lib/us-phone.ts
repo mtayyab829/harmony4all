@@ -44,12 +44,21 @@ function hasInvalidNanpCode(threeDigits: string): boolean {
   return false;
 }
 
+// The 555 exchange is reserved for fiction and directory assistance (e.g. the
+// classic "(212) 555-0123") and is never a real person's line.
+function isFictional555(digits: string): boolean {
+  return digits.slice(3, 6) === '555';
+}
+
+// Local checks only. The backend additionally confirms the number exists via
+// Twilio Lookup (see components/ui/phone-input.tsx for the live check).
 export function isValidUSPhone(raw: string | null | undefined): boolean {
   const digits = getUSPhoneDigits(raw);
   if (digits.length !== 10) return false;
   if (isTrivialDigitPattern(digits)) return false;
   if (hasInvalidNanpCode(digits.slice(0, 3))) return false; // area code
   if (hasInvalidNanpCode(digits.slice(3, 6))) return false; // exchange code
+  if (isFictional555(digits)) return false;
   return true;
 }
 

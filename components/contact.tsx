@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { EmailInput } from '@/components/ui/email-input'
 import { PhoneInput } from "@/components/ui/phone-input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
@@ -144,8 +145,7 @@ export default function ContactSection() {
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">Email <span className="text-red-500">*</span></label>
-                                    <Input
-                                        type="email"
+                                    <EmailInput
                                         placeholder="your.email@example.com"
                                         name="email"
                                         value={formData.email}

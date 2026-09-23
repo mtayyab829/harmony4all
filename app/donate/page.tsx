@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { EmailInput } from '@/components/ui/email-input'
 import { PhoneInput } from "@/components/ui/phone-input"
 import { Badge } from "@/components/ui/badge"
 import { Heart, DollarSign, CreditCard, Gift, Users, Building, Calendar, CheckCircle, Star, Shield, AlertCircle } from "lucide-react"
@@ -200,10 +201,10 @@ export default function DonatePage() {
         setSubmitStatus('error')
         setErrorMessage(response.message || 'Failed to create checkout session')
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Checkout session creation error:', error)
       setSubmitStatus('error')
-      setErrorMessage('Network error. Please try again.')
+      setErrorMessage(error?.response?.data?.message || 'Network error. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -490,8 +491,7 @@ export default function DonatePage() {
                       </div>
                       <div>
                         <label className="block text-xs md:text-sm font-medium text-gray-700 mb-1 md:mb-2">Email Address <span className="text-red-500">*</span></label>
-                        <Input
-                          type="email"
+                        <EmailInput
                           placeholder="your.email@example.com"
                           className={`rounded-lg text-sm md:text-base ${emailError ? 'border-red-500 focus:border-red-500' : ''}`}
                           value={formData.email}

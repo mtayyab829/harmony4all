@@ -5,6 +5,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { EmailInput } from '@/components/ui/email-input'
 import { PhoneInput } from "@/components/ui/phone-input"
 import { Textarea } from "@/components/ui/textarea"
 import { Heart, HandHeart, CheckCircle, Phone, Loader2, AlertCircle } from "lucide-react"
@@ -280,8 +281,7 @@ export default function VolunteerPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-3 sm:mt-4">
                       <div>
                         <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">Email <span className="text-red-500">*</span></label>
-                        <Input
-                          type="email"
+                        <EmailInput
                           placeholder="your.email@example.com"
                           className="rounded-lg text-sm sm:text-base"
                           value={formData.email}

@@ -1,9 +1,11 @@
 'use client';
 
 import * as React from 'react';
+import { AlertCircle } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
-import { formatUSPhoneInput, getUSPhoneDigits } from '@/lib/us-phone';
+import { formatUSPhoneInput, getUSPhoneDigits, isValidUSPhone } from '@/lib/us-phone';
+import { useLiveVerification } from '@/lib/contact-verification';
 
 export type PhoneInputProps = Omit<
   React.ComponentProps<typeof Input>,
@@ -11,7 +13,11 @@ export type PhoneInputProps = Omit<
 > & {
   value: string;
   onValueChange: (value: string) => void;
+  // On blur, confirm with the server (Twilio Lookup) that the number exists.
+  liveVerify?: boolean;
 };
+
+const isLocallyValid = (v: string) => isValidUSPhone(v);
 
 // Counts digit characters in `formatted` that occur before `position`.
 function digitIndexBeforePosition(formatted: string, position: number): number {
@@ -37,8 +43,12 @@ function positionAfterDigitIndex(formatted: string, digitIndex: number): number 
 }
 
 export const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
-  ({ value, onValueChange, className, onKeyDown, ...props }, forwardedRef) => {
+  ({ value, onValueChange, className, onKeyDown, onBlur, liveVerify = true, id, ...props }, forwardedRef) => {
     const inputRef = React.useRef<HTMLInputElement | null>(null);
+    const generatedId = React.useId();
+    const messageId = `${id ?? generatedId}-live-error`;
+    const live = useLiveVerification('phone', value ?? '', isLocallyValid);
+    const liveError = liveVerify ? live.error : null;
     const pendingCursorRef = React.useRef<number | null>(null);
 
     const setRefs = React.useCallback(
@@ -122,18 +132,33 @@ export const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
     };
 
     return (
-      <Input
-        ref={setRefs}
-        type="tel"
-        inputMode="tel"
-        autoComplete="tel"
-        placeholder="(555) 123-4567"
-        value={value}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        className={cn(className)}
-        {...props}
-      />
+      <>
+        <Input
+          placeholder="(555) 123-4567"
+          {...props}
+          ref={setRefs}
+          id={id}
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel"
+          value={value}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          onBlur={(e) => {
+            onBlur?.(e);
+            if (liveVerify) void live.check();
+          }}
+          aria-invalid={liveError ? true : props['aria-invalid']}
+          aria-describedby={liveError ? messageId : props['aria-describedby']}
+          className={cn(className, liveError && 'border-red-500 focus:border-red-500')}
+        />
+        {liveError && (
+          <p id={messageId} role="alert" className="text-red-600 text-sm mt-1 flex items-center gap-1">
+            <AlertCircle className="h-4 w-4 flex-shrink-0" />
+            {liveError}
+          </p>
+        )}
+      </>
     );
   }
 );

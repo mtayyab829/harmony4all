@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { EmailInput } from '@/components/ui/email-input'
 import { PhoneInput } from "@/components/ui/phone-input"
 import { Loader2, CheckCircle, AlertCircle } from "lucide-react"
 import { rsvpAPI } from "@/lib/api"
@@ -174,8 +175,7 @@ export default function RSVPPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Email <span className="text-red-500">*</span>
                   </label>
-                  <Input
-                    type="email"
+                  <EmailInput
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     className={fieldErrors.email ? "border-red-500 focus:border-red-500" : ""}

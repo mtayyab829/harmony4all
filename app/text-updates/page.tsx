@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { PhoneInput } from "@/components/ui/phone-input"
+import { EmailInput } from "@/components/ui/email-input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Loader2, AlertCircle, CheckCircle, MessageSquare } from "lucide-react"
 import { textUpdatesAPI } from "@/lib/api"
@@ -182,9 +183,8 @@ export default function TextUpdatesPage() {
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                       Email <span className="text-red-500">*</span>
                     </label>
-                    <Input
+                    <EmailInput
                       id="email"
-                      type="email"
                       value={formData.email}
                       onChange={(e) => {
                         setFormData({ ...formData, email: e.target.value })

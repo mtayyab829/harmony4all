@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
+import { EmailInput } from '@/components/ui/email-input'
 import { Button } from "@/components/ui/button"
 import { newsletterAPI } from '../lib/api'
 import { getEmailValidationError } from '../lib/email'
@@ -58,8 +59,7 @@ export default function NewsletterSection() {
             </p>
   
             <form onSubmit={(e) => { e.preventDefault(); handleSubscribe(); }} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <Input
-                type="email"
+              <EmailInput
                 placeholder="Enter your email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
