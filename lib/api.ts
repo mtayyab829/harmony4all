@@ -70,8 +70,16 @@ export const rsvpAPI = {
     cellNumber: string;
     promotionalUpdates: boolean;
     agreeToTerms: boolean;
+    source?: "qr";
+    guests?: number;
   }) => {
     const response = await api.post("/rsvp/submit", formData);
+    return response.data;
+  },
+
+  // Record a visit from the event QR code
+  trackQrScan: async () => {
+    const response = await api.post("/rsvp/qr/scan");
     return response.data;
   },
 }
