@@ -1,80 +1,76 @@
 "use client"
 
 import type React from "react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { EmailInput } from '@/components/ui/email-input'
 import { PhoneInput } from "@/components/ui/phone-input"
-import { Loader2, CheckCircle, AlertCircle } from "lucide-react"
-import { rsvpAPI } from "@/lib/api"
+import { Loader2, CheckCircle, AlertCircle, CalendarDays, MapPin, FileText, Users } from "lucide-react"
+import { rsvpAPI, type RsvpEvent } from "@/lib/api"
+import { formatEventWhen, formatRsvpDeadline } from "@/lib/rsvp-event"
 import { getUSPhoneValidationError, formatUSPhoneForStorage } from "@/lib/us-phone"
 import { getEmailValidationError } from "@/lib/email"
 
-const QR_SCAN_SESSION_KEY = "h4a-rsvp-qr-scan-tracked"
+const MAX_GUESTS = 20
 
 type RSVPFormProps = {
-  // "qr" = visitor arrived from the event QR code; tracked separately with a guest count
-  source?: "qr"
+  event: RsvpEvent
 }
 
-export default function RSVPForm({ source }: RSVPFormProps) {
-  const isQr = source === "qr"
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    cellNumber: "",
-    guests: 1,
-    promotionalUpdates: true,
-    agreeToTerms: true,
-  })
+const emptyForm = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  cellNumber: "",
+  guests: 1,
+  promotionalUpdates: true,
+  agreeToTerms: true,
+}
+
+const emptyErrors = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  cellNumber: "",
+  agreeToTerms: "",
+}
+
+function EventDetails({ event }: { event: RsvpEvent }) {
+  const when = formatEventWhen(event)
+
+  // Hidden on mobile/tablet so the RSVP form is the first thing visitors see
+  return (
+    <div className="hidden lg:block space-y-5">
+      {event.flyer && !event.flyer.isPdf && (
+        <a href={event.flyer.url} target="_blank" rel="noopener noreferrer" className="block">
+          <img
+            src={event.flyer.url}
+            alt={`${event.title} flyer`}
+            className="w-full rounded-2xl shadow-lg object-contain bg-white"
+          />
+        </a>
+      )}
+    </div>
+  )
+}
+
+export default function RSVPForm({ event }: RSVPFormProps) {
+  const [formData, setFormData] = useState(emptyForm)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
-  const [fieldErrors, setFieldErrors] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    cellNumber: "",
-    agreeToTerms: "",
-  })
-
-  // Count each QR visit once per browser session so refreshes don't inflate the scan total
-  useEffect(() => {
-    if (!isQr) return
-    try {
-      if (sessionStorage.getItem(QR_SCAN_SESSION_KEY)) return
-      sessionStorage.setItem(QR_SCAN_SESSION_KEY, "1")
-    } catch {
-      // sessionStorage unavailable (private mode) — still record the scan
-    }
-    rsvpAPI.trackQrScan().catch(() => {})
-  }, [isQr])
+  const [success, setSuccess] = useState<{ message: string; guests: number; email: string } | null>(null)
+  const [fieldErrors, setFieldErrors] = useState(emptyErrors)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     setError("")
-    setSuccess("")
-    setFieldErrors({
-      firstName: "",
-      lastName: "",
-      email: "",
-      cellNumber: "",
-      agreeToTerms: "",
-    })
+    setFieldErrors(emptyErrors)
 
-    const nextFieldErrors = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      cellNumber: "",
-      agreeToTerms: "",
-    }
-
+    const nextFieldErrors = { ...emptyErrors }
     let hasErrors = false
 
     if (!formData.firstName.trim()) {
@@ -111,27 +107,18 @@ export default function RSVPForm({ source }: RSVPFormProps) {
 
     try {
       setIsLoading(true)
-      const { guests, ...rest } = formData
       const result = await rsvpAPI.submitForm({
-        ...rest,
+        ...formData,
+        eventId: event._id,
         cellNumber: formatUSPhoneForStorage(formData.cellNumber),
-        ...(isQr ? { source: "qr", guests } : {}),
       })
-      setSuccess(result.message || "Thank you for your submission!")
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        cellNumber: "",
-        guests: 1,
-        promotionalUpdates: true,
-        agreeToTerms: true,
+      setSuccess({
+        message: result.message || "Thank you for your RSVP!",
+        guests: formData.guests,
+        email: formData.email.trim(),
       })
-
-      setTimeout(() => {
-        window.location.href = "/"
-      }, 2000)
-
+      setFormData(emptyForm)
+      window.scrollTo({ top: 0, behavior: "smooth" })
     } catch (submitError: any) {
       setError(submitError.response?.data?.message || "Something went wrong. Please try again.")
     } finally {
@@ -148,180 +135,208 @@ export default function RSVPForm({ source }: RSVPFormProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <Card className="w-full max-w-xl mx-auto bg-white rounded-2xl shadow-2xl">
-            <CardContent className="p-6">
-              <div className="text-center mb-6">
-                <h1 className="text-2xl font-semibold text-gray-900 mb-2">Submission Form</h1>
-                <p className="text-gray-600">Submit your details and we will follow up with you shortly.</p>
-              </div>
+          <div className="max-w-5xl mx-auto grid gap-8 lg:grid-cols-2 lg:items-start">
+            <EventDetails event={event} />
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    First Name <span className="text-red-500">*</span>
-                  </label>
-                  <Input
-                    type="text"
-                    value={formData.firstName}
-                    onChange={(e) => handleInputChange("firstName", e.target.value)}
-                    className={fieldErrors.firstName ? "border-red-500 focus:border-red-500" : ""}
-                  />
-                  {fieldErrors.firstName && (
-                    <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
-                      <AlertCircle className="h-4 w-4" />
-                      {fieldErrors.firstName}
+            <Card className="w-full bg-white rounded-2xl shadow-2xl lg:sticky lg:top-24">
+              <CardContent className="p-6">
+                {success ? (
+                  <div className="text-center py-6 space-y-4">
+                    <CheckCircle className="h-14 w-14 text-green-600 mx-auto" />
+                    <h2 className="text-2xl font-semibold text-gray-900">You're on the list!</h2>
+                    <p className="text-gray-600">{success.message}</p>
+                    <div className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2 text-sm text-gray-800">
+                      <Users className="h-4 w-4" />
+                      {success.guests === 1 ? "1 person" : `${success.guests} people`}
+                    </div>
+                    <p className="text-sm text-gray-500">
+                      We've sent a confirmation to <strong>{success.email}</strong>
+                      {event.flyer ? " with the event flyer attached" : ""}.
                     </p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Last Name <span className="text-red-500">*</span>
-                  </label>
-                  <Input
-                    type="text"
-                    value={formData.lastName}
-                    onChange={(e) => handleInputChange("lastName", e.target.value)}
-                    className={fieldErrors.lastName ? "border-red-500 focus:border-red-500" : ""}
-                  />
-                  {fieldErrors.lastName && (
-                    <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
-                      <AlertCircle className="h-4 w-4" />
-                      {fieldErrors.lastName}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email <span className="text-red-500">*</span>
-                  </label>
-                  <EmailInput
-                    value={formData.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
-                    className={fieldErrors.email ? "border-red-500 focus:border-red-500" : ""}
-                  />
-                  {fieldErrors.email && (
-                    <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
-                      <AlertCircle className="h-4 w-4" />
-                      {fieldErrors.email}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Cell Number <span className="text-red-500">*</span>
-                  </label>
-                  <PhoneInput
-                    value={formData.cellNumber}
-                    onValueChange={(value) => handleInputChange("cellNumber", value)}
-                    className={fieldErrors.cellNumber ? "border-red-500 focus:border-red-500" : ""}
-                  />
-                  {fieldErrors.cellNumber && (
-                    <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
-                      <AlertCircle className="h-4 w-4" />
-                      {fieldErrors.cellNumber}
-                    </p>
-                  )}
-                </div>
-
-                {isQr && (
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      How many people are coming (including you)? <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      value={formData.guests}
-                      onChange={(e) => handleInputChange("guests", Number(e.target.value))}
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
-                    >
-                      {Array.from({ length: 20 }, (_, i) => i + 1).map((n) => (
-                        <option key={n} value={n}>
-                          {n}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                      <Button asChild className="bg-black hover:bg-gray-800 text-white rounded-full px-6">
+                        <Link href="/">Back to home</Link>
+                      </Button>
+                      <Button variant="ghost" className="rounded-full px-6" onClick={() => setSuccess(null)}>
+                        RSVP someone else
+                      </Button>
+                    </div>
                   </div>
+                ) : (
+                  <>
+                    <div className="text-center mb-6">
+                      <h2 className="text-2xl font-semibold text-gray-900 mb-2">RSVP</h2>
+                      <p className="text-gray-600">Let us know you're coming and how many people you're bringing.</p>
+                      {formatRsvpDeadline(event.endDate) && (
+                        <p className="text-sm text-gray-500 mt-2">RSVPs close {formatRsvpDeadline(event.endDate)}</p>
+                      )}
+                    </div>
+
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            First Name <span className="text-red-500">*</span>
+                          </label>
+                          <Input
+                            type="text"
+                            autoComplete="given-name"
+                            value={formData.firstName}
+                            onChange={(e) => handleInputChange("firstName", e.target.value)}
+                            className={fieldErrors.firstName ? "border-red-500 focus:border-red-500" : ""}
+                          />
+                          {fieldErrors.firstName && (
+                            <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                              <AlertCircle className="h-4 w-4" />
+                              {fieldErrors.firstName}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Last Name <span className="text-red-500">*</span>
+                          </label>
+                          <Input
+                            type="text"
+                            autoComplete="family-name"
+                            value={formData.lastName}
+                            onChange={(e) => handleInputChange("lastName", e.target.value)}
+                            className={fieldErrors.lastName ? "border-red-500 focus:border-red-500" : ""}
+                          />
+                          {fieldErrors.lastName && (
+                            <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                              <AlertCircle className="h-4 w-4" />
+                              {fieldErrors.lastName}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Email <span className="text-red-500">*</span>
+                        </label>
+                        <EmailInput
+                          value={formData.email}
+                          onChange={(e) => handleInputChange("email", e.target.value)}
+                          className={fieldErrors.email ? "border-red-500 focus:border-red-500" : ""}
+                        />
+                        {fieldErrors.email && (
+                          <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                            <AlertCircle className="h-4 w-4" />
+                            {fieldErrors.email}
+                          </p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Cell Number <span className="text-red-500">*</span>
+                        </label>
+                        <PhoneInput
+                          value={formData.cellNumber}
+                          onValueChange={(value) => handleInputChange("cellNumber", value)}
+                          className={fieldErrors.cellNumber ? "border-red-500 focus:border-red-500" : ""}
+                        />
+                        {fieldErrors.cellNumber && (
+                          <p className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                            <AlertCircle className="h-4 w-4" />
+                            {fieldErrors.cellNumber}
+                          </p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label htmlFor="rsvp-guests" className="block text-sm font-medium text-gray-700 mb-2">
+                          How many people are coming (including you)? <span className="text-red-500">*</span>
+                        </label>
+                        <select
+                          id="rsvp-guests"
+                          value={formData.guests}
+                          onChange={(e) => handleInputChange("guests", Number(e.target.value))}
+                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                        >
+                          {Array.from({ length: MAX_GUESTS }, (_, i) => i + 1).map((n) => (
+                            <option key={n} value={n}>
+                              {n}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="space-y-3 pt-2">
+                        <label className="flex items-start space-x-3">
+                          <input
+                            type="checkbox"
+                            checked={formData.promotionalUpdates}
+                            onChange={(e) => handleInputChange("promotionalUpdates", e.target.checked)}
+                            className="mt-1 h-4 w-4 text-black border-gray-300 rounded focus:ring-black flex-shrink-0"
+                          />
+                          <span className="text-sm text-gray-700 leading-relaxed">
+                            Want to receive promotional updates
+                          </span>
+                        </label>
+
+                        <div>
+                          <label className="flex items-start space-x-3">
+                            <input
+                              type="checkbox"
+                              checked={formData.agreeToTerms}
+                              onChange={(e) => handleInputChange("agreeToTerms", e.target.checked)}
+                              className={`mt-1 h-4 w-4 text-black border-gray-300 rounded focus:ring-black flex-shrink-0 ${
+                                fieldErrors.agreeToTerms ? "border-red-500" : ""
+                              }`}
+                            />
+                            <span className="text-sm text-gray-700 leading-relaxed">
+                              By checking the box, you indicate that you've read our{" "}
+                              <Link href="/privacy" className="text-black underline hover:text-gray-700">
+                                Privacy Policy
+                              </Link>{" "}
+                              and agree to our{" "}
+                              <Link href="/terms" className="text-black underline hover:text-gray-700">
+                                Terms and Use
+                              </Link>
+                            </span>
+                          </label>
+                          {fieldErrors.agreeToTerms && (
+                            <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
+                              <AlertCircle className="h-4 w-4" />
+                              {fieldErrors.agreeToTerms}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      {error && (
+                        <div className="flex items-start gap-3 p-3 bg-red-50 border border-red-200 rounded-lg">
+                          <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+                          <p className="text-red-800 text-sm">{error}</p>
+                        </div>
+                      )}
+
+                      <Button
+                        type="submit"
+                        className="w-full bg-black hover:bg-gray-800 text-white py-3 rounded-full font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled={!formData.agreeToTerms || isLoading}
+                      >
+                        {isLoading ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Submitting...
+                          </>
+                        ) : (
+                          "Submit RSVP"
+                        )}
+                      </Button>
+                    </form>
+                  </>
                 )}
-
-                <div className="space-y-3 pt-2">
-                  <label className="flex items-start space-x-3">
-                    <input
-                      type="checkbox"
-                      checked={formData.promotionalUpdates}
-                      onChange={(e) => handleInputChange("promotionalUpdates", e.target.checked)}
-                      className="mt-1 h-4 w-4 text-black border-gray-300 rounded focus:ring-black flex-shrink-0"
-                    />
-                    <span className="text-sm text-gray-700 leading-relaxed">
-                      Want to receive promotional updates
-                    </span>
-                  </label>
-
-                  <div>
-                    <label className="flex items-start space-x-3">
-                      <input
-                        type="checkbox"
-                        checked={formData.agreeToTerms}
-                        onChange={(e) => handleInputChange("agreeToTerms", e.target.checked)}
-                        className={`mt-1 h-4 w-4 text-black border-gray-300 rounded focus:ring-black flex-shrink-0 ${
-                          fieldErrors.agreeToTerms ? "border-red-500" : ""
-                        }`}
-                      />
-                      <span className="text-sm text-gray-700 leading-relaxed">
-                        By checking the box, you indicate that you've read our{" "}
-                        <Link href="/privacy" className="text-black underline hover:text-gray-700">
-                          Privacy Policy
-                        </Link>{" "}
-                        and agree to our{" "}
-                        <Link href="/terms" className="text-black underline hover:text-gray-700">
-                          Terms and Use
-                        </Link>
-                      </span>
-                    </label>
-                    {fieldErrors.agreeToTerms && (
-                      <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
-                        <AlertCircle className="h-4 w-4" />
-                        {fieldErrors.agreeToTerms}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                {error && (
-                  <div className="flex items-start gap-3 p-3 bg-red-50 border border-red-200 rounded-lg">
-                    <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                    <p className="text-red-800 text-sm">{error}</p>
-                  </div>
-                )}
-
-                {success && (
-                  <div className="flex items-start gap-3 p-3 bg-green-50 border border-green-200 rounded-lg">
-                    <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <p className="text-green-800 text-sm">{success}</p>
-                  </div>
-                )}
-
-                <Button
-                  type="submit"
-                  className="w-full bg-black hover:bg-gray-800 text-white py-3 rounded-full font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={!formData.agreeToTerms || isLoading}
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Submitting...
-                    </>
-                  ) : (
-                    "Submit"
-                  )}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
     </div>

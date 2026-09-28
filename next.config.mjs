@@ -57,6 +57,12 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // The old QR RSVP page was removed; printed QR codes still land on /rsvp
+      { source: '/rsvp/qr', destination: '/rsvp', permanent: false },
+    ];
+  },
   async headers() {
     return [
       {

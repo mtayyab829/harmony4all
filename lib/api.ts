@@ -60,26 +60,37 @@ export const welcomePopupAPI = {
   },
 }
 
+export type RsvpEvent = {
+  _id: string;
+  title: string;
+  description: string;
+  eventDate: string | null;
+  eventTime: string;
+  location: string;
+  endDate: string;
+  flyer: { url: string; isPdf: boolean; fileName?: string } | null;
+}
+
 // RSVP API functions
 export const rsvpAPI = {
+  // The one event currently taking RSVPs, or null
+  getCurrentEvent: async (): Promise<RsvpEvent | null> => {
+    const response = await api.get("/rsvp/events/current");
+    return response.data.event;
+  },
+
   // Submit RSVP form
   submitForm: async (formData: {
+    eventId: string;
     firstName: string;
     lastName: string;
     email: string;
     cellNumber: string;
+    guests: number;
     promotionalUpdates: boolean;
     agreeToTerms: boolean;
-    source?: "qr";
-    guests?: number;
   }) => {
     const response = await api.post("/rsvp/submit", formData);
-    return response.data;
-  },
-
-  // Record a visit from the event QR code
-  trackQrScan: async () => {
-    const response = await api.post("/rsvp/qr/scan");
     return response.data;
   },
 }
