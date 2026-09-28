@@ -17,7 +17,8 @@ import { getEmailValidationError } from "@/lib/email"
 const MAX_GUESTS = 20
 
 type RSVPFormProps = {
-  event: RsvpEvent
+  // null when no event is open; the RSVP is then saved without an event
+  event: RsvpEvent | null
 }
 
 const emptyForm = {
@@ -109,7 +110,7 @@ export default function RSVPForm({ event }: RSVPFormProps) {
       setIsLoading(true)
       const result = await rsvpAPI.submitForm({
         ...formData,
-        eventId: event._id,
+        eventId: event?._id,
         cellNumber: formatUSPhoneForStorage(formData.cellNumber),
       })
       setSuccess({
@@ -137,8 +138,8 @@ export default function RSVPForm({ event }: RSVPFormProps) {
     <div className="min-h-screen bg-gray-50">
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto grid gap-8 lg:grid-cols-2 lg:items-start">
-            <EventDetails event={event} />
+          <div className={`mx-auto grid gap-8 lg:items-start ${event ? "max-w-5xl lg:grid-cols-2" : "max-w-xl"}`}>
+            {event && <EventDetails event={event} />}
 
             <Card className="w-full bg-white rounded-2xl shadow-2xl lg:sticky lg:top-24">
               <CardContent className="p-6">
@@ -153,7 +154,7 @@ export default function RSVPForm({ event }: RSVPFormProps) {
                     </div>
                     <p className="text-sm text-gray-500">
                       We've sent a confirmation to <strong>{success.email}</strong>
-                      {event.flyer ? " with the event flyer attached" : ""}.
+                      {event?.flyer ? " with the event flyer attached" : ""}.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
                       <Button asChild className="bg-black hover:bg-gray-800 text-white rounded-full px-6">
@@ -169,8 +170,8 @@ export default function RSVPForm({ event }: RSVPFormProps) {
                     <div className="text-center mb-6">
                       <h2 className="text-2xl font-semibold text-gray-900 mb-2">RSVP</h2>
                       <p className="text-gray-600">Let us know you're coming and how many people you're bringing.</p>
-                      {formatRsvpDeadline(event.endDate) && (
-                        <p className="text-sm text-gray-500 mt-2">RSVPs close {formatRsvpDeadline(event.endDate)}</p>
+                      {formatRsvpDeadline(event?.endDate) && (
+                        <p className="text-sm text-gray-500 mt-2">RSVPs close {formatRsvpDeadline(event?.endDate)}</p>
                       )}
                     </div>
 

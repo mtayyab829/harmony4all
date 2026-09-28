@@ -81,7 +81,7 @@ export const rsvpAPI = {
 
   // Submit RSVP form
   submitForm: async (formData: {
-    eventId: string;
+    eventId?: string;
     firstName: string;
     lastName: string;
     email: string;
