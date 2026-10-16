@@ -71,6 +71,18 @@ export type RsvpEvent = {
   flyer: { url: string; isPdf: boolean; fileName?: string } | null;
 }
 
+// Returned after an RSVP to an event: the guest's check-in pass and the event's links
+export type RsvpConfirmation = {
+  rsvp: { firstName: string; lastName: string; guests: number; checkInCode: string; qrDataUrl: string } | null;
+  eventLinks: {
+    when: string;
+    directionsUrl: string;
+    googleCalendarUrl: string;
+    outlookCalendarUrl: string;
+    icsUrl: string;
+  } | null;
+}
+
 // RSVP API functions
 export const rsvpAPI = {
   // The one event currently taking RSVPs, or null
@@ -89,7 +101,7 @@ export const rsvpAPI = {
     guests: number;
     promotionalUpdates: boolean;
     agreeToTerms: boolean;
-  }) => {
+  }): Promise<RsvpConfirmation & { message: string; guests: number }> => {
     const response = await api.post("/rsvp/submit", formData);
     return response.data;
   },

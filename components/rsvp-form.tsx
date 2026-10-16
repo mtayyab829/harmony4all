@@ -8,8 +8,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { EmailInput } from '@/components/ui/email-input'
 import { PhoneInput } from "@/components/ui/phone-input"
-import { Loader2, CheckCircle, AlertCircle, CalendarDays, MapPin, FileText, Users } from "lucide-react"
-import { rsvpAPI, type RsvpEvent } from "@/lib/api"
+import { Loader2, AlertCircle } from "lucide-react"
+import { rsvpAPI, type RsvpConfirmation, type RsvpEvent } from "@/lib/api"
+import RSVPConfirmation from "@/components/rsvp-confirmation"
 import { formatEventWhen, formatRsvpDeadline } from "@/lib/rsvp-event"
 import { getUSPhoneValidationError, formatUSPhoneForStorage } from "@/lib/us-phone"
 import { getEmailValidationError } from "@/lib/email"
@@ -62,7 +63,7 @@ export default function RSVPForm({ event }: RSVPFormProps) {
   const [formData, setFormData] = useState(emptyForm)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
-  const [success, setSuccess] = useState<{ message: string; guests: number; email: string } | null>(null)
+  const [success, setSuccess] = useState<(RsvpConfirmation & { message: string; guests: number; email: string }) | null>(null)
   const [fieldErrors, setFieldErrors] = useState(emptyErrors)
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -115,8 +116,10 @@ export default function RSVPForm({ event }: RSVPFormProps) {
       })
       setSuccess({
         message: result.message || "Thank you for your RSVP!",
-        guests: formData.guests,
+        guests: result.guests || formData.guests,
         email: formData.email.trim(),
+        rsvp: result.rsvp || null,
+        eventLinks: result.eventLinks || null,
       })
       setFormData(emptyForm)
       window.scrollTo({ top: 0, behavior: "smooth" })
@@ -144,27 +147,11 @@ export default function RSVPForm({ event }: RSVPFormProps) {
             <Card className="w-full bg-white rounded-2xl shadow-2xl lg:sticky lg:top-24">
               <CardContent className="p-6">
                 {success ? (
-                  <div className="text-center py-6 space-y-4">
-                    <CheckCircle className="h-14 w-14 text-green-600 mx-auto" />
-                    <h2 className="text-2xl font-semibold text-gray-900">You're on the list!</h2>
-                    <p className="text-gray-600">{success.message}</p>
-                    <div className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2 text-sm text-gray-800">
-                      <Users className="h-4 w-4" />
-                      {success.guests === 1 ? "1 person" : `${success.guests} people`}
-                    </div>
-                    <p className="text-sm text-gray-500">
-                      We've sent a confirmation to <strong>{success.email}</strong>
-                      {event?.flyer ? " with the event flyer attached" : ""}.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-                      <Button asChild className="bg-black hover:bg-gray-800 text-white rounded-full px-6">
-                        <Link href="/">Back to home</Link>
-                      </Button>
-                      <Button variant="ghost" className="rounded-full px-6" onClick={() => setSuccess(null)}>
-                        RSVP someone else
-                      </Button>
-                    </div>
-                  </div>
+                  <RSVPConfirmation
+                    {...success}
+                    event={event}
+                    onReset={() => setSuccess(null)}
+                  />
                 ) : (
                   <>
                     <div className="text-center mb-6">
