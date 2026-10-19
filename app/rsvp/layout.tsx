@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { formatStartTime } from "@/lib/rsvp-event"
 
 // Link previews for /rsvp (iMessage, WhatsApp, Facebook, ...) show the active event instead of the
 // homepage: its title, date/time, location and flyer.
@@ -36,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const event = await getCurrentEvent()
   const title = event ? `RSVP: ${event.title}` : "RSVP | Harmony 4 All"
   const description = event
-    ? [[formatDate(event.eventDate), event.eventTime].filter(Boolean).join(" · "), event.location.split(/\s*\n\s*/)[0]]
+    ? [[formatDate(event.eventDate), formatStartTime(event.eventTime)].filter(Boolean).join(" · "), event.location.split(/\s*\n\s*/)[0]]
         .filter(Boolean)
         .join(" — ") || "Reserve your spot with Harmony 4 All."
     : "Reserve your spot at Harmony 4 All's next community concert."

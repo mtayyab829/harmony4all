@@ -11,7 +11,7 @@ import { PhoneInput } from "@/components/ui/phone-input"
 import { Loader2, AlertCircle } from "lucide-react"
 import { rsvpAPI, type RsvpConfirmation, type RsvpEvent } from "@/lib/api"
 import RSVPConfirmation from "@/components/rsvp-confirmation"
-import { formatEventWhen, formatRsvpDeadline } from "@/lib/rsvp-event"
+import { formatEventWhen } from "@/lib/rsvp-event"
 import { getUSPhoneValidationError, formatUSPhoneForStorage } from "@/lib/us-phone"
 import { getEmailValidationError } from "@/lib/email"
 
@@ -157,9 +157,6 @@ export default function RSVPForm({ event }: RSVPFormProps) {
                     <div className="text-center mb-6">
                       <h2 className="text-2xl font-semibold text-gray-900 mb-2">RSVP</h2>
                       <p className="text-gray-600">Let us know you're coming and how many people you're bringing.</p>
-                      {formatRsvpDeadline(event?.endDate) && (
-                        <p className="text-sm text-gray-500 mt-2">RSVPs close {formatRsvpDeadline(event?.endDate)}</p>
-                      )}
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-4">
