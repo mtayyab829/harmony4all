@@ -59,6 +59,33 @@ function EventDetails({ event }: { event: RsvpEvent }) {
   )
 }
 
+// Invitation shown above the form fields. Title, date, time and location come from the event in the admin;
+// the rest of the copy is written for the 2026 Holiday Concert and should be updated for the next event.
+function EventInvitation({ event }: { event: RsvpEvent }) {
+  const when = formatEventWhen(event)
+
+  return (
+    <div className="text-center mb-6 space-y-4">
+      <h2 className="text-2xl font-semibold text-gray-900">{event.title}</h2>
+      <p className="text-gray-600 leading-relaxed">
+        Celebrate the season with Harmony 4 All through live music, warm company, and community connection. Stay
+        afterward for refreshments and wine, with wine available to guests ages 21 and over.
+      </p>
+
+      {(when || event.location) && (
+        <div className="space-y-1">
+          {when && <p className="font-semibold text-gray-900">{when}</p>}
+          {event.location && <p className="text-gray-700 whitespace-pre-line">{event.location}</p>}
+        </div>
+      )}
+
+      <p className="text-sm text-gray-700">Free admission · Free parking · Wheelchair accessible</p>
+      <p className="text-sm font-medium text-gray-900">The first 100 registered guests receive a gift bag.</p>
+      <p className="text-gray-600">We'd love to welcome you! Please RSVP below and include everyone attending with you.</p>
+    </div>
+  )
+}
+
 export default function RSVPForm({ event }: RSVPFormProps) {
   const [formData, setFormData] = useState(emptyForm)
   const [isLoading, setIsLoading] = useState(false)
@@ -154,10 +181,14 @@ export default function RSVPForm({ event }: RSVPFormProps) {
                   />
                 ) : (
                   <>
-                    <div className="text-center mb-6">
-                      <h2 className="text-2xl font-semibold text-gray-900 mb-2">RSVP</h2>
-                      <p className="text-gray-600">Let us know you're coming and how many people you're bringing.</p>
-                    </div>
+                    {event ? (
+                      <EventInvitation event={event} />
+                    ) : (
+                      <div className="text-center mb-6">
+                        <h2 className="text-2xl font-semibold text-gray-900 mb-2">RSVP</h2>
+                        <p className="text-gray-600">Let us know you're coming and how many people you're bringing.</p>
+                      </div>
+                    )}
 
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div className="grid gap-4 sm:grid-cols-2">
