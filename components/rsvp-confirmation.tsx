@@ -74,7 +74,7 @@ export default function RSVPConfirmation({ event, rsvp, eventLinks, guests, mess
     )
   }
 
-  const when = eventLinks?.when || formatEventWhen(event)
+  const when = formatEventWhen(event) || eventLinks?.when
   const fullName = `${rsvp.firstName} ${rsvp.lastName}`
 
   return (

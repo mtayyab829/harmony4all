@@ -89,5 +89,5 @@ export function eventDirectionsUrl(location: string) {
 }
 
 export function formatEventWhen(event: Pick<RsvpEvent, "eventDate" | "eventTime">, style: "long" | "short" = "long") {
-  return [formatEventDate(event.eventDate, style), formatStartTime(event.eventTime)].filter(Boolean).join(" · ")
+  return [formatEventDate(event.eventDate, style), formatStartTime(event.eventTime)].filter(Boolean).join(" at ")
 }

@@ -82,7 +82,7 @@ function EventInvitation({ event }: { event: RsvpEvent }) {
       )}
 
       <p className="text-sm text-gray-700">Free admission · Free parking · Wheelchair accessible</p>
-      <p className="text-sm font-medium text-gray-900">The first 100 registered guests receive a gift bag.</p>
+      <p className="text-sm font-bold text-gray-900">The first 100 registered guests receive a gift bag.</p>
       <p className="text-gray-600">We'd love to welcome you! Please RSVP below and include everyone attending with you.</p>
     </div>
   )
