@@ -34,10 +34,42 @@ export function formatStartTime(eventTime: string | null | undefined) {
   return start.replace(/(\d)\s*([ap])\.?m\.?(?![a-z])/gi, (_, digit, ap) => `${digit} ${ap.toUpperCase()}M`)
 }
 
-// Free-text location → [venue, street, city/state/zip]. Line breaks from the admin are kept; a line that still
-// holds "street, city, ST zip" is split at its first comma so the street and city each get their own line.
+const STREET_SUFFIX =
+  /^(.*?\b(?:st|street|rd|road|ave|avenue|blvd|boulevard|dr|drive|pl|place|ln|lane|way|pkwy|parkway|ct|court|ter|terrace|hwy|highway|sq|square|tpke|turnpike)\.?)\s+(.+)$/i
+
+// ALL-CAPS admin text → "Title Case"; text with any lowercase is left as typed
+function tidyCase(text: string) {
+  return /[a-z]/.test(text) ? text : text.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase())
+}
+
+// Free-text location → [venue, street, "City, ST zip"], however the admin broke it up:
+// "AT BROWNSON CENTER 127-15 KEW GARDENS RD\nKEW GARDENS\nNY 11415" → ["Brownson Center", "127-15 Kew Gardens Rd", "Kew Gardens, NY 11415"]
 export function splitEventLocation(location: string | null | undefined) {
-  const lines = String(location || "").split(/\s*\n\s*/).map((line) => line.trim()).filter(Boolean)
+  const text = String(location || "").trim()
+  const stateZip = text.match(/[\s,]+([a-z]{2})\.?[\s,]+(\d{5}(?:-\d{4})?)$/i)
+  const streetStart = stateZip ? text.slice(0, stateZip.index).search(/(?:^|[\s,])\d+(?:-\d+)?\s+[a-z]/i) : -1
+  if (stateZip && streetStart >= 0) {
+    const before = text.slice(0, stateZip.index)
+    const venue = before.slice(0, streetStart).replace(/^\s*at\s+/i, "").replace(/[\s,]+$/, "")
+    const rest = before.slice(streetStart).replace(/^[\s,]+/, "")
+    let street = rest
+    let city = ""
+    const lastBreak = Math.max(rest.lastIndexOf("\n"), rest.lastIndexOf(","))
+    if (lastBreak > 0) {
+      street = rest.slice(0, lastBreak)
+      city = rest.slice(lastBreak + 1)
+    } else {
+      const suffix = rest.match(STREET_SUFFIX)
+      if (suffix) [, street, city] = suffix
+    }
+    street = street.replace(/\s*\n\s*/g, " ").replace(/[\s,]+$/, "").trim()
+    city = city.replace(/\s+/g, " ").trim()
+    const cityLine = `${city ? `${tidyCase(city)}, ` : ""}${stateZip[1].toUpperCase()} ${stateZip[2]}`
+    return [tidyCase(venue), tidyCase(street), cityLine].filter(Boolean)
+  }
+
+  // No recognizable "ST zip" ending: fall back to the admin's own lines/commas
+  const lines = text.split(/\s*\n\s*/).map((line) => line.trim()).filter(Boolean)
   if (lines.length === 1) {
     const parts = lines[0].split(/\s*,\s*/)
     // "Venue, 123 Main St, City, ST 10001": peel off the venue unless the first part is already a street number
