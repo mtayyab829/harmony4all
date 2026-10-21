@@ -34,6 +34,28 @@ export function formatStartTime(eventTime: string | null | undefined) {
   return start.replace(/(\d)\s*([ap])\.?m\.?(?![a-z])/gi, (_, digit, ap) => `${digit} ${ap.toUpperCase()}M`)
 }
 
+// Free-text location → [venue, street, city/state/zip]. Line breaks from the admin are kept; a line that still
+// holds "street, city, ST zip" is split at its first comma so the street and city each get their own line.
+export function splitEventLocation(location: string | null | undefined) {
+  const lines = String(location || "").split(/\s*\n\s*/).map((line) => line.trim()).filter(Boolean)
+  if (lines.length === 1) {
+    const parts = lines[0].split(/\s*,\s*/)
+    // "Venue, 123 Main St, City, ST 10001": peel off the venue unless the first part is already a street number
+    if (parts.length > 2 && !/^\d/.test(parts[0])) return [parts[0], parts[1], parts.slice(2).join(", ")]
+    if (parts.length > 1 && /^\d/.test(parts[0])) return [parts[0], parts.slice(1).join(", ")]
+    return lines
+  }
+  if (lines.length === 2 && lines[1].includes(",") && /^\d/.test(lines[1])) {
+    const [street, ...rest] = lines[1].split(/\s*,\s*/)
+    return [lines[0], street, rest.join(", ")]
+  }
+  return lines
+}
+
+export function eventDirectionsUrl(location: string) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(splitEventLocation(location).join(", "))}`
+}
+
 export function formatEventWhen(event: Pick<RsvpEvent, "eventDate" | "eventTime">, style: "long" | "short" = "long") {
   return [formatEventDate(event.eventDate, style), formatStartTime(event.eventTime)].filter(Boolean).join(" · ")
 }

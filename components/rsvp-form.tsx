@@ -11,6 +11,7 @@ import { PhoneInput } from "@/components/ui/phone-input"
 import { Loader2, AlertCircle } from "lucide-react"
 import { rsvpAPI, type RsvpConfirmation, type RsvpEvent } from "@/lib/api"
 import RSVPConfirmation from "@/components/rsvp-confirmation"
+import RSVPEventAddress from "@/components/rsvp-event-address"
 import { formatEventWhen } from "@/lib/rsvp-event"
 import { getUSPhoneValidationError, formatUSPhoneForStorage } from "@/lib/us-phone"
 import { getEmailValidationError } from "@/lib/email"
@@ -68,14 +69,15 @@ function EventInvitation({ event }: { event: RsvpEvent }) {
     <div className="text-center mb-6 space-y-4">
       <h2 className="text-2xl font-semibold text-gray-900">{event.title}</h2>
       <p className="text-gray-600 leading-relaxed">
-        Celebrate the season with Harmony 4 All through live music, warm company, and community connection. Stay
-        afterward for refreshments and wine, with wine available to guests ages 21 and over.
+        Celebrate the season with <strong className="font-bold text-gray-900">Harmony 4 All</strong> through live
+        music, warm company, and community connection. Stay afterward for refreshments and wine, with wine available
+        to guests ages 21 and over.
       </p>
 
       {(when || event.location) && (
-        <div className="space-y-1">
+        <div className="space-y-4">
           {when && <p className="font-semibold text-gray-900">{when}</p>}
-          {event.location && <p className="text-gray-700 whitespace-pre-line">{event.location}</p>}
+          {event.location && <RSVPEventAddress location={event.location} />}
         </div>
       )}
 

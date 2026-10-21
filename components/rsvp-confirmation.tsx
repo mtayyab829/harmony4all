@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { CalendarPlus, CheckCircle, Download, MapPin, Users } from "lucide-react"
 import type { RsvpConfirmation as Confirmation, RsvpEvent } from "@/lib/api"
 import { formatEventWhen } from "@/lib/rsvp-event"
+import RSVPEventAddress from "@/components/rsvp-event-address"
 
 type RSVPConfirmationProps = Confirmation & {
   event: RsvpEvent | null
@@ -86,7 +87,11 @@ export default function RSVPConfirmation({ event, rsvp, eventLinks, guests, mess
       <div className="space-y-1">
         <p className="text-lg font-semibold text-gray-900">{event.title}</p>
         {when && <p className="text-gray-700">{when}</p>}
-        {event.location && <p className="text-gray-700 whitespace-pre-line">{event.location}</p>}
+        {event.location && (
+          <div className="pt-3">
+            <RSVPEventAddress location={event.location} />
+          </div>
+        )}
         {event.description && <p className="text-sm text-gray-600 pt-2 whitespace-pre-line">{event.description}</p>}
       </div>
 
